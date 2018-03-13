@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import './styles/css/App.css'
+
 import 'materialize-css'
 import 'materialize-css/dist/css/materialize.min.css'
 
