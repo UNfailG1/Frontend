@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import register_img from '../assets/register_img.jpg'
 
 class SignUp extends Component{
   constructor(props){
@@ -14,7 +15,11 @@ class SignUp extends Component{
   }
 
   handleSubmit( event ){
-    //axios
+    event.preventDefault()
+    this.setState({
+      username: document.getElementById("username").value,
+      email: document.getElementById("email").value
+    })
   }
 
   handleChange( event ){
@@ -25,32 +30,39 @@ class SignUp extends Component{
     this.setState({
       [name]: value
     })
+    console.log(this.state);
   }
 
   render(){
     return(
-      <div className="card-panel white center-align form-panel">
-        <h5>Create your personal account.</h5>
-        <form onSubmit={this.handleSubmit}>
-          <div className="input-field">
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" onChange={this.handleChange}/>
-          </div>
-          <div className="input-field ">
-            <label htmlFor="email">Email</label>
-            <input id="email" type="email" onChange={this.handleChange}/>
-          </div>
-          <div className="input-field ">
-            <label  htmlFor="password">Password</label>
-            <input id="password" type="password" onChange={this.handleChange}/>
-          </div>
-          <div className="input-field">
-            <label htmlFor="cpass">Confirm Password</label>
-            <input id="cpass" type="password" onChange={this.handleChange}/>
-          </div>
-            <a className="waves-effect waves-light btn primary-color">Sign Up</a>
-        </form>
-       </div>
+      <figure className="back_image">
+        <img src={register_img} alt="una imagen mas"/>
+        <figcaption>
+          <div className="card-panel white center-align form-panel">
+            <h5>Create your personal account.</h5>
+            <form onSubmit={this.handleSubmit}>
+              <div className="input-field">
+                <label htmlFor="username">Username</label>
+                <input id="username" type="text" />
+              </div>
+              <div className="input-field ">
+                <label htmlFor="email">Email</label>
+                <input id="email" type="email" />
+              </div>
+              <div className="input-field ">
+                <label  htmlFor="password">Password</label>
+                <input id="password" type="password" onChange={this.handleChange}/>
+              </div>
+              <div className="input-field">
+                <label htmlFor="cpass">Confirm Password</label>
+                <input id="cpass" type="password" onChange={this.handleChange}/>
+              </div>
+              <button className="btn waves-effect waves-light primary-color" type="submit">Sign Up</button>
+            </form>
+           </div>
+        </figcaption>
+      </figure>
+
     )
   }
 }
