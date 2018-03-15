@@ -3,6 +3,14 @@ import login_img from '../assets/login_image.jpg'
 
 class SignIn extends Component {
 
+  handleSubmit(event){
+    event.preventDefault()
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    console.log('user: ', username)
+    console.log('password: ', password)
+  }
+
   render(){
     return (
       <figure className="back_image">
@@ -10,7 +18,7 @@ class SignIn extends Component {
         <figcaption>
           <div className="center-align form-panel">
             <div className="card-panel white">
-              <form>
+              <form onSubmit={ (e) => this.handleSubmit(e)}>
               <h5>Sign in to Spairing</h5>
                 <div className="input-field">
                   <label htmlFor="username">Username or email</label>
