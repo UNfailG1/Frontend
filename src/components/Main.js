@@ -6,7 +6,7 @@ import halo1 from '../assets/haloReach1.jpg';
 import fort1 from '../assets/fortnite1.jpg';
 import mine1 from '../assets/minecraft1.jpeg';
 
-class Landing_Body extends Component {
+class Main extends Component {
 
     render() {
     return (
@@ -65,3 +65,5 @@ class Landing_Body extends Component {
     )
     }
 }
+
+export default Main
