@@ -11,11 +11,11 @@
 
 .back_image {
   position: relative;
-  z-index: -1;
   margin: -4px;
   width: calc(100%+8px);
   height: calc(100%+8px);
   min-height: 500px;
+  max-height: 900px;
   overflow: hidden !important;
 }
 
@@ -32,8 +32,8 @@
   top: 0%;
   left: 0%;
   width: 100%;
+  height: auto;
   min-height: 500px;
-  max-height: 600px;
   object-fit: cover;
   overflow: hidden;
   filter: blur(3px);
