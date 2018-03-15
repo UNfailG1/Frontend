@@ -1,0 +1,9 @@
+$primary-color: #37474F;
+
+.primary-text-color {
+  color: $primary-color;
+}
+
+.primary-color{
+  background-color: $primary-color !important;
+}
