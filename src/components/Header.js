@@ -14,11 +14,15 @@ class Header extends Component {
   }
 
   render() {
+    const adjPadding = {
+      'paddingLeft': '16px',
+      'paddingRight': '16px'
+    }
     return (
       <nav>
         <div className="nav-wrapper primary-color">
-          <a href="#!" className="brand-logo" style={{'marginLeft': '16px'}}>SPairing</a>
-          <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+          <Link to="/" className="brand-logo" style={adjPadding}>SPairing</Link>
+          <a href="#!" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/login">Sing In</Link></li>

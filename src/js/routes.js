@@ -5,6 +5,7 @@ import App from '../components/App'
 import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
 import Home from '../components/Home'
+import NotFound from '../components/NotFound'
 
 const Routes = () => (
   <App>
@@ -12,7 +13,7 @@ const Routes = () => (
       <Route exact path="/" component={ Home }/>
       <Route exact path="/login" component={ SignIn }/>
       <Route exact path="/register" component={ SignUp }/>
-      <Route render={ () => (<h1>404 Not Found</h1>) }/>
+      <Route component={NotFound}/>
     </Switch>
   </App>
 )

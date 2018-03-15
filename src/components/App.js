@@ -16,7 +16,7 @@ class App extends Component {
         <header>
           <Header/>
         </header>
-        <main>
+        <main style={{'height': 'auto', 'display': 'block'}}>
           { children }
         </main>
         <footer className="page-footer primary-color">
