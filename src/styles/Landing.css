@@ -1,0 +1,16 @@
+.Navbar{
+    /*background-color: blue-grey darken-2;*/
+    /*background-color: #455a64;*/
+    /*background-color: blue-grey darken-3;*/
+    background-color: #37474f;
+}
+.News-tab{
+    padding: 20px;
+}
+.Footer{
+    background-color: #37474f;
+}
+.InfoCol{
+    padding-right: 16px;
+    padding-left: 16px;
+}
