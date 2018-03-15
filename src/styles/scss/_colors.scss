@@ -1,9 +1,61 @@
-$primary-color: #37474F;
+$primary-color: #263238;
+$light-primary-color: #4f5b62;
+$dark-primary-color: #000a12;
 
-.primary-text-color {
-  color: $primary-color;
-}
+$secondary-color: #0277bd;
+$light-secondary-color: #58a5f0;
+$dark-secondary-color: #004c8c;
 
 .primary-color{
   background-color: $primary-color !important;
+  color: white !important;
+}
+
+.light-primary-color {
+  background-color: $light-primary-color !important;
+  color: white !important;
+}
+
+.dark-primary-color {
+  background-color: $dark-primary-color !important;
+  color: white !important;
+}
+
+.primary-color-text {
+  color: $primary-color !important;
+}
+
+.light-primary-color-text {
+  color: $light-primary-color !important;
+}
+
+.dark-primary-color-text {
+  color: $dark-primary-color !important;
+}
+
+.secondary-color{
+  background-color: $secondary-color !important;
+  color: white !important;
+}
+
+.light-secondary-color {
+  background-color: $light-secondary-color !important;
+  color: black !important;
+}
+
+.dark-secondary-color {
+  background-color: $dark-secondary-color !important;
+  color: white;
+}
+
+.secondary-color-text {
+  color: $secondary-color !important;
+}
+
+.light-secondary-color-text {
+  color: $light-secondary-color !important;
+}
+
+.dark-secondary-color-text {
+  color: $dark-secondary-color !important;
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Header from './Header'
-// import Main from './Main'
 import Footer from './Footer'
 
 class App extends Component {
@@ -15,10 +14,15 @@ class App extends Component {
     console.log(children);
     return (
       <div>
-        <Header/>
-        {/* <Main/> */}
-        { children }
-        <Footer/>        
+        <header>
+          <Header/>
+        </header>
+        <main>
+          { children }
+        </main>
+        <footer className="page-footer primary-color">
+          <Footer/>
+        </footer>
       </div>
     )
   }
