@@ -1,2 +1,6 @@
 @import 'helpers';
 @import 'input-colors';
+
+body {
+  background-color: $background-color;
+}

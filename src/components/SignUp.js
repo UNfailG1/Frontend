@@ -14,6 +14,10 @@ class SignUp extends Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount(){
+    document.title = 'Sign up'
+  }
+
   handleSubmit( event ){
     event.preventDefault()
     this.setState({

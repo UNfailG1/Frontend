@@ -3,6 +3,10 @@ import login_img from '../assets/login_image.jpg'
 
 class SignIn extends Component {
 
+  componentDidMount(){
+    document.title = 'Sign in'
+  }
+
   handleSubmit(event){
     event.preventDefault()
     const username = document.getElementById('username').value

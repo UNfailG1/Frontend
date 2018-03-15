@@ -1,34 +1,33 @@
 import React, { Component } from 'react'
-import { Navbar, NavItem } from 'react-materialize'
 import { Link } from 'react-router-dom'
 
 class Header extends Component {
   initNav(){
     const $ = window.$
-    $( document ).ready(
+    $( document ).ready(function(){
       $(".button-collapse").sideNav()
-    )
+    })
   }
 
   componentWillMount(){
-    initNav()
+    this.initNav()
   }
 
   render() {
     return (
       <nav>
-        <div class="nav-wrapper primary-color">
-          <a href="#" class="brand-logo right">SPairing</a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <div className="nav-wrapper primary-color">
+          <a href="#!" className="brand-logo" style={{'marginLeft': '16px'}}>SPairing</a>
+          <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/login">Sing In</Link></li>
-            <li><Link to="/register">Sing In</Link></li>
+            <li><Link to="/register">Sing Up</Link></li>
           </ul>
-          <ul class="side-nav" id="mobile-demo">
+          <ul className="side-nav" id="mobile-demo">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/login">Sing In</Link></li>
-            <li><Link to="/register">Sing In</Link></li>
+            <li><Link to="/register">Sing Up</Link></li>
           </ul>
         </div>
       </nav>

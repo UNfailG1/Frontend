@@ -9,9 +9,9 @@ import Home from '../components/Home'
 const Routes = () => (
   <App>
     <Switch>
-      <Route path="/" component={ Home }/>
-      <Route path="/login" component={ SignIn }/>
-      <Route path="/register" component={ SignUp }/>
+      <Route exact path="/" component={ Home }/>
+      <Route exact path="/login" component={ SignIn }/>
+      <Route exact path="/register" component={ SignUp }/>
       <Route render={ () => (<h1>404 Not Found</h1>) }/>
     </Switch>
   </App>
