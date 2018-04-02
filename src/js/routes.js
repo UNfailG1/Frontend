@@ -6,6 +6,7 @@ import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
 import Home from '../components/Home'
 import NotFound from '../components/NotFound'
+import ResetPassword from '../components/ResetPassword'
 
 const Routes = () => (
   <App>
@@ -13,6 +14,7 @@ const Routes = () => (
       <Route exact path="/" component={ Home }/>
       <Route exact path="/login" component={ SignIn }/>
       <Route exact path="/register" component={ SignUp }/>
+      <Route exact path="/resetpassword" component={ ResetPassword }/>
       <Route component={NotFound}/>
     </Switch>
   </App>

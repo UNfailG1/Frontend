@@ -33,6 +33,7 @@ class SignIn extends Component {
                   <input type="password" id="password"/>
                 </div>
                 <button className="waves-effect waves-light btn primary-color">Sign In</button>
+                <h6><br/><a href="/resetpassword">Forgot your password?</a></h6>
               </form>
             </div>
             <div className="card-panel blue lighten-5">
