@@ -25,6 +25,43 @@ class GameInfo extends Component {
               </div>
             </div>
           </div>
+          
+          <div>
+            <h3>Top Rated Players</h3>
+            <ul class="collection">
+              <li class="collection-item avatar">
+                <span class="title">Nickname Jugador</span>
+                <p>Calificación: <br/>
+                   Reputación:
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle">account_circle</i>
+                <span class="title">Nickname Jugador</span>
+                <p>Calificación: <br/>
+                   Reputación:
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle green">account_circle</i>
+                <span class="title">Nickname Jugador</span>
+                <p>Calificación: <br/>
+                   Reputación:
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              </li>
+              <li class="collection-item avatar">
+                <i class="material-icons circle red">account_circle</i>
+                <span class="title">Nickname Jugador</span>
+                <p>Calificación: <br/>
+                   Reputación:
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              </li>
+            </ul>
+          </div>
         </div>
     )
   }
