@@ -36,7 +36,7 @@ class SignIn extends Component {
               </form>
             </div>
             <div className="card-panel blue lighten-5">
-              <span>Are you new on Spairing? <br/><a href="">Create an Account</a></span>
+              <span>Are you new on Spairing? <br/><a href="/register">Create an Account</a></span>
             </div>
           </div>
         </figcaption>
