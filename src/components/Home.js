@@ -3,9 +3,17 @@ import lol1 from '../assets/lol1.png';
 import halo1 from '../assets/haloReach1.jpg';
 import fort1 from '../assets/fortnite1.jpg';
 import mine1 from '../assets/minecraft1.jpeg';
+import ForumList from './ForumList'
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      authed: false
+    }
+  }
   componentDidMount(){
     const $ = window.$
     document.title = "SPairing";
@@ -38,7 +46,7 @@ class Home extends Component {
                       <p>Información acerca de lo mas reciente de LoL</p>
                     </div>
                     <div className="card-action">
-                      <a href="#!" className="secondary-color-text">IR A FORO</a>
+                      <Link to="/forums">IR A FORO</Link>
                     </div>
                   </div>
                 </div>
@@ -56,7 +64,7 @@ class Home extends Component {
                       <p>Información acerca de lo mas reciente de Halo Reach</p>
                     </div>
                     <div className="card-action">
-                      <a href="#!" className="secondary-color-text">IR A FORO</a>
+                      <Link to="/forums">IR A FORO</Link>
                     </div>
                   </div>
                 </div>
@@ -74,7 +82,7 @@ class Home extends Component {
                       <p>Información acerca de lo mas reciente de Minecraft</p>
                     </div>
                     <div className="card-action">
-                      <a href="#!" className="secondary-color-text">IR A FORO</a>
+                      <Link to="/forums">IR A FORO</Link>
                     </div>
                   </div>
                 </div>
@@ -92,7 +100,7 @@ class Home extends Component {
                       <p>Información acerca de lo mas reciente de Fornite</p>
                     </div>
                     <div className="card-action">
-                      <a href="#!" className="secondary-color-text">IR A FORO</a>
+                      <Link to="/forums">IR A FORO</Link>
                     </div>
                   </div>
                 </div>
