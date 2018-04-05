@@ -33,7 +33,7 @@ class ForumList extends Component {
     componentWillMount(){
        // const game_id = this.props.game_id
         
-        this.request('https://question-api.herokuapp.com/questions/')
+        this.request('https://sparing172371823.herokuapp.com/sub_forums/')
     }
 
     render(){

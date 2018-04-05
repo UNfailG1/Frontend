@@ -17,8 +17,8 @@ class ForumCard extends Component {
                 <div class="col s12 m6">
                   <div class="card primary-color">
                     <div class="card-content white-text">
-                      <span class="card-title">{item.id}</span> {/* Deberia ser el título del foro.*/}
-                      <p>{item.question} <small> - {item.author}</small></p>
+                      <span class="card-title">{item.sf_name}</span> {/* Deberia ser el título del foro.*/}
+                      <p>{item.sf_description} <small> - {item.game_id}</small></p>
                     </div>
                     <div class="card-action">
                       <a href="!#" className="secondary-color-text ">Link a los hilos</a>
