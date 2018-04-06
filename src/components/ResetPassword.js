@@ -23,11 +23,11 @@ class ResetPassword extends Component {
               <form onSubmit={ (e) => this.handleSubmit(e)}>
               <h5>Recover your password</h5>
                 <div>
-                   <h6 className="left-align">Please remind us your email in order to send you a recovery email, if an account associated to it exists</h6> 
+                   <h6 className="left-align">Please remind us your email in order to send you a recovery email, if an account associated to it exists</h6>
                 </div>
                 <div className="input-field">
                   <label htmlFor="email">Email</label>
-                  <input type="text" id="email"/>
+                  <input id="email" type="email" pattern="(([a-zA-Z]+)([\w\.\-]*)\@([\w\.\-]*)\.([\w\.\-]*))" required/>
                 </div>
                 <button className="waves-effect waves-light btn primary-color">Recover password</button>
               </form>
