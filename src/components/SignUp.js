@@ -47,19 +47,21 @@ class SignUp extends Component{
             <form onSubmit={this.handleSubmit}>
               <div className="input-field">
                 <label htmlFor="username">Username</label>
-                <input id="username" type="text" />
+                <input id="username" type="text" pattern="(([a-zA-Z]+)([\w\.\-]*))" required/>
               </div>
               <div className="input-field ">
                 <label htmlFor="email">Email</label>
-                <input id="email" type="email" />
+                <input id="email" type="email" pattern="(([a-zA-Z]+)([\w\.\-]*)\@([\w\.\-]*)\.([\w\.\-]*))" required/>
               </div>
               <div className="input-field ">
                 <label  htmlFor="password">Password</label>
-                <input id="password" type="password" onChange={this.handleChange}/>
+                <input id="password" type="password" onChange={this.handleChange}
+                pattern="[a-z0-9]+$" minlength ="4" maxlength="20"/>
               </div>
               <div className="input-field">
                 <label htmlFor="cpass">Confirm Password</label>
-                <input id="cpass" type="password" onChange={this.handleChange}/>
+                <input id="cpass" type="password" onChange={this.handleChange}
+                pattern="[a-z0-9]+$" minlength ="4" maxlength="20" required/>
               </div>
               <button className="btn waves-effect waves-light primary-color" type="submit">Sign Up</button>
             </form>

@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import SignUp from './SignUp'
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authed: false
+    }
+  }
   initNav(){
     const $ = window.$
     $( document ).ready(function(){
