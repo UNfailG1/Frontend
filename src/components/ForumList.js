@@ -49,7 +49,7 @@ class ForumList extends Component {
     componentWillMount(){
        // const game_id = this.props.game_id
         
-        this.request('https://spairing-api.herokuapp.com/sub_forums')
+        this.request('https://spairing-api.herokuapp.com/games/1/sub_forums')
     }
 
     render(){

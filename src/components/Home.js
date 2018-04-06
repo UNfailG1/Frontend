@@ -110,10 +110,12 @@ class Home extends Component {
             <div className="col s4 center-align">
               <i className="large material-icons">info_outline</i>
               <p> Texto de explicación de caracteristica 1</p>
+              <Link to="/gameinfo">IR A JUEGO (PRUEBA)</Link>
             </div>
             <div className="col s4 center-align">
               <i className="large material-icons">info_outline</i>
               <p> Texto de explicación de caracteristica 2</p>
+              <Link to="/platforms">IR A PLATAFORMAS (PRUEBA)</Link>
             </div>
             <div className="col s4 center-align">
               <i className="large material-icons">info_outline</i>

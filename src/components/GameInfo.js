@@ -74,7 +74,7 @@ class GameInfo extends Component {
                 <h1>{items.gam_name}</h1>
                 <i className="large material-icons">info_outline</i>
                 <p className="gameinfo">{items.gam_description}</p>
-                <h7 className="secondary-color-text">{items.gam_link}</h7>
+                <a href={items.gam_link}><h7 className="secondary-color-text">{items.gam_link}</h7></a>
                 <div className="row">
                   <h7>PEGI Rating: </h7>
                   <h7>{pegi.peg_name}</h7> <br/>
