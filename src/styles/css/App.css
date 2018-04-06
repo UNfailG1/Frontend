@@ -85,6 +85,9 @@
 .big-title {
   font-size: 225px; }
 
+.gameImage {
+  height: 64px; }
+
 .primary-color {
   background-color: #263238 !important;
   color: white !important; }
@@ -139,9 +142,6 @@
 
 .input-field .prefix.active {
   color: #263238 !important; }
-
-.gameImage{
-  height: 64px }
 
 body {
   background-color: #eeeeee;
