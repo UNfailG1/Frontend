@@ -15,3 +15,6 @@ Regex Implementation : Juan Lozano
 ### Allow Register of Players
 ### Clean the interface for nicer presentation
 ### Implement a smooth flow across all the app
+### Add more interactive elements to the app
+
+### Heroku Link: https://spairing.herokuapp.com
