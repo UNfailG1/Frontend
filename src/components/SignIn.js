@@ -1,8 +1,30 @@
 import React, { Component } from 'react'
 import login_img from '../assets/login_image.jpg'
+import $ from 'jquery'
+//import axios from 'axios'
+//import { connect } from 'react-redux';
 
+export const AUTH_GET_TOKEN = '[Auth] AUTH_GET_TOKEN' 
+
+function addToken(token) {
+  return {
+    type: AUTH_GET_TOKEN,
+    token
+  }
+}
+
+/*export function login(data){
+  return dispatch => {
+    return axios.post('https://spairing-api.herokuapp.com/player_profile_token',data).then(
+        res => {
+          const token = res.data.token;
+          localStorage.setItem("jwt", token)
+        }
+      )
+  }
+}*/
 class SignIn extends Component {
-
+  
   componentDidMount(){
     document.title = 'Sign in'
   }
@@ -11,8 +33,26 @@ class SignIn extends Component {
     event.preventDefault()
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
+    const request = {"auth": {"email": username, "password": password}}
     console.log('user: ', username)
     console.log('password: ', password)
+    console.log(request)
+    //ogin(request)
+    $.ajax({
+      url: "https://spairing-api.herokuapp.com/player_profile_token",
+      type: "POST",
+      data: request,
+      dataType: "json",
+      success: function (result) {
+        console.log(result)
+        //this.props.dispatch(addToken("jwt", result.jwt))
+        localStorage.setItem("jwt", result.jwt)
+      },
+      error:function() {
+        console.log("Eso no existe :'v")
+        //dispatch()
+      }
+    })
   }
 
   render(){
@@ -45,5 +85,4 @@ class SignIn extends Component {
     )
   }
 }
-
 export default SignIn
