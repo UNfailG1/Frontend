@@ -16,8 +16,8 @@ class Footer extends Component {
               <ul>
                 <li><a className="grey-text text-lighten-3" href="http://materializecss.com">Materialize</a></li>
                 <li><a className="grey-text text-lighten-3" href="https://github.com/UNfailG1">Github</a></li>
-                <li><a className="grey-text text-lighten-3" href="#!">Link Heroku</a></li>
-                <li><a className="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                <li><a className="grey-text text-lighten-3" href="https://spairing.herokuapp.com">Heroku-Front</a></li>
+                <li><a className="grey-text text-lighten-3" href="https://spairing-api.herokuapp.com">Heroku-Back</a></li>
               </ul>
             </div>
           </div>

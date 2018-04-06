@@ -3,7 +3,6 @@ import lol1 from '../assets/lol1.png';
 import halo1 from '../assets/haloReach1.jpg';
 import fort1 from '../assets/fortnite1.jpg';
 import mine1 from '../assets/minecraft1.jpeg';
-import ForumList from './ForumList'
 import { Link } from 'react-router-dom'
 
 class Home extends Component {

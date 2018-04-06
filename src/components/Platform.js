@@ -23,16 +23,16 @@ class Platform extends Component {
 
     request(url){
         let token = "Bearer " + localStorage.getItem("jwt")
-        console.log(token)
+        //console.log(token)
         $.ajax({
           url: url,
           type: "GET",
           beforeSend: function(xhr){xhr.setRequestHeader('Authorization', token)},
           context: this, // Allows us to use this.setState inside success
           success: function (result) {
-            console.log(result)
+            //console.log(result)
             this.setState({
-                        items: JSON.stringify(result),
+                        items: result,
                         isLoaded: true
                     })
           }
@@ -72,8 +72,6 @@ class Platform extends Component {
     render(){
         const { items, isLoaded } = this.state
         //const game_id = this.props.game_id
-        
-        console.log(items)
         
         if(isLoaded){
             var list

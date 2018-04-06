@@ -1,9 +1,5 @@
 import React from 'react'
-import { Route, Switch,
-  BrowserRouter as Router,
-  Link,
-  Redirect,
-  withRouter } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import App from '../components/App'
 import SignUp from '../components/SignUp'
@@ -15,31 +11,22 @@ import GameInfo from '../components/GameInfo'
 import ForumList from '../components/ForumList'
 import Platform from '../components/Platform'
 
-var authed = false
 
 const Routes = () => (
 
-  <Router>
-    <App>
+  <App>
+    <Switch>
       <Route exact path="/" component={ Home }/>
       <Route exact path="/login" component={ SignIn }/>
       <Route exact path="/register" component={ SignUp }/>
       <Route exact path="/resetpassword" component={ ResetPassword }/>
       <Route exact path="/gameinfo" component={ GameInfo }/>
-      <PrivateRoute authed={this.authed} path='/forums' component={ ForumList } />
+      <Route exact path="/forums" component={ ForumList }/>
+      <Route exact path="/platforms" component={ Platform }/>
       <Route component={NotFound}/>
-    </App>
-  </Router>
+    </Switch>
+  </App>
 
 )
-
-const PrivateRoute = ({component: Component, ...rest}) => (
-    <Route
-      {...rest}
-      render={(props) => authed === true
-        ? <Component {...props} />
-        : <Redirect to='/login'/>}
-    />
-  )
 
 export default Routes

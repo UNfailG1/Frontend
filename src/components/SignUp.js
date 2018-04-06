@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import register_img from '../assets/register_img.jpg'
+import $ from 'jquery'
 
 class SignUp extends Component{
   constructor(props){
@@ -8,7 +9,8 @@ class SignUp extends Component{
       username: '',
       email: '',
       password: '',
-      cpass: ''
+      cpass: '',
+      location_id: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,7 +24,30 @@ class SignUp extends Component{
     event.preventDefault()
     this.setState({
       username: document.getElementById("username").value,
-      email: document.getElementById("email").value
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value,
+      cpass: document.getElementById("cpass").value,
+      location_id: "1"
+    })
+    
+    const profile = {"player_profile": {"pp_username": this.state.username, "password": this.state.password, 
+                      "password_confirmation": this.state.cpass, "email": this.state.email, "location_id":this.state.location_id}}
+    console.log(profile)
+    //ogin(request)
+    $.ajax({
+      url: "https://spairing-api.herokuapp.com/player_profiles",
+      type: "POST",
+      data: profile,
+      dataType: "json",
+      success: function (result) {
+        console.log(result)
+        //this.props.dispatch(addToken("jwt", result.jwt))
+        localStorage.setItem("jwt", result.jwt)
+      },
+      error:function() {
+        console.log("Usuario Invalido")
+        //dispatch()
+      }
     })
   }
 
@@ -56,12 +81,12 @@ class SignUp extends Component{
               <div className="input-field ">
                 <label  htmlFor="password">Password</label>
                 <input id="password" type="password" onChange={this.handleChange}
-                pattern="[a-z0-9]+$" minlength ="4" maxlength="20"/>
+                pattern="[a-z0-9]+$" minLength ="4" maxLength="20"/>
               </div>
               <div className="input-field">
                 <label htmlFor="cpass">Confirm Password</label>
                 <input id="cpass" type="password" onChange={this.handleChange}
-                pattern="[a-z0-9]+$" minlength ="4" maxlength="20" required/>
+                pattern="[a-z0-9]+$" minLength ="4" maxLength="20" required/>
               </div>
               <button className="btn waves-effect waves-light primary-color" type="submit">Sign Up</button>
             </form>

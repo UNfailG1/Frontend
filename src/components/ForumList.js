@@ -15,7 +15,7 @@ class ForumList extends Component {
 
     request(url){
         let token = "Bearer " + localStorage.getItem("jwt")
-        console.log(token)
+        //console.log(token)
         $.ajax({
           url: url,
           type: "GET",
@@ -24,7 +24,7 @@ class ForumList extends Component {
           success: function (result) {
             console.log(result)
             this.setState({
-                        items: JSON.stringify(result),
+                        items: result,
                         isLoaded: true
                     })
           }
@@ -49,7 +49,7 @@ class ForumList extends Component {
     componentWillMount(){
        // const game_id = this.props.game_id
         
-        this.request('https://spairing-api.herokuapp.com/sub_forums/')
+        this.request('https://spairing-api.herokuapp.com/sub_forums')
     }
 
     render(){

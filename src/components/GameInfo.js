@@ -14,21 +14,20 @@ class GameInfo extends Component {
 
     request(url){
         let token = "Bearer " + localStorage.getItem("jwt")
-        console.log(token)
+        //console.log(token)
         $.ajax({
           url: url,
           type: "GET",
           beforeSend: function(xhr){xhr.setRequestHeader('Authorization', token)},
           context: this, // Allows us to use this.setState inside success
-          success: function (result) {
+          success: (result) => {
             console.log(result)
             this.setState({
-                        items: JSON.stringify(result),
+                        items: result,
                         isLoaded: true
                     })
           }
         })
-        console.log(this.state.isLoaded)
         /*fetch(url)
             .then(res => res.json())
             .then(
@@ -60,23 +59,22 @@ class GameInfo extends Component {
   }
 
   render() {
-    const { item, isLoaded } = this.state
-    const pegi = this.state.item.pegi
-    const pgp = this.state.item.player_game_profiles
-    
+    const { items, isLoaded } = this.state
     
     if(isLoaded){
-      const pgpNick = pgp.map((p) => <h5 key={p.pgp_nickname}>{p.pgp_nickname}</h5>)
-      const pgpRep = pgp.map((p) => <h5 key={p.pgp_reputation}>{p.pgp_reputation}</h5>)
-      const pgpRate = pgp.map((p) => <h5 key={p.pgp_rate}>{p.pgp_rate}</h5>)
+      const pegi = this.state.items.pegi
+      const pgp = this.state.items.player_game_profiles[0]
+      const pgpNick = pgp.pgp_nickname
+      const pgpRep = pgp.pgp_reputation
+      const pgpRate = pgp.pgp_rate
       return (
           <div>
             <div className="row">
               <div className="center-align">
-                <h1>{item.gam_name}</h1>
+                <h1>{items.gam_name}</h1>
                 <i className="large material-icons">info_outline</i>
-                <p className="gameinfo">{item.gam_description}</p>
-                <h7 className="secondary-color-text">{item.gam_link}</h7>
+                <p className="gameinfo">{items.gam_description}</p>
+                <h7 className="secondary-color-text">{items.gam_link}</h7>
                 <div className="row">
                   <h7>PEGI Rating: </h7>
                   <h7>{pegi.peg_name}</h7> <br/>
@@ -88,9 +86,9 @@ class GameInfo extends Component {
               <h3>Top Rated Player</h3>
               <ul className="collection">
                 <li className="collection-item avatar">
-                  <span className="title">{pgpNick}</span>
-                  <h5>Reputation:</h5> {pgpRep}<br/>
-                   <h5>Rating:</h5> {pgpRate}
+                  <span className="title"><h5>{pgpNick}</h5></span><br/>
+                  <h5>Reputation:</h5> <h5>{pgpRep}</h5><br/>
+                   <h5>Rating:</h5> <h5>{pgpRate}</h5>
                   <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
                 </li>
               </ul>
