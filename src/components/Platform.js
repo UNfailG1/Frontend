@@ -21,7 +21,22 @@ class Platform extends Component {
       }
 
     request(url){
-        fetch(url)
+        let token = "Bearer " + localStorage.getItem("jwt")
+        console.log(token)
+        $.ajax({
+          url: url,
+          type: "GET",
+          beforeSend: function(xhr){xhr.setRequestHeader('Authorization', token)},
+          context: this, // Allows us to use this.setState inside success
+          success: function (result) {
+            console.log(result)
+            this.setState({
+                        items: JSON.stringify(result),
+                        isLoaded: true
+                    })
+          }
+        })
+        /*fetch(url)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -35,13 +50,13 @@ class Platform extends Component {
                         isLoaded: true,
                         error
                     })
-                })
+                })*/
     }
     
     componentWillMount(){
        // const game_id = this.props.game_id
         
-        this.request('https://question-api.herokuapp.com/questions/')
+        this.request('https://spairing-api.herokuapp.com/platforms')
     }
     
     // Asegurarse del funcionamiento de materialize

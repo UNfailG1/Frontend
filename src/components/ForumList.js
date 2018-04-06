@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ForumCard from './ForumCard'
+import $ from 'jquery'
 
 class ForumList extends Component {
 
@@ -13,7 +14,22 @@ class ForumList extends Component {
     }
 
     request(url){
-        fetch(url)
+        let token = "Bearer " + localStorage.getItem("jwt")
+        console.log(token)
+        $.ajax({
+          url: url,
+          type: "GET",
+          beforeSend: function(xhr){xhr.setRequestHeader('Authorization', token)},
+          context: this, // Allows us to use this.setState inside success
+          success: function (result) {
+            console.log(result)
+            this.setState({
+                        items: JSON.stringify(result),
+                        isLoaded: true
+                    })
+          }
+        })
+        /*fetch(url)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -27,13 +43,13 @@ class ForumList extends Component {
                         isLoaded: true,
                         error
                     })
-                })
+                })*/
     }
     
     componentWillMount(){
        // const game_id = this.props.game_id
         
-        this.request('https://sparing172371823.herokuapp.com/sub_forums/')
+        this.request('https://spairing-api.herokuapp.com/sub_forums/')
     }
 
     render(){

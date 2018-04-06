@@ -1,23 +1,39 @@
 import React, { Component } from 'react'
+import $ from 'jquery'
 
 class GameInfo extends Component {
 
   constructor(props){
         super(props)
         this.state = {
-            item: [],
+            items: [],
             isLoaded: false,
             error: null
         }
     }
 
     request(url){
-        fetch(url)
+        let token = "Bearer " + localStorage.getItem("jwt")
+        console.log(token)
+        $.ajax({
+          url: url,
+          type: "GET",
+          beforeSend: function(xhr){xhr.setRequestHeader('Authorization', token)},
+          context: this, // Allows us to use this.setState inside success
+          success: function (result) {
+            console.log(result)
+            this.setState({
+                        items: JSON.stringify(result),
+                        isLoaded: true
+                    })
+          }
+        })
+        /*fetch(url)
             .then(res => res.json())
             .then(
                 (result) => {
                     this.setState({
-                        item: result,
+                        items: result,
                         isLoaded: true
                     })
                 },
@@ -26,12 +42,12 @@ class GameInfo extends Component {
                         isLoaded: true,
                         error
                     })
-                })
+                })*/
     }
   
   componentWillMount(){
        // const game_id = this.props.game_id
-        this.request('https://spa-tmp-front.herokuapp.com/games/1')
+        this.request('https://spairing-api.herokuapp.com/games/1')
     }
   
   componentDidMount(){
@@ -46,6 +62,7 @@ class GameInfo extends Component {
     const { item, isLoaded } = this.state
     const pegi = this.state.item.pegi
     const pgp = this.state.item.player_game_profiles
+    
     
     if(isLoaded){
       const pgpNick = pgp.map((p) => <h5 key={p.pgp_nickname}>{p.pgp_nickname}</h5>)

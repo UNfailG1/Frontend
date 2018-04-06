@@ -50,38 +50,40 @@
 
 .back_image {
   position: relative;
-  display: table;
-  float: left;
-  margin: 0px;
-  width: 100%;
-  height: 100%;
-  min-height: 100%; }
+  margin: -4px;
+  width: calc(100%+8px);
+  height: calc(100%+8px);
+  min-height: 500px;
+  max-height: 900px;
+  overflow: hidden !important; }
 
 .back_image figcaption {
-  position: absolute;
-  display: inline-block;
   top: 0%;
   left: 0%;
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
   width: 100%;
-  height: 100%;
-  min-height: 100%; }
+  height: 100%; }
 
 .back_image img {
-  position: relative;
+  margin-bottom: -6px;
   top: 0%;
   left: 0%;
   width: 100%;
-  height: 600px;
-  overflow-y: hidden;
-  object-fit: cover; }
+  height: auto;
+  min-height: 500px;
+  object-fit: cover;
+  overflow: hidden;
+  filter: blur(3px); }
 
 .tabs .indicator {
-  height: 4px !important;
+  height: 3px !important;
   background-color: #58a5f0 !important; }
 
 .no-padding {
   padding: 0px !important; }
+
+.big-title {
+  font-size: 225px; }
 
 .primary-color {
   background-color: #263238 !important;
@@ -138,5 +140,12 @@
 .input-field .prefix.active {
   color: #263238 !important; }
 
+.gameImage{
+  height: 64px }
+
 body {
-  background-color: #eeeeee; }
+  background-color: #eeeeee;
+  overflow-x: hidden !important; }
+
+div#root, figure, main {
+  overflow-x: hidden !important; }
