@@ -28,6 +28,7 @@ class GameInfo extends Component {
                     })
           }
         })
+        console.log(this.state.isLoaded)
         /*fetch(url)
             .then(res => res.json())
             .then(

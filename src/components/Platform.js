@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PlatformItem from './PlatformItem'
+import $ from 'jquery'
 
 class Platform extends Component {
 
