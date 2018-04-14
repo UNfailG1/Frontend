@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
-import lol1 from '../assets/lol1.png';
-import halo1 from '../assets/haloReach1.jpg';
-import fort1 from '../assets/fortnite1.jpg';
-import mine1 from '../assets/minecraft1.jpeg';
+import lol1 from '../assets/lol1.png'
+import halo1 from '../assets/haloReach1.jpg'
+import fort1 from '../assets/fortnite1.jpg'
+import mine1 from '../assets/minecraft1.jpeg'
 import { Link } from 'react-router-dom'
 
 class Home extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       authed: false
     }
   }
   componentDidMount(){
     const $ = window.$
-    document.title = "SPairing";
+    document.title = "SPairing"
     $(document).ready(function(){
-      $('ul.tabs').tabs();
+      $('ul.tabs').tabs()
     })
   }
 
@@ -38,7 +38,7 @@ class Home extends Component {
                 <div className="col s12 m8 offset-m2">
                   <div className="card">
                     <div className="card-image">
-                      <img alt="" src={lol1}/>
+                      <img alt="" src={ lol1 }/>
                       <span className="card-title">League of Legends</span>
                     </div>
                     <div className="card-content">
@@ -56,7 +56,7 @@ class Home extends Component {
                 <div className="col s12 m8 offset-m2">
                   <div className="card">
                     <div className="card-image">
-                      <img alt="" src={halo1}/>
+                      <img alt="" src={ halo1 }/>
                       <span className="card-title">Halo Reach</span>
                     </div>
                     <div className="card-content">
@@ -74,7 +74,7 @@ class Home extends Component {
                 <div className="col s12 m8 offset-m2">
                   <div className="card">
                     <div className="card-image">
-                      <img alt="" src={mine1}/>
+                      <img alt="" src={ mine1 }/>
                       <span className="card-title">Minecraft</span>
                     </div>
                     <div className="card-content">
@@ -92,7 +92,7 @@ class Home extends Component {
                 <div className="col s12 m8 offset-m2">
                   <div className="card">
                     <div className="card-image">
-                      <img alt="" src={fort1}/>
+                      <img alt="" src={ fort1 }/>
                       <span className="card-title">Fornite</span>
                     </div>
                     <div className="card-content">

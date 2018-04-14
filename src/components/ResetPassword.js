@@ -16,7 +16,7 @@ class ResetPassword extends Component {
   render(){
     return (
       <figure className="back_image">
-        <img src={login_img} alt="The Pulpit Rock"/>
+        <img src={login_img} alt="login image"/>
         <figcaption>
           <div className="center-align form-panel">
             <div className="card-panel white">

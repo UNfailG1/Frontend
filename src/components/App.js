@@ -4,6 +4,11 @@ import PropTypes from 'prop-types'
 import Header from './Header'
 import Footer from './Footer'
 
+const mainStyle = {
+  'height': 'auto',
+  'display': 'block'
+}
+
 class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired
@@ -16,7 +21,7 @@ class App extends Component {
         <header>
           <Header/>
         </header>
-        <main style={{'height': 'auto', 'display': 'block'}}>
+        <main style={ mainStyle }>
           { children }
         </main>
         <footer className="page-footer primary-color">

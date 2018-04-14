@@ -23,10 +23,9 @@ const Routes = () => (
       <Route exact path="/gameinfo" component={ GameInfo }/>
       <Route exact path="/forums" component={ ForumList }/>
       <Route exact path="/platforms" component={ Platform }/>
-      <Route component={NotFound}/>
+      <Route component={ NotFound }/>
     </Switch>
   </App>
-
 )
 
 export default Routes
