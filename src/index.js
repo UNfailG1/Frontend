@@ -6,12 +6,14 @@ import './styles/css/App.css'
 
 import 'materialize-css'
 import 'materialize-css/dist/css/materialize.min.css'
-import Routes from './js/routes'
+
+import RoutesList from './components/RoutesList'
 import registerServiceWorker from './js/registerServiceWorker'
+
 
 ReactDOM.render(
   <Router>
-    <Routes/>
+    <RoutesList/>
   </Router>,
   document.getElementById('root'))
 registerServiceWorker()

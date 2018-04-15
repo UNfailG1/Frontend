@@ -1,17 +1,18 @@
 import React from 'react'
 
-PlatformItem = ({ item }) => {
+const PlatformItem = ({ item }) => {
 
   return (
-    <li>
+    <div>
       <div className="collapsible-header">
-        <i className="material-icons">filter_drama</i>{ item.plat_name }</div>
+        <i className="material-icons">filter_drama</i>{ item.plat_name }
+      </div>
       <div className="collapsible-body">
         <a href={ item.plat_link }>
           <span>{ item.plat_link }</span>
         </a>
       </div>
-    </li>
+    </div>
   )
 }
 

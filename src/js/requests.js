@@ -1,5 +1,4 @@
 import axios from 'axios'
-import store from './store'
 
 const BASE_URL = 'https://spairing-api.herokuapp.com/'
 
@@ -8,9 +7,7 @@ const POST = (url, data) => {
     url,
     method: 'post',
     baseURL: BASE_URL,
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     data
   })
 }
@@ -31,7 +28,7 @@ const POST_AUTH = (url, data) => {
     method: 'post',
     baseURL: BASE_URL,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('spToken')}`
     },
     data
@@ -44,7 +41,7 @@ const GET_AUTH = (url, params = {}) => {
     method: 'get',
     baseURL: BASE_URL,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${localStorage.getItem('spToken')}`
     },
     params

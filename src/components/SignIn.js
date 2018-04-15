@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import login_img from '../assets/login_image.jpg'
-import PropTypes from 'prop-types'
+
+//Assets
+import store from '../js/store'
 import { login } from '../js/actions'
 import { POST } from '../js/requests'
+import login_img from '../assets/login_image.jpg'
 
 class SignIn extends Component {
 
@@ -11,10 +13,10 @@ class SignIn extends Component {
   }
 
   handleSubmit(event) {
-    const regUser = /^.+@.+\..+$/
-    const regPassword = /[a-z0-9]+$/
+    // const regUser = /^.+@.+\..+$/
+    // const regPassword = /[a-z0-9]+$/
     event.preventDefault()
-    const email = document.getElementById('username').value
+    const email = document.getElementById('email').value
     const password = document.getElementById('password').value
 
     // var matchEmail = username.match(regUser)
@@ -44,9 +46,9 @@ class SignIn extends Component {
 
     POST('/player_profile_token', credentials).then(
       (res) => {
-        if (res.jwt) {
-          localStorage.setItem('spToken', res.jwt)
-          login()
+        if (res.data.jwt) {
+          localStorage.setItem('spToken', res.data.jwt)
+          store.dispatch(login())
         } else {
           //La contraseña es incorrecta
 

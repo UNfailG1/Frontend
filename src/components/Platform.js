@@ -18,7 +18,7 @@ class Platform extends Component {
     GET_AUTH('/platforms').then(
       (res) => {
         this.setState({
-          items: res,
+          items: res.data,
           isLoaded: true
         })
       }
@@ -47,7 +47,7 @@ class Platform extends Component {
     //const game_id = this.props.game_id
     var list
     if (isLoaded) {
-      list = items.map((item) => <PlatformItem key={ item.id } item={ item }/>)
+      list = items.map((item) => (<li key={ item.id }><PlatformItem item={ item }/></li>))
       return (<ul className="collapsible">{ list }</ul>)
     } else {
       return (<h1>Loading...</h1>)

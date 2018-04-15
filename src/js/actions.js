@@ -1,10 +1,10 @@
-login = () => {
+const login = () => {
   return {
     type: 'LOG_IN',
   }
 }
 
-logout = () => {
+const logout = () => {
   return {
     type: 'LOG_OUT'
   }

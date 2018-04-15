@@ -18,6 +18,9 @@ const reducer = (state, action) => {
         ...state,
         session: false
       }
+
+    default:
+      return state
   }
 }
 
