@@ -5,6 +5,8 @@ import store from '../js/store'
 import { login } from '../js/actions'
 import { POST } from '../js/requests'
 import login_img from '../assets/login_image.jpg'
+//new sign in google
+import { GoogleLogin } from 'react-google-login';
 
 class SignIn extends Component {
 
@@ -56,6 +58,25 @@ class SignIn extends Component {
         }
     })
   }
+  
+  responseGoogle = (response) => {
+      console.log(response)
+      const data = { access_token: response.accessToken }
+      
+      POST('http://spairing-adgonzalezo.c9users.io:3000//google_authentication', data).then(
+      (res) => {
+        if (res.data.jwt) {
+          console.log(res.data.jwt) 
+          localStorage.setItem('spToken', res.data.jwt)
+          store.dispatch(login())
+        } else {
+          //La contraseña es incorrecta
+
+          //No esta registrado
+        }
+      })
+
+    }
 
   render() {
     return (
@@ -75,6 +96,13 @@ class SignIn extends Component {
                   <input type="password" id="password"/>
                 </div>
                 <button className="waves-effect waves-light btn primary-color">Sign In</button>
+                <GoogleLogin
+                  clientId="683912365974-b6fhgbk93ae2vomb7rejqgl6ea5l4bli.apps.googleusercontent.com"
+                  buttonText="Sign in with Google"
+                  onSuccess={this.responseGoogle}
+                  onFailure={this.responseGoogle}
+                />
+                
                 <h6><br/>
                   <a href="/resetpassword">Forgot your password?</a>
                 </h6>
