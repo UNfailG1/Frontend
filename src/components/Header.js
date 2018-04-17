@@ -29,7 +29,6 @@ class Header extends Component {
     this.initNav()
     store.subscribe(
       () => {
-        console.log(store.getState().session)
         this.setState({
           authed: store.getState().session
         })

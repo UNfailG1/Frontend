@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
+import { GoogleLogin } from 'react-google-login';
+// import axios from 'axios'
 
 //Assets
 import store from '../js/store'
 import { login } from '../js/actions'
 import { POST } from '../js/requests'
 import login_img from '../assets/login_image.jpg'
-//new sign in google
-import { GoogleLogin } from 'react-google-login';
 
 class SignIn extends Component {
 
@@ -58,15 +58,31 @@ class SignIn extends Component {
         }
     })
   }
-  
+
   responseGoogle = (response) => {
-      console.log(response)
-      const data = { access_token: response.accessToken }
-      
-      POST('http://spairing-adgonzalezo.c9users.io:3000//google_authentication', data).then(
+    const data = {id_token: response.Zi.id_token }
+
+    // axios({
+    //   url: '/google_authentication',
+    //   method: 'post',
+    //   baseURL: 'http://localhost:3001',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   data
+    // }).then(
+    // (res) => {
+    //   if (res.data.jwt) {
+    //     localStorage.setItem('spToken', res.data.jwt)
+    //     store.dispatch(login())
+    //   } else {
+    //     //La contraseña es incorrecta
+    //
+    //     //No esta registrado
+    //   }
+    // })
+
+    POST('/google_authentication', data).then(
       (res) => {
         if (res.data.jwt) {
-          console.log(res.data.jwt) 
           localStorage.setItem('spToken', res.data.jwt)
           store.dispatch(login())
         } else {
@@ -102,7 +118,7 @@ class SignIn extends Component {
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 />
-                
+
                 <h6><br/>
                   <a href="/resetpassword">Forgot your password?</a>
                 </h6>
