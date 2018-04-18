@@ -10,8 +10,7 @@ class SignUp extends Component{
   constructor(props){
     super(props)
     this.state = {
-      password: '',
-      cpass: ''
+      eqPass: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -57,21 +56,26 @@ class SignUp extends Component{
   }
 
   handleChange(event){
-    const target = event.target
-    const value = target.value
-    const name = target.id
-
-    this.setState({
-      [name]: value
-    })
+    const password = document.getElementById("password").value
+    const cpass = event.target.value
+    var eqPass = cpass === password
+    this.setState({ eqPass })
   }
 
   render(){
-
-    // username pattern="(([a-zA-Z]+)([\w\.\-]*))"
-    // Email pattern="(([a-zA-Z]+)([\w\.\-]*)\@([\w\.\-]*)\.([\w\.\-]*))"
-    // password pattern="[a-z0-9]+$"
-    // cpass pattern="[a-z0-9]+$"
+    
+    const { eqPass } = this.state
+    
+    var equalPass = null
+    if(eqPass != null && !eqPass){
+      equalPass = (
+        <div className="input-field" style={{'marginBottom': 16, 'marginTop': 0}}>
+          <p className="red-text center-align" style={{'marginTop': 0}}>
+            Passwords mismatch
+          </p>
+        </div>
+      )
+    }
 
     return(
       <figure className="back_image">
@@ -82,23 +86,30 @@ class SignUp extends Component{
             <form onSubmit={ this.handleSubmit }>
               <div className="input-field">
                 <label htmlFor="username">Username</label>
-                <input id="username" type="text" required/>
+                <input id="username" type="text" pattern="([a-zA-Z]+)([\w\.\-]*)" 
+                  title="Must begin with a letter" required/>
               </div>
               <div className="input-field ">
                 <label htmlFor="email">email</label>
-                <input id="email" type="email" required/>
+                <input id="email" type="email" 
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" 
+                  title="Must contain the symbol '@' followed of a domain" required/>
               </div>
               <div className="input-field ">
                 <label  htmlFor="password">Password</label>
-                <input id="password" type="password" onChange={ this.handleChange }
-                minLength ="4" maxLength="20"/>
+                <input id="password" type="password" 
+                  pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
+                  title="Must contain at least one number, one letter and at least
+                  8 or more characters"/>
               </div>
               <div className="input-field">
                 <label htmlFor="cpass">Confirm Password</label>
                 <input id="cpass" type="password" onChange={ this.handleChange }
-                minLength ="4" maxLength="20" required/>
+                pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" required/>
               </div>
-              <button className="btn waves-effect waves-light primary-color" type="submit">Sign Up</button>
+              { equalPass }
+              <button className="btn waves-effect waves-light primary-color" 
+              type="submit">Sign Up</button>
             </form>
            </div>
         </figcaption>

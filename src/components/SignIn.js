@@ -65,16 +65,21 @@ class SignIn extends Component {
                 <h5>Sign in to Spairing</h5>
                 <div className="input-field">
                   <label htmlFor="email">Email</label>
-                  <input type="text" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                  title="Must contain the symbol '@' followed of a domain" autoComplete="off"/>
+                  <input type="email" id="email" 
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                  title="Must contain the symbol '@' followed of a domain"/>
                 </div>
                 <div className="input-field">
                   <label htmlFor="password">Password</label>
-                  <input type="password" id="password" pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
-                    title="Must contain at least one number, one letter and at least 8 or more characters"/>
+                  <input type="password" id="password" 
+                    pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
+                    title="Must contain at least one number, one letter and at 
+                    least 8 or more characters"/>
                 </div>
                 { errorMessage }
-                <button className="waves-effect waves-light btn primary-color">Sign In</button>
+                <button className="waves-effect waves-light btn primary-color">
+                Sign In
+                </button>
                 <h6><br/>
                   <a href="/resetpassword">Forgot your password?</a>
                 </h6>
