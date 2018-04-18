@@ -135,7 +135,7 @@ class SignUp extends Component{
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" 
                     title="Must contain the symbol '@' followed of a domain" required/>
                 </div>
-                <div className="input-field" style={{'height': 66}}>
+                <div className="input-field" style={{ 'height': 66 }}>
                   <select id="location" defaultValue="">
                     <option value="" disabled selected>Location</option>
                     { list }
