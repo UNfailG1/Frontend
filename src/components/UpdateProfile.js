@@ -54,7 +54,11 @@ class UpdateProfile extends Component {
       "location_id": document.getElementById("location").value
     }
     
-    PATCH('/player_profiles/10', updateData)
+    PATCH('/player_profiles/10', updateData).then(
+      (res) => {
+        console.log(res)
+      }
+    )
   }
 
   render(){
@@ -75,7 +79,7 @@ class UpdateProfile extends Component {
                   </div>
                   <div className="input-field">
                     <label htmlFor="email">Email</label>
-                    <input id="email" type="email" pattern="(([a-zA-Z]+)([\w\.\-]*)\@([\w\.\-]*)\.([\w\.\-]*))" required/>
+                    <input id="email" type="email"/>
                   </div>
                   <div className="input-field">
                     <label htmlFor="rating">Rating</label>
