@@ -5,6 +5,7 @@ import NotFound from '../components/NotFound'
 import GameInfo from '../components/GameInfo'
 import ForumList from '../components/ForumList'
 import Platform from '../components/Platform'
+import ThreadList from '../components/ThreadList'
 
 /*
   add redirect option only if you want redirect with 'when' option =
@@ -37,6 +38,10 @@ const ROUTES = [
   },
   { component: Platform,
     path: '/platforms',
+    redirect: { when: 'VISITOR', to: '/login' }
+  },
+  { component: ThreadList,
+    path: '/threads',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: NotFound }
