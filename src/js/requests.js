@@ -48,4 +48,17 @@ const GET_AUTH = (url, params = {}) => {
   })
 }
 
-export { POST, GET, POST_AUTH, GET_AUTH }
+const PATCH = (url, data) => {
+  return axios({
+    url,
+    method: 'patch',
+    baseURL: BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('spToken')}`
+    },
+    data
+  })
+}
+
+export { POST, GET, POST_AUTH, GET_AUTH, PATCH }

@@ -88,6 +88,9 @@
 .gameImage {
   height: 64px; }
 
+.leftText {
+  margin-left: 16px; }
+
 .primary-color {
   background-color: #263238 !important;
   color: white !important; }

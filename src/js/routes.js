@@ -5,6 +5,8 @@ import NotFound from '../components/NotFound'
 import GameInfo from '../components/GameInfo'
 import ForumList from '../components/ForumList'
 import Platform from '../components/Platform'
+import PlayerProfile from '../components/PlayerProfile'
+import UpdateProfile from '../components/UpdateProfile'
 
 /*
   add redirect option only if you want redirect with 'when' option =
@@ -37,6 +39,14 @@ const ROUTES = [
   },
   { component: Platform,
     path: '/platforms',
+    redirect: { when: 'VISITOR', to: '/login' }
+  },
+  { component: PlayerProfile,
+    path: '/profile',
+    redirect: { when: 'VISITOR', to: '/login' }
+  },
+  { component: UpdateProfile,
+    path: '/updateprofile',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: NotFound }
