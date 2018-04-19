@@ -15,7 +15,7 @@ class CommentList extends Component {
 
   componentWillMount() {
     // const game_id = this.props.game_id
-    GET_AUTH('/comments?page=2').then(
+    GET_AUTH('/comments?page=3').then(
       (res) => {
         this.setState({
           items: res.data,
@@ -41,8 +41,15 @@ class CommentList extends Component {
           (res) => {
             //Validar si hubo un error en el servidor
             console.log(res)
+            this.addComment(res.data)
           }
         )
+  }
+  
+  addComment(comment){
+    this.setState({ 
+      items: this.state.items.concat([comment])
+    })
   }
 
   render() {
@@ -58,13 +65,13 @@ class CommentList extends Component {
         <ul>{ list }</ul>
         <form onSubmit={ (e) => this.handleSubmit(e)}>
           <div className="row">
-            <h5>Comment: </h5>
             <div className = "col s12 m6 center-aligned">
+            <h5>Comment: </h5>
               <div className="input-field">
                 <label htmlFor="comment"></label>
                 <input id="comment" type="text"/>
               </div>
-              <button className="waves-effect waves-light btn primary-color">Make Comment</button>
+              <button className="waves-effect waves-light btn primary-color" onClick={this.addComment}>Make Comment</button>
             </div>
           </div>
         </form>
