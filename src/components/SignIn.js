@@ -1,4 +1,7 @@
+/* global gapi */
 import React, { Component } from 'react'
+import { GoogleLogin } from 'react-google-login'
+import axios from 'axios'
 
 //Assets
 import store from '../js/store'
@@ -51,6 +54,27 @@ class SignIn extends Component {
     )
   }
 
+  responseGoogle = (response) => {
+    const data = {id_token: response.Zi.id_token }
+    axios({
+      url: '/google_authentication',
+      method: 'post',
+      baseURL: 'http://localhost:3001',
+      headers: { 'Content-Type': 'application/json' },
+      data
+    }).then(
+    (res) => {
+      if (res.data.jwt) {
+        localStorage.setItem('spToken', res.data.jwt)
+        store.dispatch(login())
+      } else {
+        //La contraseña es incorrecta
+
+        //No esta registrado
+      }
+    })
+  }
+
   render() {
     const { error } = this.state
     var errorMessage = null
@@ -88,6 +112,12 @@ class SignIn extends Component {
                 <button className="waves-effect waves-light btn primary-color">
                 Sign In
                 </button>
+                <button className="waves-effect waves-light btn primary-color" style={{"marginBottom": "20px"}}>Sign In</button>
+                <GoogleLogin
+                    clientId="544479097367-vsgksn1j0h4p6kv9glqhq6h6pffbs5l4.apps.googleusercontent.com"
+                    buttonText="Sign in with Google"
+                    onSuccess={this.responseGoogle}
+                />
                 <h6><br/>
                   <a href="/resetpassword">Forgot your password?</a>
                 </h6>
