@@ -80,7 +80,7 @@ class SignIn extends Component {
                 </div>
                 <button className="waves-effect waves-light btn primary-color" style={{"marginBottom": "20px"}}>Sign In</button>
                 <GoogleLogin
-                    clientId="toca poner la env"
+                    clientId="544479097367-vsgksn1j0h4p6kv9glqhq6h6pffbs5l4.apps.googleusercontent.com"
                     buttonText="Sign in with Google"
                     onSuccess={this.responseGoogle}
                 />
