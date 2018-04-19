@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { GET_AUTH } from '../js/requests'
+import defaultAvatar from '../assets/user.svg'
+import { GET_AUTH, BASE_URL } from '../js/requests'
 
 class PlayerProfile extends Component {
 
@@ -8,7 +9,8 @@ class PlayerProfile extends Component {
     this.state = {
       items: [],
       isLoaded: false,
-      error: null
+      error: null,
+      avatar: null
     }
   }
 
@@ -35,20 +37,24 @@ class PlayerProfile extends Component {
 
   render() {
     const { items, isLoaded } = this.state
-    console.log(items)
-    
+
     if (isLoaded) {
       const username = items.pp_username
       const email = items.email
       const elo = items.pp_spairing_elo
       const location = items.location.loc_name
+      const avatar =  BASE_URL + items.pp_avatar.url
+      var avatarImg = (items.pp_avatar.url) ?
+          <img className="circle responsive-img" src={ avatar } height="160" width="160"/> :
+          <img className="circle responsive-img" src={ defaultAvatar } height="160" width="160"/>
       var friends = items.friends.map((item, i) => (<h5 className="leftText"  key={i}>{item.pp_username}</h5>))
       var games = items.games.map((item, i) => (<h5 className="leftText" key={i}>{item.gam_name}</h5>))
       return (
         <div>
           <div className="row">
             <div className="center-align">
-              <i className="large material-icons">info_outline</i>
+              <br />
+              {avatarImg}
               <h3>{ username }</h3>
               <h5 className="secondary-color-text">{ email }</h5>
               <h4>Current player level (Rating): { elo }</h4>

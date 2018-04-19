@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import login_img from '../assets/login_image.jpg'
-import { GET, PATCH } from '../js/requests'
+import defaultAvatar from '../assets/user.svg'
+import { GET, GET_AUTH, PATCH, FPATCH, BASE_URL } from '../js/requests'
 import $ from 'jquery'
 
 class UpdateProfile extends Component {
@@ -12,7 +13,8 @@ class UpdateProfile extends Component {
       email: '',
       location_id: '',
       items: [],
-      loading: true
+      loading: true,
+      avatar: null
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -25,7 +27,16 @@ class UpdateProfile extends Component {
           loading: false,
           items: res
         })
-      }  
+      }
+    )
+    const route = "/player_profiles/".concat(localStorage.getItem('userId'))
+    GET_AUTH(route).then(
+      (res) => {
+        const url = res.data.pp_avatar.url
+        this.setState({
+          avatar: (url) ?  BASE_URL + url : url ,
+        })
+      }
     )
   }
 
@@ -35,7 +46,7 @@ class UpdateProfile extends Component {
       $('select').material_select();
     });
   }
-  
+
   // Asegurarse del funcionamiento de materialize
   componentDidUpdate(){
       const $ = window.$
@@ -43,20 +54,33 @@ class UpdateProfile extends Component {
         $('select').material_select();
       });
    }
-  
+
+  handleChange(event){
+    const avatar = URL.createObjectURL(event.target.files[0])
+    this.setState({ avatar })
+  }
+
 
   handleSubmit(event){
     event.preventDefault()
     const updateData = {
       "pp_username": document.getElementById("username").value,
       "email": document.getElementById("email").value,
-      "pp_spairing_elo": parseFloat(document.getElementById("rating").value),
       "location_id": document.getElementById("location").value
     }
-    
+
     const route = "/player_profiles/".concat(localStorage.getItem('userId'))
-    
+    const newAvatar =  document.getElementById("newAvatar").files[0]
+    const data =  new FormData()
+    data.append('image', newAvatar)
+
     PATCH(route, updateData).then(
+      (res) => {
+        console.log(res)
+      }
+    )
+    const route0 = "/player_profiles_avatar/".concat(localStorage.getItem('userId'))
+    FPATCH(route0, data).then(
       (res) => {
         console.log(res)
       }
@@ -65,7 +89,10 @@ class UpdateProfile extends Component {
 
   render(){
     if(this.state.loading === false){
-      const {items} = this.state
+      const {items, avatar} = this.state
+      var avatarImg = ( avatar ) ?
+          <img className="circle responsive-img" src={ avatar } height="160" width="160"/> :
+          <img className="circle responsive-img" src={ defaultAvatar } height="160" width="160"/>
       var list = items.data.map((item) => <option value={item.id} key={item.id} className="primary-color-text"> {item.loc_name} </option>)
       return (
         <figure className="back_image">
@@ -74,7 +101,17 @@ class UpdateProfile extends Component {
             <div className="center-align form-panel">
               <div className="card-panel white">
                 <form onSubmit={ (e) => this.handleSubmit(e)}>
-                <h5>Update your Profile</h5>
+                  <h5>Update your Profile</h5>
+                  { avatarImg }
+                  <div className="file-field input-field">
+                    <div className="btn primary-color">
+                      <span>File</span>
+                      <input id="newAvatar" type="file" onChange={(e) => this.handleChange(e)}/>
+                    </div>
+                    <div className="file-path-wrapper">
+                      <input className="file-path validate" type="text"/>
+                    </div>
+                  </div>
                   <div className="input-field">
                     <label htmlFor="username">Username</label>
                     <input id="username" type="text"/>
@@ -82,10 +119,6 @@ class UpdateProfile extends Component {
                   <div className="input-field">
                     <label htmlFor="email">Email</label>
                     <input id="email" type="email"/>
-                  </div>
-                  <div className="input-field">
-                    <label htmlFor="rating">Rating</label>
-                    <input id="rating" type="text"/>
                   </div>
                   <div className="input-field">
                     <select id="location">

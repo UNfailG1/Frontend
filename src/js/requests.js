@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://spairing-api.herokuapp.com/'
+const BASE_URL = 'https://spairing-api.herokuapp.com'
+// const BASE_URL = 'http://localhost:3001'
 
 const POST = (url, data) => {
   return axios({
@@ -61,4 +62,13 @@ const PATCH = (url, data) => {
   })
 }
 
-export { POST, GET, POST_AUTH, GET_AUTH, PATCH }
+const FPATCH = (url, data) => {
+  return axios({
+    url,
+    method: 'patch',
+    baseURL: BASE_URL,
+    data
+  })
+}
+
+export { POST, GET, POST_AUTH, GET_AUTH, PATCH, FPATCH, BASE_URL }
