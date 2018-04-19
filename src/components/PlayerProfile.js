@@ -22,7 +22,8 @@ class PlayerProfile extends Component {
 
   componentWillMount() {
     // const game_id = this.props.game_id
-    GET_AUTH("/player_profiles/10").then(
+    const route = "/player_profiles/".concat(localStorage.getItem('userId'))
+    GET_AUTH(route).then(
       (res) => {
         this.setState({
           items: res.data,

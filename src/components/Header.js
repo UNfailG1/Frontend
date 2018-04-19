@@ -40,6 +40,7 @@ class Header extends Component {
   log_out(event){
     event.preventDefault()
     localStorage.removeItem('spToken')
+    localStorage.removeItem('userId')
     store.dispatch(logout())
   }
 

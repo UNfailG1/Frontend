@@ -54,7 +54,9 @@ class UpdateProfile extends Component {
       "location_id": document.getElementById("location").value
     }
     
-    PATCH('/player_profiles/10', updateData).then(
+    const route = "/player_profiles/".concat(localStorage.getItem('userId'))
+    
+    PATCH(route, updateData).then(
       (res) => {
         console.log(res)
       }
