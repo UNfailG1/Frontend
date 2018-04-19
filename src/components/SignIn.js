@@ -8,34 +8,22 @@ import login_img from '../assets/login_image.jpg'
 
 class SignIn extends Component {
 
+  constructor(props){
+    super(props)
+    this.state = {
+      error: false
+    }
+  }
+
   componentDidMount() {
     document.title = 'Sign in'
   }
 
   handleSubmit(event) {
-    // const regUser = /^.+@.+\..+$/
-    // const regPassword = /[a-z0-9]+$/
+
     event.preventDefault()
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
-
-    // var matchEmail = username.match(regUser)
-    // var matchPassword = password.match(regPassword)
-    //
-    // this.setState({usernameState: matchEmail && matchEmail.index === 0})
-    // this.setState({passwordState: matchPassword && matchPassword.index === 0})
-
-    // if(this.usernameState && this.passwordState){
-    //   this.setState({
-    //     error: {},
-    //     isLoading: true
-    //   })
-    //
-    //   this.props.login(this.state).then(
-    //     (res) => this.context.history.router.push('/'),
-    //     (err) => this.setState({errors:err.data.errors, isLoading:false})
-    //   )
-    // }
 
     const credentials = {
       "auth": {
@@ -56,27 +44,50 @@ class SignIn extends Component {
 
           //No esta registrado
         }
-    })
+    }).catch(
+      (error) => {
+        this.setState({error: true})
+      }
+    )
   }
 
   render() {
+    const { error } = this.state
+    var errorMessage = null
+    if(error){
+      errorMessage = (
+        <div className="input-field" style={{'marginBottom': 16, 'marginTop': 0}}>
+          <p className="red-text center-align" style={{'marginTop': 0}}>
+            Email or password are incorrect
+          </p>
+        </div>
+        )
+    }
     return (
       <figure className="back_image">
-        <img src={login_img} alt="The Pulpit Rock"/>
+        <img src={ login_img } alt="The Pulpit Rock"/>
         <figcaption>
           <div className="center-align form-panel">
             <div className="card-panel white">
-              <form onSubmit={(e) => this.handleSubmit(e)}>
+              <form onSubmit={ (e) => this.handleSubmit(e) }>
                 <h5>Sign in to Spairing</h5>
                 <div className="input-field">
                   <label htmlFor="email">Email</label>
-                  <input type="email" id="email"/>
+                  <input type="email" id="email"
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                  title="Must contain the symbol '@' followed of a domain"/>
                 </div>
                 <div className="input-field">
                   <label htmlFor="password">Password</label>
-                  <input type="password" id="password"/>
+                  <input type="password" id="password"
+                    pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
+                    title="Must contain at least one number, one letter and at
+                    least 8 or more characters"/>
                 </div>
-                <button className="waves-effect waves-light btn primary-color">Sign In</button>
+                { errorMessage }
+                <button className="waves-effect waves-light btn primary-color">
+                Sign In
+                </button>
                 <h6><br/>
                   <a href="/resetpassword">Forgot your password?</a>
                 </h6>
