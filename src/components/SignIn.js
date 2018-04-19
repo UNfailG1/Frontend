@@ -46,8 +46,10 @@ class SignIn extends Component {
 
     POST('/player_profile_token', credentials).then(
       (res) => {
+        console.log(res)
         if (res.data.jwt) {
           localStorage.setItem('spToken', res.data.jwt)
+          localStorage.setItem('userId', res.data.user_id)
           store.dispatch(login())
         } else {
           //La contraseña es incorrecta

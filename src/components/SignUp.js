@@ -49,6 +49,7 @@ class SignUp extends Component{
           (res) => {
             //Validar si hubo un error en el servidor
             localStorage.setItem('spToken', res.data.jwt)
+            localStorage.setItem('userId', res.data.user_id)
             store.dispatch(login())
           }
         )

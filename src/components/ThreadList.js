@@ -15,7 +15,7 @@ class ThreadList extends Component {
 
   componentWillMount() {
     // const game_id = this.props.game_id
-    GET_AUTH('/games/1/sub_forums').then(
+    GET_AUTH('/sub_forums').then(
       (res) => {
         this.setState({
           items: res.data,
@@ -33,7 +33,7 @@ class ThreadList extends Component {
     console.log(items)
     console.log(items.length)
     if (isLoaded) {
-      const threads = items[0].thread_forums
+      const threads = items[2].thread_forums
       if(threads.length > 0)
       {
         list = threads.map((item, i) => (<li key={ i }><ThreadCard item={ item }/></li>))

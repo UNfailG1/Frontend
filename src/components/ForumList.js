@@ -15,7 +15,7 @@ class ForumList extends Component {
 
   componentWillMount() {
     // const game_id = this.props.game_id
-    GET_AUTH('/games/1/sub_forums').then(
+    GET_AUTH('/games/4').then(
       (res) => {
         this.setState({
           items: res.data,
@@ -31,7 +31,7 @@ class ForumList extends Component {
     var list
     console.log(items)
     if (isLoaded) {
-      list = items.map((item, i) => (<li key={ i }><ForumCard item={ item }/></li>))
+      list = items.sub_forums.map((item, i) => (<li key={ i }><ForumCard item={ item }/></li>))
       return (<ul>{ list }</ul>)
     } else {
       return (<h1>Loading...</h1>)

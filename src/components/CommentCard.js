@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ThreadCard = ({ item }) => {
+const CommentCard = ({ item }) => {
 
   return (
     <div className="row">
@@ -8,11 +8,8 @@ const ThreadCard = ({ item }) => {
         <div className="card primary-color">
           <div className="card-content white-text">
             <span className="card-title">{ item.thr_name }</span>
-            <p>Thread Views: { item.thr_views }</p>
-            <p>Comment Count: { item.thr_comments }</p>
-          </div>
-          <div className="card-action">
-            <a href="/comments" className="secondary-color-text ">Comments</a>
+            <p>{ item.player_profile.pp_username }</p>
+            <p>- { item.com_comment }</p>
           </div>
         </div>
       </div>
@@ -20,4 +17,4 @@ const ThreadCard = ({ item }) => {
   )
 }
 
-export default ThreadCard
+export default CommentCard
