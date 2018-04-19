@@ -16,7 +16,7 @@ const ForumCard = ({ item }) => {
             </p>
           </div>
           <div className="card-action">
-            <a href="!#" className="secondary-color-text ">Link a los hilos</a>
+            <a href="/threads" className="secondary-color-text ">Sub-threads</a>
           </div>
         </div>
       </div>

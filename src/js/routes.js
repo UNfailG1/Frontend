@@ -7,6 +7,8 @@ import ForumList from '../components/ForumList'
 import Platform from '../components/Platform'
 import PlayerProfile from '../components/PlayerProfile'
 import UpdateProfile from '../components/UpdateProfile'
+import ThreadList from '../components/ThreadList'
+import CommentList from '../components/CommentList'
 
 /*
   add redirect option only if you want redirect with 'when' option =
@@ -47,6 +49,12 @@ const ROUTES = [
   },
   { component: UpdateProfile,
     path: '/updateprofile',
+  { component: ThreadList,
+    path: '/threads',
+    redirect: { when: 'VISITOR', to: '/login' }
+  },
+  { component: CommentList,
+    path: '/comments',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: NotFound }

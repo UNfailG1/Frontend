@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import ForumCard from './ForumCard'
+import ThreadCard from './ThreadCard'
 import { GET_AUTH } from '../js/requests'
 
-class ForumList extends Component {
+class ThreadList extends Component {
 
   constructor(props) {
     super(props)
@@ -15,7 +15,7 @@ class ForumList extends Component {
 
   componentWillMount() {
     // const game_id = this.props.game_id
-    GET_AUTH('/games/4').then(
+    GET_AUTH('/sub_forums').then(
       (res) => {
         this.setState({
           items: res.data,
@@ -29,10 +29,19 @@ class ForumList extends Component {
     const { items, isLoaded } = this.state
     //const game_id = this.props.game_id
     var list
+    
     console.log(items)
+    console.log(items.length)
     if (isLoaded) {
-      list = items.sub_forums.map((item, i) => (<li key={ i }><ForumCard item={ item }/></li>))
-      return (<ul>{ list }</ul>)
+      const threads = items[2].thread_forums
+      if(threads.length > 0)
+      {
+        list = threads.map((item, i) => (<li key={ i }><ThreadCard item={ item }/></li>))
+        return (<ul>{ list }</ul>)
+      }
+      else {
+        return (<h3>No threads at the moment. Be the first to start one!</h3>)
+      }
     } else {
       return (<h1>Loading...</h1>)
     }
@@ -40,4 +49,4 @@ class ForumList extends Component {
 
 }
 
-export default ForumList
+export default ThreadList
