@@ -55,16 +55,11 @@ class SignIn extends Component {
 
   responseGoogle = (response) => {
     const data = {id_token: response.Zi.id_token }
-    axios({
-      url: '/google_authentication',
-      method: 'post',
-      baseURL: 'http://localhost:3001',
-      headers: { 'Content-Type': 'application/json' },
-      data
-    }).then(
+    POST('/google_authentication', data).then(
     (res) => {
       if (res.data.jwt) {
         localStorage.setItem('spToken', res.data.jwt)
+        localStorage.setItem('userId', res.data.user_id)
         store.dispatch(login())
       } else {
         //La contraseña es incorrecta
