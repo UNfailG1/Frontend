@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import defaultAvatar from '../assets/user.svg'
+import Loading from './Loading'
 import { GET_AUTH, BASE_URL } from '../js/requests'
 
 class PlayerProfile extends Component {
@@ -45,8 +46,8 @@ class PlayerProfile extends Component {
       const location = items.location.loc_name
       const avatar =  BASE_URL + items.pp_avatar.url
       var avatarImg = (items.pp_avatar.url) ?
-          <img className="circle responsive-img" src={ avatar } height="160" width="160"/> :
-          <img className="circle responsive-img" src={ defaultAvatar } height="160" width="160"/>
+          <img className="circle responsive-img" alt="" src={ avatar } height="160" width="160"/> :
+          <img className="circle responsive-img" alt="" src={ defaultAvatar } height="160" width="160"/>
       var friends = items.friends.map((item, i) => (<h5 className="leftText"  key={i}>{item.pp_username}</h5>))
       var games = items.games.map((item, i) => (<h5 className="leftText" key={i}>{item.gam_name}</h5>))
       return (
@@ -76,7 +77,7 @@ class PlayerProfile extends Component {
           </div>
         </div>)
     } else {
-      return (<h1>Loading...</h1>)
+      return (<Loading />)
     }
   }
 }

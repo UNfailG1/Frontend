@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ThreadCard from './ThreadCard'
+import Loading from './Loading'
 import { GET_AUTH } from '../js/requests'
 
 class ThreadList extends Component {
@@ -43,7 +44,7 @@ class ThreadList extends Component {
         return (<h3>No threads at the moment. Be the first to start one!</h3>)
       }
     } else {
-      return (<h1>Loading...</h1>)
+      return (<Loading />)
     }
   }
 

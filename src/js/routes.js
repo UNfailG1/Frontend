@@ -49,6 +49,8 @@ const ROUTES = [
   },
   { component: UpdateProfile,
     path: '/updateprofile',
+    redirect: { when: 'VISITOR', to: '/login' }
+  },
   { component: ThreadList,
     path: '/threads',
     redirect: { when: 'VISITOR', to: '/login' }

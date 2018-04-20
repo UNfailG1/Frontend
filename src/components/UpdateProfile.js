@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import login_img from '../assets/login_image.jpg'
 import defaultAvatar from '../assets/user.svg'
 import { GET, GET_AUTH, PATCH, FPATCH, BASE_URL } from '../js/requests'
-import $ from 'jquery'
+import Loading from './Loading'
 
 class UpdateProfile extends Component {
 
@@ -41,6 +41,7 @@ class UpdateProfile extends Component {
   }
 
   componentDidMount(){
+    const $ = window.$
     document.title = 'Settings'
     $(document).ready(function() {
       $('select').material_select();
@@ -91,8 +92,8 @@ class UpdateProfile extends Component {
     if(this.state.loading === false){
       const {items, avatar} = this.state
       var avatarImg = ( avatar ) ?
-          <img className="circle responsive-img" src={ avatar } height="160" width="160"/> :
-          <img className="circle responsive-img" src={ defaultAvatar } height="160" width="160"/>
+          <img className="circle responsive-img" alt="" src={ avatar } height="160" width="160"/> :
+          <img className="circle responsive-img" alt="" src={ defaultAvatar } height="160" width="160"/>
       var list = items.data.map((item) => <option value={item.id} key={item.id} className="primary-color-text"> {item.loc_name} </option>)
       return (
         <figure className="back_image">
@@ -136,7 +137,7 @@ class UpdateProfile extends Component {
       )
     }
     else{
-      return(<h5>Loading...</h5>)
+      return(<Loading />)
     }
   }
 }

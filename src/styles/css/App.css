@@ -91,6 +91,12 @@
 .leftText {
   margin-left: 16px; }
 
+.center-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
 .primary-color {
   background-color: #263238 !important;
   color: white !important; }

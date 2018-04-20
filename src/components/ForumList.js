@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ForumCard from './ForumCard'
+import Loading from './Loading'
 import { GET_AUTH } from '../js/requests'
 
 class ForumList extends Component {
@@ -34,7 +35,7 @@ class ForumList extends Component {
       list = items.sub_forums.map((item, i) => (<li key={ i }><ForumCard item={ item }/></li>))
       return (<ul>{ list }</ul>)
     } else {
-      return (<h1>Loading...</h1>)
+      return (<Loading />)
     }
   }
 

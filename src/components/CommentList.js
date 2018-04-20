@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CommentCard from './CommentCard'
+import Loading from './Loading'
 import { GET_AUTH, POST_AUTH } from '../js/requests'
 
 class CommentList extends Component {
@@ -77,7 +78,7 @@ class CommentList extends Component {
         </form>
       </div>)
     } else {
-      return (<h1>Loading...</h1>)
+      return (<Loading />)
     }
   }
 

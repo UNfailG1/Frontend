@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Loading from './Loading'
 import { GET_AUTH } from '../js/requests'
 
 class GameInfo extends Component {
@@ -78,7 +79,7 @@ class GameInfo extends Component {
         </div>
       </div>)
     } else {
-      return (<h1>Loading...</h1>)
+      return (<Loading />)
     }
   }
 }

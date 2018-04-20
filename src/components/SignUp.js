@@ -3,6 +3,7 @@ import store from '../js/store'
 import { GET, POST } from '../js/requests'
 import register_img from '../assets/register_img.jpg'
 import { login } from '../js/actions'
+import Loading from './Loading'
 
 //TODO: Validar si hubo un error en el servidor
 
@@ -163,7 +164,9 @@ class SignUp extends Component{
         </figure>
       )
     }else if(isLoaded == null){
-      return (<div>Loading...</div>)
+      return (<Loading />)
+    }else{
+      return (<h1>Server error</h1>)
     }
   }
 }
