@@ -30,11 +30,11 @@ class ThreadList extends Component {
     const { items, isLoaded } = this.state
     //const game_id = this.props.game_id
     var list
-    
+
     console.log(items)
     console.log(items.length)
     if (isLoaded) {
-      const threads = items[2].thread_forums
+      const threads = items[0].thread_forums
       if(threads.length > 0)
       {
         list = threads.map((item, i) => (<li key={ i }><ThreadCard item={ item }/></li>))

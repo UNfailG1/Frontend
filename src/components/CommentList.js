@@ -16,20 +16,21 @@ class CommentList extends Component {
 
   componentWillMount() {
     // const game_id = this.props.game_id
-    GET_AUTH('/comments?page=3').then(
+    GET_AUTH('/comments?page=2').then(
       (res) => {
         this.setState({
           items: res.data,
           isLoaded: true
         })
+        console.log(this.state);
       }
     )
   }
-  
+
   handleSubmit(event){
     event.preventDefault()
     const comment = document.getElementById('comment').value
-    
+
     const commentary = {
       comment: {
         com_comment: comment,
@@ -37,7 +38,7 @@ class CommentList extends Component {
         player_profile_id: localStorage.getItem('userId')
       }
     }
-    
+
     POST_AUTH('/comments', commentary).then(
           (res) => {
             //Validar si hubo un error en el servidor
@@ -46,10 +47,13 @@ class CommentList extends Component {
           }
         )
   }
-  
+
   addComment(comment){
-    this.setState({ 
-      items: this.state.items.concat([comment])
+    const list = this.state.items.slice()
+    list.push(comment)
+
+    this.setState({
+      items: list
     })
   }
 
@@ -57,11 +61,8 @@ class CommentList extends Component {
     const { items, isLoaded } = this.state
     //const game_id = this.props.game_id
     var list
-    
-    console.log(items)
-    console.log(items.length)
     if (isLoaded) {
-      list = items.map((item, i) => (<li key={ i }><CommentCard item={ item }/></li>))
+      list = items.map((item) => (<li key={ item.id }><CommentCard item={ item }/></li>))
       return (<div>
         <ul>{ list }</ul>
         <form onSubmit={ (e) => this.handleSubmit(e)}>
@@ -72,7 +73,7 @@ class CommentList extends Component {
                 <label htmlFor="comment"></label>
                 <input id="comment" type="text"/>
               </div>
-              <button className="waves-effect waves-light btn primary-color" onClick={this.addComment}>Make Comment</button>
+              <button className="waves-effect waves-light btn primary-color">Make Comment</button>
             </div>
           </div>
         </form>

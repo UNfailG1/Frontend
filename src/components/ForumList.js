@@ -16,7 +16,7 @@ class ForumList extends Component {
 
   componentWillMount() {
     // const game_id = this.props.game_id
-    GET_AUTH('/games/4').then(
+    GET_AUTH('/games/1').then(
       (res) => {
         this.setState({
           items: res.data,
