@@ -5,21 +5,22 @@ import register_img from '../assets/register_img.jpg'
 import { login } from '../js/actions'
 import Loading from './Loading'
 
-//TODO: Validar si hubo un error en el servidor
+// TODO: Verificar error en linea 87 y 94
 
 class SignUp extends Component{
-  
+
   constructor(props){
     super(props)
     this.state = {
       eqPass: null,
       items: [],
-      isLoaded: null
+      isLoaded: null,
+      logginIn: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  
+
   componentWillMount(){
     GET('/locations').then(
       (res) => {
@@ -27,10 +28,10 @@ class SignUp extends Component{
           items: res,
           isLoaded: true
         })
-      }  
+      }
     ).catch(
       (error) => {
-        this.setState({ isLoaded: false })  
+        this.setState({ isLoaded: false })
       }
     )
   }
@@ -46,14 +47,15 @@ class SignUp extends Component{
     document.title = 'Sign up'
     this.initSelect()
   }
-  
-  componentDidUpdate(){
+
+  componentWillUpdate(){
     this.initSelect()
   }
 
   handleSubmit( event ){
-    
+
     event.preventDefault()
+    this.setState({ logginIn: true })
     const profile = {
       "player_profile": {
         "pp_username": document.getElementById("username").value,
@@ -81,9 +83,15 @@ class SignUp extends Component{
           }
         ).catch(
           (error) => {
+            this.setState({ logginIn: false})
             console.log(error)
           }
         )
+      }
+    ).catch(
+      (error) => {
+        this.setState({ logginIn: false})
+        console.log(error)
       }
     )
   }
@@ -96,9 +104,13 @@ class SignUp extends Component{
   }
 
   render(){
-    
-    const { eqPass, items, isLoaded } = this.state
-    
+
+    const { eqPass, items, isLoaded, logginIn } = this.state
+
+    if(logginIn){
+      return (<Loading />)
+    }
+
     var equalPass = null, list = null
     if(eqPass != null && !eqPass){
       equalPass = (
@@ -114,11 +126,11 @@ class SignUp extends Component{
       list = items.data.map(
         (item) => (
           <option value={ item.id } key={ item.id }>
-            { item.loc_name } 
+            { item.loc_name }
           </option>
         )
       )
-      
+
       return (
         <figure className="back_image">
           <img src={ register_img } alt="una imagen mas"/>
@@ -128,13 +140,13 @@ class SignUp extends Component{
               <form onSubmit={ this.handleSubmit }>
                 <div className="input-field">
                   <label htmlFor="username">Username</label>
-                  <input id="username" type="text" pattern="([a-zA-Z]+)([\w\.\-]*)" 
+                  <input id="username" type="text" pattern="([a-zA-Z]+)([\w\.\-]*)"
                     title="Must begin with a letter" required/>
                 </div>
                 <div className="input-field">
                   <label htmlFor="email">email</label>
-                  <input id="email" type="email" 
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" 
+                  <input id="email" type="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                     title="Must contain the symbol '@' followed of a domain" required/>
                 </div>
                 <div className="input-field" style={{ 'height': 66 }}>
@@ -145,7 +157,7 @@ class SignUp extends Component{
                 </div>
                 <div className="input-field">
                   <label  htmlFor="password">Password</label>
-                  <input id="password" type="password" 
+                  <input id="password" type="password"
                     pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
                     title="Must contain at least one number, one letter and at least
                     8 or more characters"/>
@@ -156,7 +168,7 @@ class SignUp extends Component{
                   pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" required/>
                 </div>
                 { equalPass }
-                <button className="btn waves-effect waves-light primary-color" 
+                <button className="btn waves-effect waves-light primary-color"
                 type="submit">Sign Up</button>
               </form>
              </div>

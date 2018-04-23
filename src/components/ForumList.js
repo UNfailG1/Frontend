@@ -9,8 +9,7 @@ class ForumList extends Component {
     super(props)
     this.state = {
       items: [],
-      isLoaded: false,
-      error: null
+      isLoaded: null
     }
   }
 
@@ -23,6 +22,11 @@ class ForumList extends Component {
           isLoaded: true
         })
       }
+    ).catch(
+      (error) => {
+        console.log(error)
+        this.setState({ isLoaded: false })
+      }
     )
   }
 
@@ -31,14 +35,15 @@ class ForumList extends Component {
     //const game_id = this.props.game_id
     var list
     console.log(items)
-    if (isLoaded) {
+    if (isLoaded != null && isLoaded) {
       list = items.sub_forums.map((item, i) => (<li key={ i }><ForumCard item={ item }/></li>))
       return (<ul>{ list }</ul>)
-    } else {
+    } else if(isLoaded == null) {
       return (<Loading />)
+    } else {
+      return (<h1>Server error</h1>)
     }
   }
-
 }
 
 export default ForumList

@@ -9,8 +9,7 @@ class ThreadList extends Component {
     super(props)
     this.state = {
       items: [],
-      isLoaded: false,
-      error: null
+      isLoaded: null
     }
   }
 
@@ -23,6 +22,11 @@ class ThreadList extends Component {
           isLoaded: true
         })
       }
+    ).catch(
+      (error) => {
+        console.log(error)
+        this.setState({ isLoaded: false })
+      }
     )
   }
 
@@ -33,7 +37,7 @@ class ThreadList extends Component {
 
     console.log(items)
     console.log(items.length)
-    if (isLoaded) {
+    if (isLoaded != null && isLoaded) {
       const threads = items[0].thread_forums
       if(threads.length > 0)
       {
@@ -43,11 +47,12 @@ class ThreadList extends Component {
       else {
         return (<h3>No threads at the moment. Be the first to start one!</h3>)
       }
-    } else {
+    } else if(isLoaded == null) {
       return (<Loading />)
+    } else {
+      return (<h1>Server error</h1>)
     }
   }
-
 }
 
 export default ThreadList

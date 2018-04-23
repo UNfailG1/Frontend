@@ -6,6 +6,7 @@ import Footer from './Footer'
 
 const mainStyle = {
   'height': 'auto',
+  'minHeight': '560px',
   'display': 'block'
 }
 
@@ -24,7 +25,7 @@ class App extends Component {
         <main style={ mainStyle }>
           { children }
         </main>
-        <footer className="page-footer primary-color">
+        <footer className="page-footer primary-color" style={{'padding': 0}}>
           <Footer/>
         </footer>
       </div>

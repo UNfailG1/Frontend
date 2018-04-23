@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import login_img from '../assets/login_image.jpg'
+import login_img from '../assets/login_img.jpg'
 import defaultAvatar from '../assets/user.svg'
 import { GET, GET_AUTH, PATCH, FPATCH, BASE_URL } from '../js/requests'
 import Loading from './Loading'

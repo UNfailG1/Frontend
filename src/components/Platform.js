@@ -9,8 +9,7 @@ class Platform extends Component {
     super(props)
     this.state = {
       items: [],
-      isLoaded: false,
-      error: null
+      isLoaded: null
     }
   }
 
@@ -23,18 +22,23 @@ class Platform extends Component {
           isLoaded: true
         })
       }
+    ).catch(
+      (error) => {
+        console.log(error)
+        this.setState({ isLoaded: false })
+      }
     )
   }
 
   initCollapsible(){
     const $ = window.$
-    document.title = "Platforms"
     $(document).ready(function() {
       $('.collapsible').collapsible()
     })
   }
 
   componentDidMount() {
+    document.title = 'Platforms'
     this.initCollapsible()
   }
 
@@ -47,11 +51,13 @@ class Platform extends Component {
     const { items, isLoaded } = this.state
     //const game_id = this.props.game_id
     var list
-    if (isLoaded) {
+    if (isLoaded != null && isLoaded) {
       list = items.map((item) => (<li key={ item.id }><PlatformItem item={ item }/></li>))
       return (<ul className="collapsible">{ list }</ul>)
-    } else {
+    } else if(isLoaded == null) {
       return (<Loading />)
+    } else {
+      return (<h1>Server error</h1>)
     }
   }
 }

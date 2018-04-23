@@ -8,8 +8,7 @@ class GameInfo extends Component {
     super(props)
     this.state = {
       items: [],
-      isLoaded: false,
-      error: null
+      isLoaded: null
     }
   }
 
@@ -30,13 +29,18 @@ class GameInfo extends Component {
           isLoaded: true
         })
       }
+    ).catch(
+      (error) => {
+        console.log(error)
+        this.setState({ isLoaded: false })
+      }
     )
   }
 
   render() {
     const { items, isLoaded } = this.state
 
-    if (isLoaded) {
+    if (isLoaded != null && isLoaded) {
       const pegi = this.state.items.pegi
       const pgp = this.state.items.player_game_profiles[0]
       const pgpNick = pgp.pgp_nickname
@@ -78,8 +82,10 @@ class GameInfo extends Component {
           </ul>
         </div>
       </div>)
-    } else {
+    } else if(isLoaded == null) {
       return (<Loading />)
+    } else {
+      return (<h1>Server error</h1>)
     }
   }
 }

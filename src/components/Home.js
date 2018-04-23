@@ -27,10 +27,10 @@ class Home extends Component {
           <div className="row">
             <div className="col s12 no-padding">
               <ul className="tabs ">
-                <li className="tab col s3 "><a className="light-primary-color" href="#test1">League of Legends</a></li>
-                <li className="tab col s3"><a className="light-primary-color" href="#test2">Halo Reach</a></li>
-                <li className="tab col s3"><a className="light-primary-color" href="#test3">Minecraft</a></li>
-                <li className="tab col s3"><a className="light-primary-color" href="#test4">Fortnite</a></li>
+                <li className="tab col s3 "><a className="primary-color-light" href="#test1">League of Legends</a></li>
+                <li className="tab col s3"><a className="primary-color-light" href="#test2">Halo Reach</a></li>
+                <li className="tab col s3"><a className="primary-color-light" href="#test3">Minecraft</a></li>
+                <li className="tab col s3"><a className="primary-color-light" href="#test4">Fortnite</a></li>
               </ul>
             </div>
             <div id="test1" className="col s12">

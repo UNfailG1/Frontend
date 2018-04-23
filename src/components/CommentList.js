@@ -9,8 +9,7 @@ class CommentList extends Component {
     super(props)
     this.state = {
       items: [],
-      isLoaded: false,
-      error: null
+      isLoaded: null
     }
   }
 
@@ -22,7 +21,11 @@ class CommentList extends Component {
           items: res.data,
           isLoaded: true
         })
-        console.log(this.state);
+      }
+    ).catch(
+      (error) => {
+        console.log(error)
+        this.setState({ isLoaded: false })
       }
     )
   }
@@ -40,12 +43,14 @@ class CommentList extends Component {
     }
 
     POST_AUTH('/comments', commentary).then(
-          (res) => {
-            //Validar si hubo un error en el servidor
-            console.log(res)
-            this.addComment(res.data)
-          }
-        )
+      (res) => {
+        this.addComment(res.data)
+      }
+    ).catch(
+      (error) => {
+        console.log(error)
+      }
+    )
   }
 
   addComment(comment){
@@ -61,7 +66,7 @@ class CommentList extends Component {
     const { items, isLoaded } = this.state
     //const game_id = this.props.game_id
     var list
-    if (isLoaded) {
+    if (isLoaded != null && isLoaded) {
       list = items.map((item) => (<li key={ item.id }><CommentCard item={ item }/></li>))
       return (<div>
         <ul>{ list }</ul>
@@ -78,11 +83,12 @@ class CommentList extends Component {
           </div>
         </form>
       </div>)
-    } else {
+    } else if(isLoaded == null){
       return (<Loading />)
+    }else{
+      return (<h1>Server error</h1>)
     }
   }
-
 }
 
 export default CommentList

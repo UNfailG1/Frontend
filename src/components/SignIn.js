@@ -4,16 +4,18 @@ import axios from 'axios'
 
 //Assets
 import store from '../js/store'
+import Loading from './Loading'
 import { login } from '../js/actions'
-import { POST } from '../js/requests'
-import login_img from '../assets/login_image.jpg'
+import { POST, BASE_URL } from '../js/requests'
+import login_img from '../assets/login_img.jpg'
 
 class SignIn extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      error: false
+      error: false,
+      logginIn: false
     }
   }
 
@@ -24,6 +26,7 @@ class SignIn extends Component {
   handleSubmit(event) {
 
     event.preventDefault()
+    this.setState({ logginIn: true })
     const email = document.getElementById('email').value
     const password = document.getElementById('password').value
 
@@ -36,41 +39,51 @@ class SignIn extends Component {
 
     POST('/player_profile_token', credentials).then(
       (res) => {
-        console.log(res)
-        if (res.data.jwt) {
           localStorage.setItem('spToken', res.data.jwt)
           localStorage.setItem('userId', res.data.user_id)
           store.dispatch(login())
-        } else {
-          //La contraseña es incorrecta
-
-          //No esta registrado
-        }
-    }).catch(
+      }
+    ).catch(
       (error) => {
-        this.setState({error: true})
+        this.setState({
+          error: true,
+          logginIn: false
+        })
       }
     )
   }
 
   responseGoogle = (response) => {
+    this.setState({ logginIn: true })
     const data = {id_token: response.Zi.id_token }
-    POST('/google_authentication', data).then(
-    (res) => {
-      if (res.data.jwt) {
-        localStorage.setItem('spToken', res.data.jwt)
-        localStorage.setItem('userId', res.data.user_id)
-        store.dispatch(login())
-      } else {
-        //La contraseña es incorrecta
-
-        //No esta registrado
+    axios({
+      url: '/google_authentication',
+      method: 'post',
+      baseURL: BASE_URL,
+      headers: { 'Content-Type': 'application/json' },
+      data
+    }).then(
+      (res) => {
+          localStorage.setItem('spToken', res.data.jwt)
+          store.dispatch(login())
       }
-    })
+    ).catch(
+      (error) => {
+        this.setState({
+          error: true,
+          logginIn: false
+        })
+      }
+    )
   }
 
   render() {
-    const { error } = this.state
+    const { error, logginIn } = this.state
+
+    if(logginIn){
+      return (<Loading />)
+    }
+
     var errorMessage = null
     if(error){
       errorMessage = (
@@ -107,7 +120,7 @@ class SignIn extends Component {
                 <GoogleLogin
                     clientId="544479097367-vsgksn1j0h4p6kv9glqhq6h6pffbs5l4.apps.googleusercontent.com"
                     buttonText="Sign in with Google"
-                    onSuccess={this.responseGoogle}
+                    onSuccess={ this.responseGoogle }
                 />
                 <h6><br/>
                   <a href="/resetpassword">Forgot your password?</a>

@@ -9,8 +9,7 @@ class PlayerProfile extends Component {
     super(props)
     this.state = {
       items: [],
-      isLoaded: false,
-      error: null,
+      isLoaded: null,
       avatar: null
     }
   }
@@ -33,13 +32,18 @@ class PlayerProfile extends Component {
           isLoaded: true
         })
       }
+    ).catch(
+      (error) => {
+        console.log(error)
+        this.setState({ isLoaded: false })
+      }
     )
   }
 
   render() {
     const { items, isLoaded } = this.state
 
-    if (isLoaded) {
+    if (isLoaded != null && isLoaded) {
       const username = items.pp_username
       const email = items.email
       const elo = items.pp_spairing_elo
@@ -76,8 +80,10 @@ class PlayerProfile extends Component {
             </div>
           </div>
         </div>)
-    } else {
+    } else if(isLoaded == null) {
       return (<Loading />)
+    } else {
+      return (<h1>Server error</h1>)
     }
   }
 }
