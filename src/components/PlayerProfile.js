@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import defaultAvatar from '../assets/user.svg'
 import Loading from './Loading'
+import ErrorManager from './ErrorManager'
 import { GET_AUTH, BASE_URL } from '../js/requests'
 
 class PlayerProfile extends Component {
@@ -10,7 +11,8 @@ class PlayerProfile extends Component {
     this.state = {
       items: [],
       isLoaded: null,
-      avatar: null
+      avatar: null,
+      status: null
     }
   }
 
@@ -23,8 +25,11 @@ class PlayerProfile extends Component {
   }
 
   componentWillMount() {
+    const { match: { params } } = this.props
+
+
     // const game_id = this.props.game_id
-    const route = "/player_profiles/".concat(localStorage.getItem('userId'))
+    const route = `/player_profiles/${params.userId}`
     GET_AUTH(route).then(
       (res) => {
         this.setState({
@@ -34,8 +39,10 @@ class PlayerProfile extends Component {
       }
     ).catch(
       (error) => {
-        console.log(error)
-        this.setState({ isLoaded: false })
+        this.setState({
+          isLoaded: false,
+          status: error.response.status
+        })
       }
     )
   }
@@ -83,7 +90,7 @@ class PlayerProfile extends Component {
     } else if(isLoaded == null) {
       return (<Loading />)
     } else {
-      return (<h1>Server error</h1>)
+      return (<ErrorManager status={ this.state.status } />)
     }
   }
 }

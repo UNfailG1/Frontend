@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Loading from './Loading'
+import ErrorManager from './ErrorManager'
 import { GET_AUTH } from '../js/requests'
 
 class GameInfo extends Component {
@@ -8,7 +9,8 @@ class GameInfo extends Component {
     super(props)
     this.state = {
       items: [],
-      isLoaded: null
+      isLoaded: null,
+      status: null
     }
   }
 
@@ -21,9 +23,13 @@ class GameInfo extends Component {
   }
 
   componentWillMount() {
+
+    const { match: { params } } = this.props
+
     // const game_id = this.props.game_id
-    GET_AUTH("/games/1").then(
+    GET_AUTH(`games/${ params.gameId }`).then(
       (res) => {
+        console.log(res);
         this.setState({
           items: res.data,
           isLoaded: true
@@ -32,7 +38,10 @@ class GameInfo extends Component {
     ).catch(
       (error) => {
         console.log(error)
-        this.setState({ isLoaded: false })
+        this.setState({
+          isLoaded: false,
+          status: error.response.status
+        })
       }
     )
   }
@@ -53,12 +62,12 @@ class GameInfo extends Component {
             <i className="large material-icons">info_outline</i>
             <p className="gameinfo">{ items.gam_description }</p>
             <a href={ items.gam_link }>
-              <h7 className="secondary-color-text">{ items.gam_link }</h7>
+              <h6 className="secondary-color-text">{ items.gam_link }</h6>
             </a>
             <div className="row">
-              <h7>PEGI Rating:
-              </h7>
-              <h7>{ pegi.peg_name }</h7>
+              <h6>PEGI Rating:
+              </h6>
+              <h6>{ pegi.peg_name }</h6>
               <br/>
               <img src={ pegi.peg_image } alt="pegiImage" className="gameImage"/>
             </div>
@@ -85,7 +94,8 @@ class GameInfo extends Component {
     } else if(isLoaded == null) {
       return (<Loading />)
     } else {
-      return (<h1>Server error</h1>)
+
+      return (<ErrorManager status={ this.state.status } />)
     }
   }
 }

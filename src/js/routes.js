@@ -2,7 +2,7 @@ import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
 import Home from '../components/Home'
 import NotFound from '../components/NotFound'
-import GameInfo from '../components/GameInfo'
+import Game from '../components/Game'
 import ForumList from '../components/ForumList'
 import Platform from '../components/Platform'
 import PlayerProfile from '../components/PlayerProfile'
@@ -31,8 +31,8 @@ const ROUTES = [
     path: '/register',
     redirect: { when: 'LOGED_IN', to: '/' }
   },
-  { component: GameInfo,
-    path: '/gameinfo',
+  { component: Game,
+    path: '/game/:gameId',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: ForumList,
@@ -44,7 +44,7 @@ const ROUTES = [
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: PlayerProfile,
-    path: '/profile',
+    path: '/profile/:userId',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: UpdateProfile,

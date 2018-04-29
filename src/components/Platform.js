@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PlatformItem from './PlatformItem'
 import Loading from './Loading'
+import ErrorManager from './ErrorManager'
 import { GET_AUTH } from '../js/requests'
 
 class Platform extends Component {
@@ -9,7 +10,8 @@ class Platform extends Component {
     super(props)
     this.state = {
       items: [],
-      isLoaded: null
+      isLoaded: null,
+      status: null
     }
   }
 
@@ -25,7 +27,10 @@ class Platform extends Component {
     ).catch(
       (error) => {
         console.log(error)
-        this.setState({ isLoaded: false })
+        this.setState({
+          isLoaded: false,
+          status: error.response.status
+        })
       }
     )
   }
@@ -57,7 +62,7 @@ class Platform extends Component {
     } else if(isLoaded == null) {
       return (<Loading />)
     } else {
-      return (<h1>Server error</h1>)
+      return (<ErrorManager status={ this.state.status } />)
     }
   }
 }

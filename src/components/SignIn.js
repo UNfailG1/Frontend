@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { GoogleLogin } from 'react-google-login'
-import axios from 'axios'
 
 //Assets
 import store from '../js/store'
 import Loading from './Loading'
 import { login } from '../js/actions'
-import { POST, BASE_URL } from '../js/requests'
+import { POST } from '../js/requests'
 import login_img from '../assets/login_img.jpg'
 
 class SignIn extends Component {
