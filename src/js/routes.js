@@ -9,6 +9,7 @@ import PlayerProfile from '../components/PlayerProfile'
 import UpdateProfile from '../components/UpdateProfile'
 import ThreadList from '../components/ThreadList'
 import CommentList from '../components/CommentList'
+import Reports from '../components/Reports'
 
 /*
   add redirect option only if you want redirect with 'when' option =
@@ -57,6 +58,10 @@ const ROUTES = [
   },
   { component: CommentList,
     path: '/comments',
+    redirect: { when: 'VISITOR', to: '/login' }
+  },
+  { component: Reports,
+    path: '/secrect_path_reports',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: NotFound }

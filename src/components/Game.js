@@ -27,7 +27,7 @@ class GameInfo extends Component {
     const { match: { params } } = this.props
 
     // const game_id = this.props.game_id
-    GET_AUTH(`games/${ params.gameId }`).then(
+    GET_AUTH(`/games/${ params.gameId }`).then(
       (res) => {
         console.log(res);
         this.setState({
