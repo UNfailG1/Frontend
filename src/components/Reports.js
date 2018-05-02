@@ -26,7 +26,7 @@ class Reports extends Component{
       (error) => {
         this.setState({
           isLoaded: false,
-          status: error.response.status
+          status: (error.response) ? error.response.status : 0  
         })
       }
     )

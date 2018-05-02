@@ -3,10 +3,17 @@ import NotFound from './NotFound'
 
 const ErrorManager = ( { status } ) => {
 
-  if (status === 404){
-    return(<NotFound />)
+  switch(status){
+
+    case 0:
+      return (<h1>Disconnected</h1>)
+
+    case 404:
+      return(<NotFound />)
+
+    default:
+      return (<h2>New error: { status }</h2>)
   }
-  return(<div>{ status }</div> )
 }
 
 export default ErrorManager

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ForumCard = ({ item }) => {
+const Forum = ({ item }) => {
 
   return (
     <div className="row">
@@ -24,4 +24,4 @@ const ForumCard = ({ item }) => {
   )
 }
 
-export default ForumCard
+export default Forum

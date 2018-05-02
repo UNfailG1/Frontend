@@ -40,7 +40,7 @@ class GameInfo extends Component {
         console.log(error)
         this.setState({
           isLoaded: false,
-          status: error.response.status
+          status: (error.response) ? error.response.status : 0  
         })
       }
     )

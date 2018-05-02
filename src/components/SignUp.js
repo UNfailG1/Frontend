@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import store from '../js/store'
-import { GET, POST } from '../js/requests'
-import register_img from '../assets/register_img.jpg'
-import { login } from '../js/actions'
-import Loading from './Loading'
 
-// TODO: Verificar error en linea 87 y 94
+// Assests
+import store from '../js/store'
+import { POST } from '../js/requests'
+import { login } from '../js/actions'
+import register_img from '../assets/register_img.jpg'
+
+// Components
+import Loading from './Loading'
+import ErrorManager from './ErrorManager'
 
 class SignUp extends Component{
 
@@ -15,25 +18,11 @@ class SignUp extends Component{
       eqPass: null,
       items: [],
       isLoaded: null,
+      status: null,
       logginIn: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentWillMount(){
-    GET('/locations').then(
-      (res) => {
-        this.setState({
-          items: res,
-          isLoaded: true
-        })
-      }
-    ).catch(
-      (error) => {
-        this.setState({ isLoaded: false })
-      }
-    )
   }
 
   initSelect(){
@@ -46,14 +35,10 @@ class SignUp extends Component{
   componentDidMount(){
     document.title = 'Sign up'
     this.initSelect()
-  }
-
-  componentWillUpdate(){
-    this.initSelect()
+    this.setState({ isLoaded: true })
   }
 
   handleSubmit( event ){
-
     event.preventDefault()
     this.setState({ logginIn: true })
     const profile = {
@@ -61,8 +46,7 @@ class SignUp extends Component{
         "pp_username": document.getElementById("username").value,
         "password": document.getElementById("password").value,
         "password_confirmation": document.getElementById("cpass").value,
-        "email": document.getElementById("email").value,
-        "location_id": document.getElementById("location").value,
+        "email": document.getElementById("email").value
       }
     }
 
@@ -84,14 +68,12 @@ class SignUp extends Component{
         ).catch(
           (error) => {
             this.setState({ logginIn: false})
-            console.log(error)
           }
         )
       }
     ).catch(
       (error) => {
         this.setState({ logginIn: false})
-        console.log(error)
       }
     )
   }
@@ -105,13 +87,13 @@ class SignUp extends Component{
 
   render(){
 
-    const { eqPass, items, isLoaded, logginIn } = this.state
+    const { eqPass, isLoaded, logginIn } = this.state
 
     if(logginIn){
       return (<Loading />)
     }
 
-    var equalPass = null, list = null
+    var equalPass = null
     if(eqPass != null && !eqPass){
       equalPass = (
         <div className="input-field" style={{'marginBottom': 16, 'marginTop': 0}}>
@@ -123,14 +105,6 @@ class SignUp extends Component{
     }
 
     if(isLoaded != null && isLoaded){
-      list = items.data.map(
-        (item) => (
-          <option value={ item.id } key={ item.id }>
-            { item.loc_name }
-          </option>
-        )
-      )
-
       return (
         <figure className="back_image">
           <img src={ register_img } alt="una imagen mas"/>
@@ -148,12 +122,6 @@ class SignUp extends Component{
                   <input id="email" type="email"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                     title="Must contain the symbol '@' followed of a domain" required/>
-                </div>
-                <div className="input-field" style={{ 'height': 66 }}>
-                  <select id="location" defaultValue="">
-                    <option value="" disabled selected>Location</option>
-                    { list }
-                  </select>
                 </div>
                 <div className="input-field">
                   <label  htmlFor="password">Password</label>
@@ -178,7 +146,7 @@ class SignUp extends Component{
     }else if(isLoaded == null){
       return (<Loading />)
     }else{
-      return (<h1>Server error</h1>)
+      return (<ErrorManager status={this.state.status} />)
     }
   }
 }

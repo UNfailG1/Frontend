@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ForumCard from './ForumCard'
+import Forum from './Forum'
 import Loading from './Loading'
 import ErrorManager from './ErrorManager'
 import { GET_AUTH } from '../js/requests'
@@ -29,7 +29,7 @@ class ForumList extends Component {
         console.log(error)
         this.setState({
           isLoaded: false,
-          status: error.response.status
+          status: (error.response) ? error.response.status : 0  
         })
       }
     )
@@ -41,7 +41,7 @@ class ForumList extends Component {
     var list
     console.log(items)
     if (isLoaded != null && isLoaded) {
-      list = items.sub_forums.map((item, i) => (<li key={ i }><ForumCard item={ item }/></li>))
+      list = items.sub_forums.map((item, i) => (<li key={ i }><Forum item={ item }/></li>))
       return (<ul>{ list }</ul>)
     } else if(isLoaded == null) {
       return (<Loading />)

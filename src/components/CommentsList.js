@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CommentCard from './CommentCard'
+import Comment from './Comment'
 import Loading from './Loading'
 import ErrorManager from './ErrorManager'
 import { GET_AUTH, POST_AUTH } from '../js/requests'
@@ -26,10 +26,9 @@ class CommentList extends Component {
       }
     ).catch(
       (error) => {
-        console.log(error)
         this.setState({
           isLoaded: false,
-          status: error.response.status
+          status: (error.response != null) ? error.response.status : 0
         })
       }
     )
@@ -72,7 +71,7 @@ class CommentList extends Component {
     //const game_id = this.props.game_id
     var list
     if (isLoaded != null && isLoaded) {
-      list = items.map((item) => (<li key={ item.id }><CommentCard item={ item }/></li>))
+      list = items.map((item) => (<li key={ item.id }><Comment item={ item }/></li>))
       return (<div>
         <ul>{ list }</ul>
         <form onSubmit={ (e) => this.handleSubmit(e)}>

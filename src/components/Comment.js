@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CommentCard = ({ item }) => {
+const Comment = ({ item }) => {
 
   const { player_profile, com_comment } = item
 
@@ -18,4 +18,4 @@ const CommentCard = ({ item }) => {
   )
 }
 
-export default CommentCard
+export default Comment

@@ -9,7 +9,7 @@ class PlayerProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      items: [],
+      profile: {},
       isLoaded: null,
       avatar: null,
       status: null
@@ -33,7 +33,7 @@ class PlayerProfile extends Component {
     GET_AUTH(route).then(
       (res) => {
         this.setState({
-          items: res.data,
+          profile: res.data,
           isLoaded: true
         })
       }
@@ -41,26 +41,26 @@ class PlayerProfile extends Component {
       (error) => {
         this.setState({
           isLoaded: false,
-          status: error.response.status
+          status: (error.response) ? error.response.status : 0
         })
       }
     )
   }
 
   render() {
-    const { items, isLoaded } = this.state
+    const { profile, isLoaded } = this.state
 
     if (isLoaded != null && isLoaded) {
-      const username = items.pp_username
-      const email = items.email
-      const elo = items.pp_spairing_elo
-      const location = items.location.loc_name
-      const avatar =  BASE_URL + items.pp_avatar.url
-      var avatarImg = (items.pp_avatar.url) ?
+      const username = profile.pp_username
+      const email = profile.email
+      const elo = profile.pp_spairing_elo
+      const location = (profile.location) ? profile.location.loc_name : 'Not available'
+      const avatar =  BASE_URL + profile.pp_avatar.url
+      var avatarImg = (profile.pp_avatar.url) ?
           <img className="circle responsive-img" alt="" src={ avatar } height="160" width="160"/> :
           <img className="circle responsive-img" alt="" src={ defaultAvatar } height="160" width="160"/>
-      var friends = items.friends.map((item, i) => (<h5 className="leftText"  key={i}>{item.pp_username}</h5>))
-      var games = items.games.map((item, i) => (<h5 className="leftText" key={i}>{item.gam_name}</h5>))
+      var friends = profile.friends.map((item, i) => (<h5 className="leftText"  key={i}>{item.pp_username}</h5>))
+      var games = profile.games.map((item, i) => (<h5 className="leftText" key={i}>{item.gam_name}</h5>))
       return (
         <div>
           <div className="row">
@@ -70,7 +70,7 @@ class PlayerProfile extends Component {
               <h3>{ username }</h3>
               <h5 className="secondary-color-text">{ email }</h5>
               <h4>Current player level (Rating): { elo }</h4>
-              <h4>{ location }</h4>
+              <h4>Location: { location }</h4>
             </div>
           </div>
           <div className="row center-align">
