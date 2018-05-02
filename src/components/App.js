@@ -5,7 +5,6 @@ import Header from './Header'
 import Footer from './Footer'
 
 const mainStyle = {
-  'height': 'auto',
   'minHeight': '560px',
   'display': 'block'
 }

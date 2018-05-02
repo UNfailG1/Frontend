@@ -8,7 +8,7 @@ import Platform from '../components/Platform'
 import PlayerProfile from '../components/PlayerProfile'
 import UpdateProfile from '../components/UpdateProfile'
 import ThreadList from '../components/ThreadList'
-import CommentList from '../components/CommentList'
+import CommentsList from '../components/CommentsList'
 import Reports from '../components/Reports'
 
 /*
@@ -56,7 +56,7 @@ const ROUTES = [
     path: '/threads',
     redirect: { when: 'VISITOR', to: '/login' }
   },
-  { component: CommentList,
+  { component: CommentsList,
     path: '/comments',
     redirect: { when: 'VISITOR', to: '/login' }
   },
