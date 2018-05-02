@@ -8,7 +8,7 @@
   transform: translate(-50%, -50%);
 }
 
-.footer-copyright .container a{
+.footer-copyright .container a {
   margin: 0 8px;
   background-color: inherit !important;
 }
@@ -18,18 +18,28 @@
   background-color: $secondary-color-light !important;
 }
 
-.no-padding{
+.no-padding {
   padding: 0px !important;
 }
 
-.big-title{
+.big-title {
   font-size: 225px;
 }
 
-.gameImage{
+.gameImage {
   height: 64px;
 }
 
-.leftText{
+.leftText {
   margin-left: 16px;
+}
+
+li.clickable {
+  cursor: pointer;
+}
+
+ul.autocomplete-content {
+  position: absolute !important;
+  min-width: 278px;
+  margin-top: 0; 
 }

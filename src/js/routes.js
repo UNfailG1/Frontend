@@ -8,8 +8,10 @@ import Platform from '../components/Platform'
 import PlayerProfile from '../components/PlayerProfile'
 import UpdateProfile from '../components/UpdateProfile'
 import ThreadList from '../components/ThreadList'
-import CommentList from '../components/CommentList'
+import CommentsList from '../components/CommentsList'
 import Reports from '../components/Reports'
+import Dashboard from '../components/Dashboard'
+import Mailbox from '../components/Mailbox'
 
 /*
   add redirect option only if you want redirect with 'when' option =
@@ -23,14 +25,21 @@ import Reports from '../components/Reports'
 */
 
 const ROUTES = [
-  { component: Home, path: '/'},
+  { component: Dashboard,
+    path: '/dashboard',
+    redirect: { when: 'VISITOR', to: '/' }
+  },
+  { component: Home,
+    path: '/',
+    redirect: { when: 'LOGED_IN', to: '/dashboard' }
+  },
   { component: SignIn,
     path: '/login',
-    redirect: { when: 'LOGED_IN', to: '/' }
+    redirect: { when: 'LOGED_IN', to: '/dashboard' }
   },
   { component: SignUp,
     path: '/register',
-    redirect: { when: 'LOGED_IN', to: '/' }
+    redirect: { when: 'LOGED_IN', to: '/dashboard' }
   },
   { component: Game,
     path: '/game/:gameId',
@@ -56,12 +65,16 @@ const ROUTES = [
     path: '/threads',
     redirect: { when: 'VISITOR', to: '/login' }
   },
-  { component: CommentList,
+  { component: CommentsList,
     path: '/comments',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: Reports,
     path: '/secrect_path_reports',
+    redirect: { when: 'VISITOR', to: '/login' }
+  },
+  { component: Mailbox,
+    path: '/mailbox',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: NotFound }
