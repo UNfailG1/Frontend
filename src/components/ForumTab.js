@@ -17,71 +17,106 @@ class ForumTab extends Component {
     this.FORUMS = 0
     this.THREADS = 1
     this.COMMENTS = 2
-    this.breadcrumbs = []
+    this.breadcrumbs = [{
+      bc_id: 0,
+      bc_link: {
+        view: this.FORUMS,
+        id: props.gameId
+      }
+    }]
+    this.threadId = null
+    this.threadName = null
+    this.subForumId = null
+    this.subForumName = null
     this.state = {
       view: this.FORUMS,
-      object: {},
+      items: [],
       isLoaded: null,
-      status: null
+      status: null,
     }
   }
 
-  renderThreadsList(subForumId){
+  componentWillMount(){
+    this.request(this.FORUMS)
+  }
+
+  renderThreadsList(subForumId, subForumName){
     this.setState({
       view: this.THREADS,
       isLoaded: null,
-      object: {}
+      items: []
     })
+    const last = this.breadcrumbs[this.breadcrumbs.length-1].bc_id
     this.breadcrumbs.push({
-      view: this.THREADS,
-      id: subForumId
+      bc_id: last+1,
+      bc_link: {
+        view: this.THREADS,
+        id: subForumId
+      }
     })
-    this.request()
+    this.subForumId = subForumId
+    this.subForumName = subForumName
+    this.request(this.THREADS)
   }
 
-  renderCommentsList(threadId){
+  renderCommentsList(threadId, threadName){
     this.setState({
       view: this.COMMENTS,
       isLoaded: null,
-      object: {}
+      items: []
     })
+    const last = this.breadcrumbs[this.breadcrumbs.length-1].bc_id
     this.breadcrumbs.push({
-      view: this.COMMENTS,
-      id: threadId
+      bc_id: last+1,
+      bc_link: {
+        view: this.COMMENTS,
+        id: threadId
+      }
     })
-    this.request()
+    this.threadId = threadId
+    this.threadName = threadName
+    this.request(this.COMMENTS)
   }
 
-  request(){
-    const last = this.breadcrumbs[this.breadcrumbs.length -1]
-    const { view, id } = last
+  handleClickBC(bc_id){
+    var last = this.breadcrumbs[this.breadcrumbs.length-1].bc_id
+    while(bc_id !== last){
+      this.breadcrumbs.pop()
+      last = this.breadcrumbs[this.breadcrumbs.length-1].bc_id
+    }
+  }
+
+  request(view){
+    const { gameId } = this.props
     var url = null
     switch(view){
+
+      case this.FORUMS:
+        url = `/games/${gameId}/sub_forums`
+        break
+
       case this.THREADS:
-        url = `/sub_forums/${id}`
+        url = `/games/${gameId}/sub_forums/${this.subForumId}/thread_forums`
         break
 
       case this.COMMENTS:
-        url = `/thread_forums/${id}`
+        url = `/games/${gameId}/sub_forums/${this.subForumId}/thread_forums/${this.threadId}/comments`
         break;
 
       default:
         url = "/"
         break
     }
-    console.log(url);
 
     GET_AUTH(url).then(
       res => {
-        console.log(res.data);
         this.setState({
           isLoaded: true,
-          object: res.data
+          items: res.data
         })
       }
     ).catch(
       error => {
-        console.log(error);
         this.setState({
           isLoaded: false,
           status: (error.response) ? error.response.status : 0
@@ -91,62 +126,66 @@ class ForumTab extends Component {
   }
 
   render(){
-    const { items } = this.props
-    const { view, object, isLoaded } = this.state
-    var list = null
+    const { view, items, isLoaded } = this.state
 
-    if(view === this.FORUMS){
+    if(isLoaded){
+      var list = null
+      switch(view){
 
-      list = items.map(
-        subForum => (
-          <li key={ subForum.id } className="collection-item">
-            <Forum item={ subForum } onClick={ () => this.renderThreadsList(subForum.id) }/>
-          </li>
-        )
-      )
-      return (
-        <ul className="collection">
-          { list }
-        </ul>
-      )
-
-    }else if(view === this.THREADS || view === this.COMMENTS) {
-      if(isLoaded){
-        list = (view === this.COMMENTS) ?
-          object.comments.map(
-            comment => (
-              <li key={ comment.id } className="collection-item">
-                <Comment item={ comment } />
+        case this.FORUMS:
+          list = items.map(
+            subForum => (
+              <li key={ subForum.id } className="collection-item">
+                <Forum item={ subForum }
+                  onClick={ () => this.renderThreadsList(subForum.id, subForum.sf_name) }/>
               </li>
             )
           )
-        :
-          object.thread_forums.map(
+
+          return (
+            <ul className="collection with-header">
+              <li className="collection-header"><h4>Forums</h4></li>
+              { list }
+            </ul>
+          )
+
+        case this.THREADS:
+          list = items.map(
             thread => (
               <li key={ thread.id } className="collection-item">
-                <Thread item={ thread } onClick={ () => this.renderCommentsList(thread.id) }/>
+                <Thread item={ thread }
+                  onClick={ () => this.renderCommentsList(thread.id, thread.thr_name) }/>
               </li>
             )
           )
-
-        return (
-          (view === this.COMMENTS) ?
+          return (
             <ul className="collection with-header">
-              <li className="collection-header"><h4>{ object.thr_name }</h4></li>
+              <li className="collection-header"><h4>Forum: { this.subForumName }</h4></li>
               { list }
             </ul>
-          :
-            <ul className="collection with-header">
-              <li className="collection-header"><h4>{ object.sf_name }</h4></li>
-              { list }
-            </ul>
-        )
+          )
 
-      }else if(isLoaded == null) {
-        return (<Loading />)
-      }else{
-        return (<ErrorManager status={ this.state.status } />)
+        case this.COMMENTS:
+          list = items.map(
+            comment => (<Comment key={ comment.id } item={ comment } />)
+          )
+          return (
+            <div>
+              <ul className="collection with-header">
+                <li className="collection-header"><h4>Thread: { this.threadName }</h4></li>
+                <li style={{ padding: '10px 20px' }}>{ list }</li>
+              </ul>
+              { /*Aqui falta un componente (CommentCreator)*/ }
+            </div>
+          )
+
+        default:
+          return (<h1>Error</h1>)
       }
+    }else if(isLoaded == null) {
+      return (<Loading />)
+    }else{
+      return (<ErrorManager status={ this.state.status } />)
     }
   }
 }

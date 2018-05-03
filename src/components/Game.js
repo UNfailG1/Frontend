@@ -102,7 +102,7 @@ class Game extends Component {
     const noPadding = { padding: 0 }, noMargin = { margin: 0 }
 
     if (isLoaded) {
-      const { gam_name, gam_image, sub_forums } = game
+      const { gam_name, gam_image } = game
       // const pegi = this.state.items.pegi
       // const pgp = this.state.items.player_game_profiles[0]
       // const pgpNick = pgp.pgp_nickname
@@ -135,7 +135,7 @@ class Game extends Component {
                   <GameDescription game={ game } />
                 </div>
                 <div id="forum" className="col s12">
-                  <ForumTab items={ sub_forums } />
+                  <ForumTab gameId={ game.id } />
                 </div>
                 <div id="statistics" className="col s12">
                   Statistics

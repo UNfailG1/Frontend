@@ -1,7 +1,10 @@
 import React from 'react'
 
+// Assets
+import { dateTime } from '../js/helpers'
+
 const Thread = ({ item, onClick }) => {
-  const { thr_name } = item
+  const { thr_name, created_at, thr_comments, thr_views } = item
   const noMargin = { margin: 0 }
 
   return (
@@ -12,10 +15,13 @@ const Thread = ({ item, onClick }) => {
         </p>
       </div>
       <div className="col s2 center-align">
-        Una cantidad
+        <p>
+          Views: { thr_views }<br/>
+          Comments: { thr_comments }
+        </p>
       </div>
       <div className="col s3 center-align">
-        Una fechita
+        <p>{ dateTime(created_at) }</p>
       </div>
     </div>
   )

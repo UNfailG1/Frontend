@@ -1,21 +1,22 @@
 import React from 'react'
+import { dateTime } from '../js/helpers'
 
 const Forum = ({ item, onClick }) => {
-  const { sf_name, sf_description } = item
+  const { sf_name, sf_description, created_at } = item
   const noMargin = { margin: 0 }
   return (
-    <div className="row valign-wrapper" style={ noMargin }>
-      <div className="col s7">
+    <div className="row" style={ noMargin }>
+      <div className="col s12 m7 l7">
         <p>
           <b><a href="#!" onClick={ () => onClick() }>{ sf_name }</a></b><br/>
           { sf_description }
         </p>
       </div>
-      <div className="col s2 center-align">
-        Una cantidad
+      <div className="col s12 m2 l2 center-align">
+        <p>Hay daticos</p>
       </div>
-      <div className="col s3 center-align">
-        Una fechita
+      <div className="col s12 m3 l3 center-align">
+        <p>{ dateTime(created_at) }</p>
       </div>
     </div>
   )
