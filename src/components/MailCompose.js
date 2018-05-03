@@ -33,7 +33,7 @@ class MailCompose extends Component {
   }
 
   handleChange(e, val){
-    GET_AUTH('/username_like?username='+ val + '&page=1').then(
+    GET_AUTH('/usernameslike?username='+ val + '&page=1').then(
       (res) => {
         this.uploadAutocomplete(res.data)
       }

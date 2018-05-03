@@ -52,7 +52,6 @@ class SignUp extends Component{
 
     POST('/player_profiles', profile).then(
       (res) => {
-        console.log(res)
         const crendentials = {
           auth: {
             email: profile.player_profile.email,
