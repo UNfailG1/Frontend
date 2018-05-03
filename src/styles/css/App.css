@@ -77,6 +77,14 @@ ul.autocomplete-content {
   min-width: 278px;
   margin-top: 0; }
 
+.parallax-container {
+  display: flex;
+  height: 375px !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); }
+  .parallax-container h2 {
+    align-self: flex-end;
+    margin: 25px auto; }
+
 .input-field label {
   color: #263238 !important; }
 

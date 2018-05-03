@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { GET_AUTH } from '../js/requests'
 
 // Components
+import GameItem from './GameItem'
 import Loading from './Loading'
 import ErrorManager from './ErrorManager'
 
@@ -12,24 +13,25 @@ class GameSearch extends Component{
   constructor(props){
     super(props)
     this.state = {
+      items: [],
       isLoaded: true,
       status: null
     }
     this.games = {}
   }
 
-  componentWillMount(){
-
-  }
-
   handleChange(event){
+    this.setState({
+      isLoaded: null,
+      items: []
+    })
     const gam_name = event.target.value
     GET_AUTH(`/gameslike?gam_name=${ gam_name }&page=1`).then(
       (res) => {
         this.setState({
-          isLoaded: true
+          isLoaded: true,
+          items: res.data
         })
-        this.uploadGames(res.data)
       }
     ).catch(
       (error) => {
@@ -40,59 +42,43 @@ class GameSearch extends Component{
         })
       }
     )
-
   }
-
-  uploadGames(games){
-    const $ = window.$
-    var aux = {}, withIds = {}, aux2 = this.games
-
-    games.forEach(
-      (game) => {
-        aux[game.gam_name] = null
-        withIds[game.gam_name] = game.id
-      }
-    )
-    console.log(aux);
-
-    $('input.autocomplete').autocomplete({
-      data: aux,
-      limit: 10,
-      onAutocomplete: (val) => {
-        aux2[val] = withIds[val]
-      },
-      minLength: 1
-    })
-
-    this.games = aux2
-
-  }
-
 
   render(){
     const { items, isLoaded } = this.state
-
+    const form = (
+      <div className="row">
+        <div className="input-field col s12 m8 offset-m2">
+          <i className="material-icons prefix">search</i>
+          <input id="icon_prefix" type="text"   placeholder="Search a game"
+                 onChange={ (e) => this.handleChange(e) }/>
+        </div>
+      </div>
+    )
     if(isLoaded){
-      return(
-        <div className="row">
-          <div className="input-field col s8 offset-s2">
-            <i className="material-icons prefix" >search</i>
-            <input type="text" id="autocomplete-input" className="autocomplete"
-              placeholder="Search a game" onChange={ (e) => this.handleChange(e) }/>
+      var games = items.map(
+        (game) => (<GameItem key={ game.id } game={ game } />)
+      )
 
-            </div>
+      return(
+        <div>
+          { form }
+          <div className="row">
+            { games }
           </div>
+        </div>
       )
     }else if(isLoaded == null){
-      return(<Loading />)
+      return(
+        <div>
+          { form }
+          <Loading />
+        </div>
+      )
     }else{
       return(<ErrorManager status={ this.state.status } />)
     }
-
-
   }
-
-
 }
 
 export default GameSearch
