@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Forum = ({ item, onClick }) => {
-  const { sf_name, sf_description } = item
+const Thread = ({ item, onClick }) => {
+  const { thr_name } = item
   const noMargin = { margin: 0 }
+
   return (
     <div className="row valign-wrapper" style={ noMargin }>
       <div className="col s7">
         <p>
-          <b><a href="#!" onClick={ () => onClick() }>{ sf_name }</a></b><br/>
-          { sf_description }
+          <b><a href="#!" onClick={ () => onClick() }>{ thr_name }</a></b>
         </p>
       </div>
       <div className="col s2 center-align">
@@ -21,4 +21,4 @@ const Forum = ({ item, onClick }) => {
   )
 }
 
-export default Forum
+export default Thread

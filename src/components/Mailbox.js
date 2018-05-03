@@ -34,11 +34,11 @@ class Mailbox extends Component {
     var aux = null
     switch(view){
       case this.INBOX:
-        aux = (<MailsList section="Inbox" onClick={ this.renderMail }/>)
+        aux = (<MailsList key={1} section="Inbox" onClick={ this.renderMail }/>)
         break
 
       case this.SENT:
-        aux = (<div><MailsList section="Sent" onClick={ this.renderMail }/></div>)
+        aux = (<MailsList key={2} section="Sent" onClick={ this.renderMail }/>)
         break
 
       case this.COMPOSE:

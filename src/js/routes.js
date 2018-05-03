@@ -3,12 +3,9 @@ import SignIn from '../components/SignIn'
 import Home from '../components/Home'
 import NotFound from '../components/NotFound'
 import Game from '../components/Game'
-import ForumList from '../components/ForumList'
 import Platform from '../components/Platform'
 import PlayerProfile from '../components/PlayerProfile'
 import UpdateProfile from '../components/UpdateProfile'
-import ThreadList from '../components/ThreadList'
-import CommentsList from '../components/CommentsList'
 import Reports from '../components/Reports'
 import Dashboard from '../components/Dashboard'
 import Mailbox from '../components/Mailbox'
@@ -45,10 +42,6 @@ const ROUTES = [
     path: '/game/:gameId',
     redirect: { when: 'VISITOR', to: '/login' }
   },
-  { component: ForumList,
-    path: '/forums',
-    redirect: { when: 'VISITOR', to: '/login' }
-  },
   { component: Platform,
     path: '/platforms',
     redirect: { when: 'VISITOR', to: '/login' }
@@ -59,14 +52,6 @@ const ROUTES = [
   },
   { component: UpdateProfile,
     path: '/updateprofile',
-    redirect: { when: 'VISITOR', to: '/login' }
-  },
-  { component: ThreadList,
-    path: '/threads',
-    redirect: { when: 'VISITOR', to: '/login' }
-  },
-  { component: CommentsList,
-    path: '/comments',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: Reports,

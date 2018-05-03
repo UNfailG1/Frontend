@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
+
+// Components
 import Loading from './Loading'
+import ForumTab from './ForumTab'
 import ErrorManager from './ErrorManager'
+import GameDescription from './GameDescription'
+
+// Assets
 import { GET_AUTH } from '../js/requests'
 
 class Game extends Component {
@@ -96,15 +102,13 @@ class Game extends Component {
     const noPadding = { padding: 0 }, noMargin = { margin: 0 }
 
     if (isLoaded) {
+      const { gam_name, gam_image, sub_forums } = game
       // const pegi = this.state.items.pegi
       // const pgp = this.state.items.player_game_profiles[0]
       // const pgpNick = pgp.pgp_nickname
       // const pgpRep = pgp.pgp_reputation
       // const pgpRate = pgp.pgp_rate
-      const gam_img = (game.gam_image) ? game.gam_image :
-                'https://semantic-ui.com/images/wireframe/image.png'
-      var genres = game.genres.map(g => g.gen_name).join(', ')
-      var platforms = game.platforms.map(p => p.plat_name).join(', ')
+      const gam_img = (gam_image) ? gam_image : 'https://semantic-ui.com/images/wireframe/image.png'
 
       return (
         <div>
@@ -113,38 +117,29 @@ class Game extends Component {
               { game.gam_name }
             </h2>
             <div className="parallax">
-              <img src={ gam_img } alt= {game.gam_name}/>
+              <img src={ gam_img } alt={ gam_name }/>
             </div>
           </div>
           <div className="section" style={ noPadding }>
+
             <div className="row" style={ noMargin }>
               <div className="col s12" style={ noPadding }>
                 <ul className="tabs">
-                  <li className="tab col s4"><a className="primary-color-dark" href="#test1">About</a></li>
-                  <li className="tab col s4"><a className="primary-color-dark" href="#test2">Forum</a></li>
-                  <li className="tab col s4"><a className="primary-color-dark" href="#test3">NoName</a></li>
+                  <li className="tab col s4"><a className="primary-color-dark" href="#about">About</a></li>
+                  <li className="tab col s4"><a className="primary-color-dark" href="#forum">Forum</a></li>
+                  <li className="tab col s4"><a className="primary-color-dark" href="#statistics">Statistics</a></li>
                 </ul>
               </div>
-              <div id="test1" className="col s12">
-                <p className="flow-text">
-                  <b>Genre: </b>
-                  { genres }
-                </p>
-                <p className="flow-text">
-                  <b>Platforms: </b>
-                  { platforms }
-                </p>
-                <p className="flow-text">
-                  <br/>
-                  <b>Description: </b>
-                  { game.gam_description }
-                </p>
-              </div>
-              <div id="test2" className="col s12">
-                Test 2
-              </div>
-              <div id="test3" className="col s12">
-                Test 3
+              <div className="container">
+                <div id="about" className="col s12">
+                  <GameDescription game={ game } />
+                </div>
+                <div id="forum" className="col s12">
+                  <ForumTab items={ sub_forums } />
+                </div>
+                <div id="statistics" className="col s12">
+                  Statistics
+                </div>
               </div>
             </div>
           </div>
@@ -153,7 +148,6 @@ class Game extends Component {
     } else if(isLoaded == null) {
       return (<Loading />)
     } else {
-
       return (<ErrorManager status={ this.state.status } />)
     }
   }
