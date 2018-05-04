@@ -17,6 +17,7 @@ class Header extends Component {
     this.state = {
       authed: store.getState().session
     }
+    this.player_profiles = {}
   }
 
   initNav(){
@@ -81,7 +82,12 @@ class Header extends Component {
       return (
         <nav>
           <div className="nav-wrapper primary-color">
-            <Link to="/" className="brand-logo" style={ adjPadding }>SPairing</Link>
+            <Link to="/" className="brand-logo" style={ adjPadding }>
+              <img src={ logo } alt="SPairing Logo"
+                className="hide-on-small-only resposive-img center-align"/>
+              SPairing
+
+            </Link>
             <a href="#!" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><Link to="/login">Sign In</Link></li>
