@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+// Components
+import GameSearch from './GameSearch'
+
 class Dashboard extends Component {
 
   constructor(props){
@@ -38,8 +41,8 @@ class Dashboard extends Component {
         content = (<div>PAIRING</div>)
       break
 
-      case this.GAME:
-        content = (<div>GAME</div>)
+      case this.GAMES:
+        content = (<GameSearch />)
       break
 
       default:
@@ -54,7 +57,7 @@ class Dashboard extends Component {
             <a href="#!" className="primary-color-text collection-item"
               onClick={ (e) => this.handleClick(e, this.PAIRING) }>Pairing</a>
             <a href="#!" className="primary-color-text collection-item"
-              onClick={ (e) => this.handleClick(e, this.GAME) }>Game</a>
+              onClick={ (e) => this.handleClick(e, this.GAMES) }>Game</a>
           </div>
         </div>
         <div className="col s12 m9 l10">
