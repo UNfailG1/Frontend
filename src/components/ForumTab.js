@@ -6,6 +6,7 @@ import Thread from './Thread'
 import Loading from './Loading'
 import Comment from './Comment'
 import ErrorManager from './ErrorManager'
+import CommentCreator from './CommentCreator'
 
 // Assets
 import { GET_AUTH } from '../js/requests'
@@ -17,6 +18,10 @@ class ForumTab extends Component {
     this.FORUMS = 0
     this.THREADS = 1
     this.COMMENTS = 2
+    this.threadId = null
+    this.threadName = null
+    this.subForumId = null
+    this.subForumName = null
     this.breadcrumbs = [{
       bc_id: 0,
       bc_link: {
@@ -24,10 +29,6 @@ class ForumTab extends Component {
         id: props.gameId
       }
     }]
-    this.threadId = null
-    this.threadName = null
-    this.subForumId = null
-    this.subForumName = null
     this.state = {
       view: this.FORUMS,
       items: [],
@@ -125,11 +126,23 @@ class ForumTab extends Component {
     )
   }
 
+  getCommentCreated = (comment) => {
+    const { view, items } = this.state
+    if(view === this.COMMENTS){
+      const aux = items.slice()
+      aux.push(comment)
+      this.setState({
+        items: aux
+      })
+    }
+  }
+
   render(){
     const { view, items, isLoaded } = this.state
+    const { gameId } = this.props
 
     if(isLoaded){
-      var list = null
+      var list = null, url = null
       switch(view){
 
         case this.FORUMS:
@@ -166,6 +179,7 @@ class ForumTab extends Component {
           )
 
         case this.COMMENTS:
+          url = `/games/${gameId}/sub_forums/${this.subForumId}/thread_forums/${this.threadId}/comments`
           list = items.map(
             comment => (<Comment key={ comment.id } item={ comment } />)
           )
@@ -173,9 +187,13 @@ class ForumTab extends Component {
             <div>
               <ul className="collection with-header">
                 <li className="collection-header"><h4>Thread: { this.threadName }</h4></li>
-                <li style={{ padding: '10px 20px' }}>{ list }</li>
+                <li className="collection-item" style={{ padding: '10px 20px' }}>{ list }</li>
+                <li className="collection-item">
+                  <CommentCreator url={ url } getCommentCreated={ this.getCommentCreated }
+                    threadId={ this.threadId }/>
+                </li>
               </ul>
-              { /*Aqui falta un componente (CommentCreator)*/ }
+
             </div>
           )
 

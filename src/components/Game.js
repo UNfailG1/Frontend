@@ -42,7 +42,6 @@ class Game extends Component {
 
     GET_AUTH(`/games/${ params.gameId }`).then(
       (res) => {
-        console.log(res);
         this.setState({
           game: res.data,
           isLoaded: true
