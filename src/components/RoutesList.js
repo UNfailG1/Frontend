@@ -33,11 +33,11 @@ class RoutesList extends Component {
               case 'LOGED_IN':
               default:
                 return (authed) ?
-                  <Redirect key={ index } from={ route.path } to={ route.redirect.to } />  :
+                  <Redirect key={ index } exact from={ route.path } to={ route.redirect.to } />  :
                   <Route key={ index } exact path={ route.path } component={ route.component }/>
               case 'VISITOR':
                 return (!authed) ?
-                  <Redirect key={ index } from={ route.path } to={ route.redirect.to } />  :
+                  <Redirect key={ index } exact from={ route.path } to={ route.redirect.to } />  :
                   <Route key={ index } exact path={route.path} component={ route.component }/>
             }
           }else{

@@ -8,7 +8,7 @@
   transform: translate(-50%, -50%);
 }
 
-.footer-copyright .container a{
+.footer-copyright .container a {
   margin: 0 8px;
   background-color: inherit !important;
 }
@@ -18,19 +18,19 @@
   background-color: $secondary-color-light !important;
 }
 
-.no-padding{
+.no-padding {
   padding: 0px !important;
 }
 
-.big-title{
+.big-title {
   font-size: 225px;
 }
 
-.gameImage{
+.gameImage {
   height: 64px;
 }
 
-.leftText{
+.leftText {
   margin-left: 16px;
 }
 
@@ -50,4 +50,28 @@
 
 .recharts-wrapper{
   margin: 0 auto !important;
+li.clickable {
+  cursor: pointer;
+}
+
+ul.autocomplete-content {
+  position: absolute !important;
+  min-width: 278px;
+  margin-top: 0;
+}
+
+.parallax-container {
+  display: flex;
+  height: 375px !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+  h2 {
+    align-self: flex-end;
+    margin: 25px auto;
+  }
+}
+
+.brand-logo img {
+  margin-right: 8px;
+  width: 45px;
+  vertical-align: middle;
 }

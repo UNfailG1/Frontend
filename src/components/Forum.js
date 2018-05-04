@@ -1,24 +1,22 @@
 import React from 'react'
+import { dateTime } from '../js/helpers'
 
-const Forum = ({ item }) => {
-
+const Forum = ({ item, onClick }) => {
+  const { sf_name, sf_description, created_at } = item
+  const noMargin = { margin: 0 }
   return (
-    <div className="row">
-      <div className="col s12 m6">
-        <div className="card primary-color">
-          <div className="card-content white-text">
-            <span className="card-title">{ item.sf_name }</span>
-            {/* Deberia ser el título del foro. */}
-            <p>
-              { item.sf_description }
-              <small>
-                - { item.game_id }</small>
-            </p>
-          </div>
-          <div className="card-action">
-            <a href="/threads" className="secondary-color-text ">Sub-threads</a>
-          </div>
-        </div>
+    <div className="row" style={ noMargin }>
+      <div className="col s12 m7 l7">
+        <p>
+          <b><a href="#!" onClick={ () => onClick() }>{ sf_name }</a></b><br/>
+          { sf_description }
+        </p>
+      </div>
+      <div className="col s12 m2 l2 center-align">
+        <p>Hay daticos</p>
+      </div>
+      <div className="col s12 m3 l3 center-align">
+        <p>{ dateTime(created_at) }</p>
       </div>
     </div>
   )

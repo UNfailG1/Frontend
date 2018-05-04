@@ -19,7 +19,7 @@
 .primary-color-dark-text {
   color: #000a12 !important; }
 
-.secondary-color {
+.secondary-color, .chip.selected {
   background-color: #0277bd !important;
   color: white !important; }
 
@@ -69,11 +69,34 @@
 .leftText {
   margin-left: 16px; }
 
+<<<<<<< HEAD
 .max-height {
   height: 100%; }
 
 .recharts-wrapper {
   margin: 0 auto !important; }
+=======
+li.clickable {
+  cursor: pointer; }
+
+ul.autocomplete-content {
+  position: absolute !important;
+  min-width: 278px;
+  margin-top: 0; }
+
+.parallax-container {
+  display: flex;
+  height: 375px !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)); }
+  .parallax-container h2 {
+    align-self: flex-end;
+    margin: 25px auto; }
+
+.brand-logo img {
+  margin-right: 8px;
+  width: 45px;
+  vertical-align: middle; }
+>>>>>>> origin/dashboard_mailbox
 
 .input-field label {
   color: #263238 !important; }
@@ -87,6 +110,16 @@
 
 .input-field .prefix.active {
   color: #263238 !important; }
+
+.input-field textarea:focus {
+  border-bottom: 1px solid #263238 !important;
+  box-shadow: 0 1px 0 0 #263238 !important; }
+
+.chips.chips-autocomplete {
+  margin-bottom: 0; }
+  .chips.chips-autocomplete.focus {
+    border-bottom-color: #263238 !important;
+    box-shadow: 0 1px 0 0 #263238 !important; }
 
 .dropdown-content li > span {
   color: #263238 !important; }
