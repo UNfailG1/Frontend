@@ -8,7 +8,6 @@ import PlayerProfile from '../components/PlayerProfile'
 import UpdateProfile from '../components/UpdateProfile'
 import Reports from '../components/Reports'
 import Stats from '../components/Stats'
-import Reports from '../components/Reports'
 import Dashboard from '../components/Dashboard'
 import Mailbox from '../components/Mailbox'
 

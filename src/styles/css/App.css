@@ -69,15 +69,13 @@
 .leftText {
   margin-left: 16px; }
 
-<<<<<<< HEAD
 .max-height {
   height: 100%; }
 
 .recharts-wrapper {
   margin: 0 auto !important; }
-=======
-li.clickable {
-  cursor: pointer; }
+  .recharts-wrapper li.clickable {
+    cursor: pointer; }
 
 ul.autocomplete-content {
   position: absolute !important;
@@ -96,7 +94,6 @@ ul.autocomplete-content {
   margin-right: 8px;
   width: 45px;
   vertical-align: middle; }
->>>>>>> origin/dashboard_mailbox
 
 .input-field label {
   color: #263238 !important; }
