@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
 // Assets
-import { GET_AUTH } from '../js/requests'
+import { GET_AUTH } from '../../js/requests'
 
 // Components
 import GameItem from './GameItem'
-import Loading from './Loading'
-import ErrorManager from './ErrorManager'
+import Loading from '../helpers/Loading'
+import ErrorManager from '../helpers/ErrorManager'
 
 class GameSearch extends Component{
 

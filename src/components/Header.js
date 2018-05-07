@@ -6,12 +6,8 @@ import store from '../js/store'
 import { logout } from '../js/actions'
 import logo from '../assets/Icon_SPairing.svg'
 
-const adjPadding = {
-  'paddingLeft': '16px',
-  'paddingRight': '16px'
-}
-
 class Header extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
@@ -49,7 +45,10 @@ class Header extends Component {
   }
 
   render() {
-
+    const adjPadding = {
+      'paddingLeft': '16px',
+      'paddingRight': '16px'
+    }
     const authed = this.state.authed
     if(authed){
       return (
@@ -86,7 +85,6 @@ class Header extends Component {
               <img src={ logo } alt="SPairing Logo"
                 className="hide-on-small-only resposive-img center-align"/>
               SPairing
-
             </Link>
             <a href="#!" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">

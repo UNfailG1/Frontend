@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { GoogleLogin } from 'react-google-login'
 
 //Assets
 import store from '../js/store'
-import Loading from './Loading'
 import { login } from '../js/actions'
 import { POST } from '../js/requests'
 import login_img from '../assets/login_img.jpg'
+
+// Components
+import Loading from './helpers/Loading'
+import { GoogleLogin } from 'react-google-login'
 
 class SignIn extends Component {
 
@@ -74,15 +76,17 @@ class SignIn extends Component {
 
   render() {
     const { error, logginIn } = this.state
-
+    const adjMargin = {
+      'marginBottom': 16,
+      'marginTop': 0
+    }
     if(logginIn){
       return (<Loading />)
     }
-
     var errorMessage = null
     if(error){
       errorMessage = (
-        <div className="input-field" style={{'marginBottom': 16, 'marginTop': 0}}>
+        <div className="input-field" style={ adjMargin }>
           <p className="red-text center-align" style={{'marginTop': 0}}>
             Email or password are incorrect
           </p>

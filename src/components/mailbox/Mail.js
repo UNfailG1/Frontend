@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 // Assets
-import { GET_AUTH } from '../js/requests'
+import { GET_AUTH } from '../../js/requests'
 
 // Components
-import Loading from './Loading'
-import ErrorManager from './ErrorManager'
+import Loading from '../helpers/Loading'
+import ErrorManager from '../helpers/ErrorManager'
 
 class Mail extends Component {
 
@@ -44,7 +44,6 @@ class Mail extends Component {
   }
 
   render(){
-
     const { mail, isLoaded } = this.state
     if(isLoaded){
       var mail_subject = (mail.mail_subject) ? mail.mail_subject : '(no subject)'

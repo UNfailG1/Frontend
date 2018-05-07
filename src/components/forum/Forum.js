@@ -1,5 +1,7 @@
 import React from 'react'
-import { dateTime } from '../js/helpers'
+
+// Assets
+import { dateTime } from '../../js/helpers'
 
 const Forum = ({ item, onClick }) => {
   const { sf_name, sf_description, created_at } = item

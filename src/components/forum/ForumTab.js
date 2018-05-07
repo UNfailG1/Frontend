@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 
+// Assets
+import { GET_AUTH } from '../../js/requests'
+
 // Components
 import Forum from './Forum'
 import Thread from './Thread'
-import Loading from './Loading'
 import Comment from './Comment'
-import ErrorManager from './ErrorManager'
+import Loading from '../helpers/Loading'
 import CommentCreator from './CommentCreator'
-
-// Assets
-import { GET_AUTH } from '../js/requests'
+import ErrorManager from '../helpers/ErrorManager'
 
 class ForumTab extends Component {
 

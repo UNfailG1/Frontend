@@ -8,7 +8,7 @@ class NotFound extends Component {
 
   render(){
     return (
-      <div className="center-align">
+      <div className="center-align" style={{ height: '100%' }}>
         <h1 className="big-title">404</h1>
         <h2>Not Found</h2>
       </div>

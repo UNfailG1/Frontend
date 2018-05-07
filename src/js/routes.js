@@ -1,15 +1,15 @@
 import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
 import Home from '../components/Home'
-import NotFound from '../components/NotFound'
-import Game from '../components/Game'
+import NotFound from '../components/helpers/NotFound'
+import Game from '../components/game/Game'
 import Platform from '../components/Platform'
-import PlayerProfile from '../components/PlayerProfile'
-import UpdateProfile from '../components/UpdateProfile'
-import Reports from '../components/Reports'
+import PlayerProfile from '../components/profile/PlayerProfile'
+import UpdateProfile from '../components/profile/UpdateProfile'
+import Reports from '../components/reports/Reports'
 import Stats from '../components/Stats'
 import Dashboard from '../components/Dashboard'
-import Mailbox from '../components/Mailbox'
+import Mailbox from '../components/mailbox/Mailbox'
 
 /*
   add redirect option only if you want redirect with 'when' option =

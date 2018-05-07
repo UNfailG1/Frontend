@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-// Components
-import Loading from './Loading'
-import ForumTab from './ForumTab'
-import ErrorManager from './ErrorManager'
-import GameDescription from './GameDescription'
-
 // Assets
-import { GET_AUTH } from '../js/requests'
+import { GET_AUTH } from '../../js/requests'
+
+// Components
+import Loading from '../helpers/Loading'
+import ForumTab from '../forum/ForumTab'
+import GameDescription from './GameDescription'
+import ErrorManager from '../helpers/ErrorManager'
 
 class Game extends Component {
 
@@ -37,9 +37,7 @@ class Game extends Component {
     })
 }
   componentWillMount() {
-
     const { match: { params } } = this.props
-
     GET_AUTH(`/games/${ params.gameId }`).then(
       (res) => {
         this.setState({
@@ -57,7 +55,6 @@ class Game extends Component {
       }
     )
   }
-
 
 //   <div>
 //   <div className="row">

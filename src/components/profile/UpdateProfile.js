@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import login_img from '../assets/login_img.jpg'
-import defaultAvatar from '../assets/user.svg'
-import { GET, GET_AUTH, PATCH, FPATCH, BASE_URL } from '../js/requests'
-import Loading from './Loading'
+
+// Assets
+import defaultAvatar from '../../assets/user.svg'
+import login_img from '../../assets/login_img.jpg'
+import { GET, GET_AUTH, PATCH, FPATCH, BASE_URL } from '../../js/requests'
+
+// Components
+import Loading from '../helpers/Loading'
 
 class UpdateProfile extends Component {
 
@@ -22,7 +26,6 @@ class UpdateProfile extends Component {
   componentWillMount(){
     GET('/locations').then(
       (res) => {
-        //console.log(res)
         this.setState({
           loading: false,
           items: res
@@ -44,16 +47,15 @@ class UpdateProfile extends Component {
     const $ = window.$
     document.title = 'Settings'
     $(document).ready(function() {
-      $('select').material_select();
-    });
+      $('select').material_select()
+    })
   }
 
-  // Asegurarse del funcionamiento de materialize
   componentDidUpdate(){
       const $ = window.$
       $(document).ready(function() {
-        $('select').material_select();
-      });
+        $('select').material_select()
+      })
    }
 
   handleChange(event){
@@ -89,12 +91,19 @@ class UpdateProfile extends Component {
   }
 
   render(){
+
     if(this.state.loading === false){
       const {items, avatar} = this.state
       var avatarImg = ( avatar ) ?
           <img className="circle responsive-img" alt="" src={ avatar } height="160" width="160"/> :
           <img className="circle responsive-img" alt="" src={ defaultAvatar } height="160" width="160"/>
-      var list = items.data.map((item) => <option value={item.id} key={item.id} className="primary-color-text"> {item.loc_name} </option>)
+      var list = items.data.map(
+        item => (
+          <option value={ item.id } key={ item.id } className="primary-color-text">
+            { item.loc_name }
+          </option>
+        )
+      )
       return (
         <figure className="back_image">
           <img src={ login_img } alt="login_image"/>

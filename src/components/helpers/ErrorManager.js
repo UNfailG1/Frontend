@@ -1,7 +1,9 @@
 import React from 'react'
-import NotFound from './NotFound'
 
-const ErrorManager = ( { status } ) => {
+// Components
+import NotFound from '../helpers/NotFound'
+
+const ErrorManager = ({ status }) => {
 
   switch(status){
 

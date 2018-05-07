@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // Assets
-import { POST_AUTH } from '../js/requests'
+import { POST_AUTH } from '../../js/requests'
 
 class CommentCreator extends Component {
   handleSubmit(event){

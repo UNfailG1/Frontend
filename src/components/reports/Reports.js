@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import { GET, BASE_URL } from '../js/requests'
-import Loading from './Loading'
-import ErrorManager from './ErrorManager'
+
+// Assets
+import { GET, BASE_URL } from '../../js/requests'
+
+//Components
+import Loading from '../helpers/Loading'
+import ErrorManager from '../helpers/ErrorManager'
 
 class Reports extends Component{
 
@@ -26,7 +30,7 @@ class Reports extends Component{
       (error) => {
         this.setState({
           isLoaded: false,
-          status: (error.response) ? error.response.status : 0  
+          status: (error.response) ? error.response.status : 0
         })
       }
     )
@@ -36,7 +40,7 @@ class Reports extends Component{
     const { items, isLoaded } = this.state
     var reports = []
 
-    if (isLoaded != null && isLoaded) {
+    if (isLoaded) {
       const keys = Object.keys(items).map(
         (type, index) => {
           reports.push([])
@@ -59,7 +63,6 @@ class Reports extends Component{
           )
         }
       )
-      // var list = items.map()
       return (
         <div className="container">
           <br/>

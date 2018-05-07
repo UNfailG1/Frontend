@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
-import defaultAvatar from '../assets/user.svg'
-import Loading from './Loading'
-import ErrorManager from './ErrorManager'
-import { GET_AUTH, BASE_URL } from '../js/requests'
+
+// Assets
+import defaultAvatar from '../../assets/user.svg'
+import { GET_AUTH, BASE_URL } from '../../js/requests'
+
+
+// Components
+import Loading from '../helpers/Loading'
+import ErrorManager from '../helpers/ErrorManager'
 
 class PlayerProfile extends Component {
 
@@ -26,9 +31,6 @@ class PlayerProfile extends Component {
 
   componentWillMount() {
     const { match: { params } } = this.props
-
-
-    // const game_id = this.props.game_id
     const route = `/player_profiles/${params.userId}`
     GET_AUTH(route).then(
       (res) => {
@@ -50,7 +52,7 @@ class PlayerProfile extends Component {
   render() {
     const { profile, isLoaded } = this.state
 
-    if (isLoaded != null && isLoaded) {
+    if (isLoaded) {
       const username = profile.pp_username
       const email = profile.email
       const elo = profile.pp_spairing_elo
@@ -86,7 +88,8 @@ class PlayerProfile extends Component {
               <ul>{ games }</ul>
             </div>
           </div>
-        </div>)
+        </div>
+      )
     } else if(isLoaded == null) {
       return (<Loading />)
     } else {

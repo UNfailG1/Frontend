@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
-import { AreaChart, Area, PieChart, Pie, LineChart, Line, BarChart, Bar,
-        XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
-import defaultAvatar from '../assets/user.svg'
+
+// Assets
 import { GET } from '../js/requests'
-import Loading from './Loading'
+import Loading from './helpers/Loading'
+import defaultAvatar from '../assets/user.svg'
+
+//Components
+import { AreaChart, Area, PieChart, Pie, LineChart, Line, BarChart, Bar,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 
 class Stats extends Component {
 
@@ -52,7 +56,6 @@ class Stats extends Component {
     })
   }
 
-  // Asegurarse del funcionamiento de materialize
   componentDidUpdate(){
     const $ = window.$
     $(document).ready(() => {

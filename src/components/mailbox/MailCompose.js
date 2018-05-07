@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // Assests
-import { GET_AUTH, POST_AUTH } from '../js/requests'
+import { GET_AUTH, POST_AUTH } from '../../js/requests'
 
 class MailCompose extends Component {
 
@@ -88,7 +88,6 @@ class MailCompose extends Component {
   }
 
   render(){
-
     const noMargin = { margin: 0 }
     return (
       <form onSubmit={ (e) => this.handleSubmit(e) }>

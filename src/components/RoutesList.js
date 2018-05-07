@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
 
 //Assets
 import store from '../js/store'
-import App from '../components/App'
 import { ROUTES } from '../js/routes'
+
+// Components
+import App from '../components/App'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 class RoutesList extends Component {
 

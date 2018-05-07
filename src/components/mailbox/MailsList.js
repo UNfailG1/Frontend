@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import Loading from './Loading'
+
+// Assets
+import { GET_AUTH } from '../../js/requests'
+
+//Components
 import MailItem from './MailItem'
-import ErrorManager from './ErrorManager'
-import { GET_AUTH } from '../js/requests'
+import Loading from '../helpers/Loading'
+import ErrorManager from '../helpers/ErrorManager'
 
 class MailsList extends Component {
   constructor(props){
@@ -46,7 +50,7 @@ class MailsList extends Component {
     const { items, isLoaded } = this.state
     const { section } = this.props
     var list = null
-    if(isLoaded != null && isLoaded){
+    if(isLoaded){
 
       if(items.length === 0){
         return (<h4 className="center-align">There aren't mails on { section }</h4>)

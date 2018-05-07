@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import PlatformItem from './PlatformItem'
-import Loading from './Loading'
-import ErrorManager from './ErrorManager'
+
+// Assets
 import { GET_AUTH } from '../js/requests'
+
+// Components
+import Loading from './helpers/Loading'
+import PlatformItem from './PlatformItem'
+import ErrorManager from './helpers/ErrorManager'
 
 class Platform extends Component {
 
@@ -16,7 +20,6 @@ class Platform extends Component {
   }
 
   componentWillMount() {
-    // const game_id = this.props.game_id
     GET_AUTH('/platforms').then(
       (res) => {
         this.setState({
@@ -29,7 +32,7 @@ class Platform extends Component {
         console.log(error)
         this.setState({
           isLoaded: false,
-          status: (error.response) ? error.response.status : 0  
+          status: (error.response) ? error.response.status : 0
         })
       }
     )
@@ -47,16 +50,14 @@ class Platform extends Component {
     this.initCollapsible()
   }
 
-  // Asegurarse del funcionamiento de materialize
   componentDidUpdate() {
     this.initCollapsible()
   }
 
   render() {
     const { items, isLoaded } = this.state
-    //const game_id = this.props.game_id
     var list
-    if (isLoaded != null && isLoaded) {
+    if (isLoaded) {
       list = items.map((item) => (<li key={ item.id }><PlatformItem item={ item }/></li>))
       return (<ul className="collapsible">{ list }</ul>)
     } else if(isLoaded == null) {

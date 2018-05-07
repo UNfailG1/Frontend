@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Assets
-import { dateTime } from '../js/helpers'
+import { dateTime } from '../../js/helpers'
 
 const Thread = ({ item, onClick }) => {
   const { thr_name, created_at, thr_comments, thr_views } = item

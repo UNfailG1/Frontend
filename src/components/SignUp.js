@@ -7,8 +7,8 @@ import { login } from '../js/actions'
 import register_img from '../assets/register_img.jpg'
 
 // Components
-import Loading from './Loading'
-import ErrorManager from './ErrorManager'
+import Loading from './helpers/Loading'
+import ErrorManager from './helpers/ErrorManager'
 
 class SignUp extends Component{
 
@@ -103,7 +103,7 @@ class SignUp extends Component{
       )
     }
 
-    if(isLoaded != null && isLoaded){
+    if(isLoaded){
       return (
         <figure className="back_image">
           <img src={ register_img } alt="una imagen mas"/>

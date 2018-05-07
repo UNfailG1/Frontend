@@ -1,7 +1,5 @@
 import React from 'react'
 
-// Assets
-
 const GameItem = ({ game }) => {
 
   const gam_img = (game.gam_image) ? game.gam_image :

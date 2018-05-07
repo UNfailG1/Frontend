@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // Components
-import GameSearch from './GameSearch'
+import GameSearch from './game/GameSearch'
 
 class Dashboard extends Component {
 
@@ -16,10 +16,6 @@ class Dashboard extends Component {
 
   }
 
-  componentWillMount(){
-
-  }
-
   componentDidMount(){
     document.title = 'SPairing'
   }
@@ -31,25 +27,27 @@ class Dashboard extends Component {
 
   render(){
     const { view } = this.state
-    var content
+    var content = null
+    const noMargin = { margin: 0 }
     switch(view){
       case this.HOME:
         content = (<div>Home</div>)
-      break
+        break
 
       case this.PAIRING:
-        content = (<div>PAIRING</div>)
-      break
+        content = (<div>Pairing</div>)
+        break
 
       case this.GAMES:
         content = (<GameSearch />)
-      break
+        break
 
       default:
         content = (<div>Un error</div>)
+        break
     }
     return (
-      <div className="row" style={{margin: 0, 'height': '-webkit-fill-available'}}>
+      <div className="row fill-height" style={ noMargin }>
         <div className="col s12 m3 l2">
           <div className="collection">
             <a href="#!" className="primary-color-text collection-item"
