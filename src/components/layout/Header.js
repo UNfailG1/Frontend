@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 //Assets
-import store from '../js/store'
-import { logout } from '../js/actions'
-import logo from '../assets/Icon_SPairing.svg'
+import store from '../../js/store'
+import { logout } from '../../js/actions'
+import logo from '../../assets/Icon_SPairing.svg'
 
 class Header extends Component {
 

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-//Assets
-import store from '../js/store'
-import { login } from '../js/actions'
-import { POST } from '../js/requests'
-import login_img from '../assets/login_img.jpg'
+// Assets
+import store from '../../js/store'
+import { login } from '../../js/actions'
+import { POST } from '../../js/requests'
+import login_img from '../../assets/login_img.jpg'
 
 // Components
-import Loading from './helpers/Loading'
+import Loading from '../helpers/Loading'
 import { GoogleLogin } from 'react-google-login'
 
 class SignIn extends Component {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 // Assets
-import { GET } from '../js/requests'
-import Loading from './helpers/Loading'
-import defaultAvatar from '../assets/user.svg'
+import { GET } from '../../js/requests'
+import Loading from '../helpers/Loading'
+import defaultAvatar from '../../assets/user.svg'
 
 //Components
 import { AreaChart, Area, PieChart, Pie, LineChart, Line, BarChart, Bar,

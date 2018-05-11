@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
 // Assests
-import store from '../js/store'
-import { POST } from '../js/requests'
-import { login } from '../js/actions'
-import register_img from '../assets/register_img.jpg'
+import store from '../../js/store'
+import { POST } from '../../js/requests'
+import { login } from '../../js/actions'
+import register_img from '../../assets/register_img.jpg'
 
 // Components
-import Loading from './helpers/Loading'
-import ErrorManager from './helpers/ErrorManager'
+import Loading from '../helpers/Loading'
+import ErrorManager from '../helpers/ErrorManager'
 
 class SignUp extends Component{
 

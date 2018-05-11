@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
 // Assets
-import { GET_AUTH } from '../js/requests'
+import { GET_AUTH } from '../../js/requests'
 
 // Components
-import Loading from './helpers/Loading'
+import Loading from '../helpers/Loading'
 import PlatformItem from './PlatformItem'
-import ErrorManager from './helpers/ErrorManager'
+import ErrorManager from '../helpers/ErrorManager'
 
 class Platform extends Component {
 
