@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 
-// Assets
-import { GET_AUTH } from '../../js/requests'
-
 // Components
 import Loading from '../helpers/Loading'
 import ForumTab from '../forum/ForumTab'
-import GameDescription from './GameDescription'
 import ErrorManager from '../helpers/ErrorManager'
+import GameDescription from './GameDescription'
+import GameGallery from './GameGallery'
+
+// Assets
+import { GET_AUTH } from '../../js/requests'
 
 class Game extends Component {
 
@@ -37,7 +38,9 @@ class Game extends Component {
     })
 }
   componentWillMount() {
+
     const { match: { params } } = this.props
+
     GET_AUTH(`/games/${ params.gameId }`).then(
       (res) => {
         this.setState({
@@ -61,8 +64,9 @@ class Game extends Component {
     const noPadding = { padding: 0 }, noMargin = { margin: 0 }
 
     if (isLoaded) {
-      const { gam_name, gam_image } = game
+      const { gam_name, gam_image, screenshots } = game
       const gam_img = (gam_image) ? gam_image : 'https://semantic-ui.com/images/wireframe/image.png'
+      const screenshot = screenshots[Math.floor(Math.random() * screenshots.length)].scr_url
 
       return (
         <div>
@@ -71,7 +75,7 @@ class Game extends Component {
               { game.gam_name }
             </h2>
             <div className="parallax">
-              <img src={ gam_img } alt={ gam_name }/>
+              <img src={ screenshot } alt={ gam_name }/>
             </div>
           </div>
           <div className="section" style={ noPadding }>
@@ -87,6 +91,7 @@ class Game extends Component {
               <div className="container">
                 <div id="about" className="col s12">
                   <GameDescription game={ game } />
+                  <GameGallery screenshots={ screenshots } />
                 </div>
                 <div id="forum" className="col s12">
                   <ForumTab gameId={ game.id } />

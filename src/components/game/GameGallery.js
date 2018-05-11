@@ -1,57 +1,27 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-// Assets
-import { GET_AUTH } from '../../js/requests'
+const GameGallery = ({ screenshots }) => {
 
-// Components
-import Loading from '../helpers/Loading'
-import ErrorManager from '../helpers/ErrorManager'
+  const $ = window.$
+  $(document).ready(function(){
+    $('.carousel').carousel({ indicators: true})
+    $('.materialboxed').materialbox()
+  })
 
-class GameGallery extends Component {
-
-  constructor(props){
-    super(props)
-
-    this.state = {
-      items: [],
-      isLoaded: null,
-      status: null,
-    }
-  }
-
-  componentWillMount(){
-    const { gameId } = this.props
-
-    GET_AUTH(`/games/${gameId}/screenshots`).then(
-      res => {
-        console.log(res.data);
-        this.setState({
-          isLoaded: true,
-          items: res.data
-        })
-      }
-    ).catch(
-      error => {
-        this.setState({
-          isLoaded: false,
-          status: (error.response) ? error.response.status : 0
-        })
-      }
+  var images = screenshots.map(
+    (image) => (
+      <a key={ image.id } className="carousel-item">
+        <img src={ image.scr_url } alt="Screenshot"/>
+      </a>
     )
-  }
+  )
 
-  render(){
-    const { items, isLoaded } = this.state
 
-    if(isLoaded){
-      var list = null, url = null
-      return (<div>Screenshots</div>)
-    }else if(isLoaded == null) {
-      return (<Loading />)
-    }else{
-      return (<ErrorManager status={ this.state.status } />)
-    }
-  }
+  return(
+    <div className="carousel carousel-slider" style={{ marginBottom: 16 }}>
+      { images }
+    </div>
+  )
 }
 
 export default GameGallery

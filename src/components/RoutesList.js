@@ -5,7 +5,7 @@ import store from '../js/store'
 import { ROUTES } from '../js/routes'
 
 // Components
-import App from '../components/App'
+import App from '../components/layout/App'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
 class RoutesList extends Component {
