@@ -1,25 +1,25 @@
 $primary-color: #263238;
-$light-primary-color: #4f5b62;
-$dark-primary-color: #000a12;
+$primary-color-light: #4f5b62;
+$primary-color-dark: #000a12;
 
 $secondary-color: #0277bd;
-$light-secondary-color: #58a5f0;
-$dark-secondary-color: #004c8c;
+$secondary-color-light: #58a5f0;
+$secondary-color-dark: #004c8c;
 
-$background-color: #eeeeee;
+$background-color: #f5f5f5;
 
 .primary-color{
   background-color: $primary-color !important;
   color: white !important;
 }
 
-.light-primary-color {
-  background-color: $light-primary-color !important;
+.primary-color-light {
+  background-color: $primary-color-light !important;
   color: white !important;
 }
 
-.dark-primary-color {
-  background-color: $dark-primary-color !important;
+.primary-color-dark {
+  background-color: $primary-color-dark !important;
   color: white !important;
 }
 
@@ -27,12 +27,12 @@ $background-color: #eeeeee;
   color: $primary-color !important;
 }
 
-.light-primary-color-text {
-  color: $light-primary-color !important;
+.primary-color-light-text {
+  color: $primary-color-light !important;
 }
 
-.dark-primary-color-text {
-  color: $dark-primary-color !important;
+.primary-color-dark-text {
+  color: $primary-color-dark !important;
 }
 
 .secondary-color{
@@ -40,13 +40,13 @@ $background-color: #eeeeee;
   color: white !important;
 }
 
-.light-secondary-color {
-  background-color: $light-secondary-color !important;
+.secondary-color-light {
+  background-color: $secondary-color-light !important;
   color: black !important;
 }
 
-.dark-secondary-color {
-  background-color: $dark-secondary-color !important;
+.secondary-color-dark {
+  background-color: $secondary-color-dark !important;
   color: white;
 }
 
@@ -54,10 +54,10 @@ $background-color: #eeeeee;
   color: $secondary-color !important;
 }
 
-.light-secondary-color-text {
-  color: $light-secondary-color !important;
+.secondary-color-light-text {
+  color: $secondary-color-light !important;
 }
 
-.dark-secondary-color-text {
-  color: $dark-secondary-color !important;
+.secondary-color-dark-text {
+  color: $secondary-color-dark !important;
 }

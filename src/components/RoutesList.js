@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
 
 //Assets
 import store from '../js/store'
-import App from '../components/App'
 import { ROUTES } from '../js/routes'
+
+// Components
+import App from '../components/layout/App'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 class RoutesList extends Component {
 
@@ -33,11 +35,11 @@ class RoutesList extends Component {
               case 'LOGED_IN':
               default:
                 return (authed) ?
-                  <Redirect key={ index } from={ route.path } to={ route.redirect.to } />  :
+                  <Redirect key={ index } exact from={ route.path } to={ route.redirect.to } />  :
                   <Route key={ index } exact path={ route.path } component={ route.component }/>
               case 'VISITOR':
                 return (!authed) ?
-                  <Redirect key={ index } from={ route.path } to={ route.redirect.to } />  :
+                  <Redirect key={ index } exact from={ route.path } to={ route.redirect.to } />  :
                   <Route key={ index } exact path={route.path} component={ route.component }/>
             }
           }else{

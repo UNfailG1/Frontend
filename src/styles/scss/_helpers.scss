@@ -1,61 +1,104 @@
-@import 'colors';
+html, body, div#root {
+  height: 100%;
+  width: 100%;
+  background-color: $background-color;
+}
+
+div#root > div{
+  overflow-x: hidden !important;
+  width: 100%;
+  height: 100%;
+  display: block;
+  flex-direction: column;
+}
+
+header {
+  width: 100%;
+  display: block;
+}
+
+main {
+  min-height: calc(100% - 110px);
+  height: auto;
+  display: block;
+}
+
+footer {
+  width: 100%;
+}
 
 .form-panel{
   position: absolute;
-  width: 25%;
-  min-width: 300px;
+  margin-top: 0px !important;
+  width: 300px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.back_image {
-  position: relative;
-  margin: -4px;
-  width: calc(100%+8px);
-  height: calc(100%+8px);
-  min-height: 500px;
-  max-height: 900px;
-  overflow: hidden !important;
-}
-
-.back_image figcaption{
-  top: 0%;
-  left: 0%;
-  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
-  width: 100%;
-  height: 100%;
-}
-
-.back_image > img{
-  margin-bottom: -6px;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-  height: auto;
-  min-height: 500px;
-  object-fit: cover;
-  overflow: hidden;
-  filter: blur(3px);
+.footer-copyright .container a {
+  margin: 0 8px;
+  background-color: inherit !important;
 }
 
 .tabs .indicator {
   height: 3px !important;
-  background-color: $light-secondary-color !important;
+  background-color: $secondary-color-light !important;
 }
 
-.no-padding{
+.no-padding {
   padding: 0px !important;
 }
 
-.big-title{
-  font-size: 225px;
+@media only screen and (max-width: 375px){
+  .big-title {
+    font-size: 150px;
+  }
 }
 
-.gameImage{
+@media only screen and (min-width: 376px){
+  .big-title {
+    font-size: 225px;
+  }
+}
+
+.gameImage {
   height: 64px;
 }
 
-.leftText{
+.leftText {
   margin-left: 16px;
+}
+
+.max-height{
+  height: 100%;
+}
+
+.recharts-wrapper{
+  margin: 0 auto !important;
+  li.clickable {
+    cursor: pointer;
+  }
+}
+
+ul.autocomplete-content {
+  position: absolute !important;
+  min-width: 278px;
+  margin-top: 0;
+}
+
+.parallax-container {
+  display: flex;
+  height: 375px !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
+  h2 {
+    align-self: flex-end;
+    margin: 25px auto;
+  }
+}
+
+.brand-logo img {
+  margin-right: 8px;
+  width: 45px;
+  vertical-align: middle;
 }

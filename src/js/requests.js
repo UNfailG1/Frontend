@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://spairing-api.herokuapp.com'
-// const BASE_URL = 'http://localhost:3001'
+// const BASE_URL = 'https://spairing-api.herokuapp.com'
+const BASE_URL = 'http://localhost:3001'
+//const BASE_URL = 'https://spairing-statistics.herokuapp.com'
 
 const POST = (url, data) => {
   return axios({

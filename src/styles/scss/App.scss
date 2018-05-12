@@ -1,11 +1,6 @@
+@import "colors";
 @import 'helpers';
-@import 'input-colors';
-
-body {
-  background-color: $background-color;
-  overflow-x: hidden !important;
-}
-
-div#root, figure, main {
-  overflow-x: hidden !important;
-}
+@import 'input-config';
+@import 'select-config';
+@import 'loading-config';
+@import 'bg-image-config';
