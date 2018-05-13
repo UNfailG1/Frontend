@@ -4,8 +4,9 @@ import React, { Component } from 'react'
 import defaultAvatar from '../../assets/user.svg'
 import { GET_AUTH, BASE_URL } from '../../js/requests'
 
-
 // Components
+import PGPList from './PGPList'
+import FriendsList from './FriendsList'
 import Loading from '../helpers/Loading'
 import ErrorManager from '../helpers/ErrorManager'
 
@@ -22,8 +23,16 @@ class PlayerProfile extends Component {
   }
 
   componentDidMount() {
-    const $ = window.$
     document.title = "SPairing"
+    this.initTabs()
+  }
+
+  componentDidUpdate(){
+    this.initTabs()
+  }
+
+  initTabs(){
+    const $ = window.$
     $(document).ready(function() {
       $('ul.tabs').tabs()
     })
@@ -34,6 +43,7 @@ class PlayerProfile extends Component {
     const route = `/player_profiles/${params.userId}`
     GET_AUTH(route).then(
       (res) => {
+        console.log(res.data);
         this.setState({
           profile: res.data,
           isLoaded: true
@@ -51,41 +61,39 @@ class PlayerProfile extends Component {
 
   render() {
     const { profile, isLoaded } = this.state
+    const {
+      email,
+      games,
+      friends,
+      pp_avatar,
+      pp_username,
+      player_game_profiles
+    } = profile
 
     if (isLoaded) {
-      const username = profile.pp_username
-      const email = profile.email
-      const elo = profile.pp_spairing_elo
-      const location = (profile.location) ? profile.location.loc_name : 'Not available'
-      const avatar =  BASE_URL + profile.pp_avatar.url
-      var avatarImg = (profile.pp_avatar.url) ?
-          <img className="circle responsive-img" alt="" src={ avatar } height="160" width="160"/> :
-          <img className="circle responsive-img" alt="" src={ defaultAvatar } height="160" width="160"/>
-      var friends = profile.friends.map((item, i) => (<h5 className="leftText"  key={i}>{item.pp_username}</h5>))
-      var games = profile.games.map((item, i) => (<h5 className="leftText" key={i}>{item.gam_name}</h5>))
       return (
-        <div>
-          <div className="row">
-            <div className="center-align">
-              <br />
-              {avatarImg}
-              <h3>{ username }</h3>
-              <h5 className="secondary-color-text">{ email }</h5>
-              <h4>Current player level (Rating): { elo }</h4>
-              <h4>Location: { location }</h4>
+        <div className="container">
+          <div className="row" style={{ marginTop: 32}}>
+            <div className="col s12 m3 l3">
+              <img src={ (pp_avatar.url) ? BASE_URL + pp_avatar.url : defaultAvatar }
+                alt="Profile img" className="responsive-img circle"/>
+              <p className="truncate" style={{ fontSize: 24, lineHeight: 1 }}>
+                { pp_username }<br />
+                <small className="grey-text trucate">{ email }</small>
+              </p>
+              <div style={{ height: 200 }} className="teal">Espacio para mapa</div>
             </div>
-          </div>
-          <div className="row center-align">
-            <a href="/updateprofile" className="waves-effect waves-light btn primary-color">Edit Profile</a>
-          </div>
-          <div className="row">
-            <div className="col s6">
-              <h3 className="leftText">Friends</h3>
-              <ul>{ friends }</ul>
-            </div>
-            <div className="col s6">
-              <h3 className="leftText">Games</h3>
-              <ul>{ games }</ul>
+            <div className="col s12 m9 l9">
+              <ul className="tabs" style={{ margin: 0 }}>
+                <li className="tab"><a className="primary-color-text" href="#pgp">Games</a></li>
+                <li className="tab"><a className="primary-color-text" href="#friends">Friends</a></li>
+              </ul>
+              <div id="pgp">
+                <PGPList games={ games } pgps={ player_game_profiles }/>
+              </div>
+              <div id="friends">
+                <FriendsList friends={ friends } />
+              </div>
             </div>
           </div>
         </div>
