@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 // Assets
-import { GET, BASE_URL } from '../../js/requests'
+import { GET } from '../../js/requests'
+import { BASE_URL } from '../../js/assets'
 
 //Components
 import Loading from '../helpers/Loading'

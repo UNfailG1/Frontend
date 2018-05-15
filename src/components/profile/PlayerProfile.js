@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
 // Assets
+import { BASE_URL } from '../../js/assets'
+import { GET_AUTH } from '../../js/requests'
 import defaultAvatar from '../../assets/user.svg'
-import { GET_AUTH, BASE_URL } from '../../js/requests'
 
 // Components
 import PGPList from './PGPList'

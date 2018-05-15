@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 
 // Assets
+import { BASE_URL } from '../../js/assets'
 import defaultAvatar from '../../assets/user.svg'
 import login_img from '../../assets/login_img.jpg'
-import { GET, GET_AUTH, PATCH, FPATCH, BASE_URL } from '../../js/requests'
+import { GET, GET_AUTH, PATCH, FPATCH } from '../../js/requests'
 
 // Components
 import Loading from '../helpers/Loading'
