@@ -10,7 +10,7 @@ const FriendsList = ({ friends }) => {
   }
 
   const list = friends.map(
-    friend => <Friend friend={ friend } />
+    friend => <Friend key={ friend.id } friend={ friend } />
   )
 
   return (
