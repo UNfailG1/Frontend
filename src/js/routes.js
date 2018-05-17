@@ -1,6 +1,6 @@
 import SignUp from '../components/accounts/SignUp'
 import SignIn from '../components/accounts/SignIn'
-import Home from '../components/Home'
+import Home from '../components/home/Home'
 import NotFound from '../components/helpers/NotFound'
 import Game from '../components/game/Game'
 import Platform from '../components/platforms/Platform'
