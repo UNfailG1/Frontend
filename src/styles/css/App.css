@@ -124,25 +124,17 @@ ul.autocomplete-content {
   vertical-align: middle; }
 
 .l-panel {
-  height: 320px;
-  padding-top: 32px !important; }
+  height: 320px; }
 
 .l-img img {
-  height: 100%;
-  width: 100%;
+  height: 80%;
+  width: auto;
   object-fit: cover; }
 
 .l-img {
   padding-left: 0px !important;
   padding-right: 0px !important;
-  padding-top: 32px !important;
   height: 320px; }
-
-@media only screen and (max-width: 600px) {
-  .l-panel {
-    padding-top: 0px !important; }
-  .l-img {
-    padding-top: 0px !important; } }
 
 .input-field label {
   color: #263238 !important; }
