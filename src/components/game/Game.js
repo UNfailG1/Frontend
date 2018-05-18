@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 
+// Assets
+import { noImage } from '../../js/assets'
+import { GET_AUTH } from '../../js/requests'
+
 // Components
 import Loading from '../helpers/Loading'
 import ForumTab from '../forum/ForumTab'
 import ErrorManager from '../helpers/ErrorManager'
 import GameDescription from './GameDescription'
 import GameGallery from './GameGallery'
-
-// Assets
-import { GET_AUTH } from '../../js/requests'
 
 class Game extends Component {
 
@@ -65,7 +66,7 @@ class Game extends Component {
 
     if (isLoaded) {
       const { gam_name, gam_image, screenshots } = game
-      const gam_img = (gam_image) ? gam_image : 'https://semantic-ui.com/images/wireframe/image.png'
+      const gam_img = (gam_image) ? gam_image : noImage
       const screenshot = screenshots[Math.floor(Math.random() * screenshots.length)].scr_url
 
       return (

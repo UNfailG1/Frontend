@@ -1,9 +1,11 @@
 import React from 'react'
 
+// Assets
+import { noImage } from '../../js/assets'
+
 const GameItem = ({ game }) => {
 
-  const gam_img = (game.gam_image) ? game.gam_image :
-            'https://semantic-ui.com/images/wireframe/image.png'
+  const gam_img = (game.gam_image) ? game.gam_image : noImage
 
   return (
     <div className="col s12 m4 l4">

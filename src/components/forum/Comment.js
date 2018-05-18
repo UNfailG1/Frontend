@@ -2,8 +2,8 @@ import React from 'react'
 
 // Assets
 import user from '../../assets/user.svg'
+import { BASE_URL } from '../../js/assets'
 import { dateTime } from '../../js/helpers'
-import { BASE_URL } from '../../js/requests'
 
 const Comment = ({ item }) => {
   const { com_comment, player_profile, created_at } = item

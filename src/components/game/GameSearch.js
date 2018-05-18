@@ -26,7 +26,7 @@ class GameSearch extends Component{
       items: []
     })
     const gam_name = event.target.value
-    GET_AUTH(`/gameslike?gam_name=${ gam_name }&page=1`).then(
+    GET_AUTH(`/games_like?gam_name=${ gam_name }&page=1`).then(
       (res) => {
         this.setState({
           isLoaded: true,
