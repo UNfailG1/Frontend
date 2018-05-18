@@ -10,6 +10,7 @@ import Reports from '../components/reports/Reports'
 import Stats from '../components/statistics/Stats'
 import Dashboard from '../components/Dashboard'
 import Mailbox from '../components/mailbox/Mailbox'
+import Ads from '../components/ads/Ads'
 
 /*
   add redirect option only if you want redirect with 'when' option =
@@ -63,6 +64,9 @@ const ROUTES = [
   { component: Mailbox,
     path: '/mailbox',
     redirect: { when: 'VISITOR', to: '/login' }
+  },
+  { component: Ads,
+    path: '/temporary_ads'
   },
   { component: NotFound }
 ]
