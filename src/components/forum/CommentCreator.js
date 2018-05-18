@@ -14,7 +14,7 @@ class CommentCreator extends Component {
     }
     POST_AUTH(url, { comment }).then(
       (res) => {
-        this.props.getCommentCreated(res.data)
+        this.props.updateCreated(res.data)
       }
     ).catch(
       (error) => {

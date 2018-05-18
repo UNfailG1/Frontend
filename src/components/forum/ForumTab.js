@@ -9,6 +9,7 @@ import Thread from './Thread'
 import Comment from './Comment'
 import Loading from '../helpers/Loading'
 import CommentCreator from './CommentCreator'
+import ThreadCreator from './ThreadCreator'
 import ErrorManager from '../helpers/ErrorManager'
 
 class ForumTab extends Component {
@@ -126,9 +127,15 @@ class ForumTab extends Component {
     )
   }
 
-  getCommentCreated = (comment) => {
+  updateCreated = (comment) => {
     const { view, items } = this.state
     if(view === this.COMMENTS){
+      const aux = items.slice()
+      aux.push(comment)
+      this.setState({
+        items: aux
+      })
+    }else if(view === this.THREADS){
       const aux = items.slice()
       aux.push(comment)
       this.setState({
@@ -163,6 +170,7 @@ class ForumTab extends Component {
           )
 
         case this.THREADS:
+          url = `/games/${gameId}/sub_forums/${this.subForumId}/thread_forums`
           list = items.map(
             thread => (
               <li key={ thread.id } className="collection-item">
@@ -172,10 +180,14 @@ class ForumTab extends Component {
             )
           )
           return (
-            <ul className="collection with-header">
-              <li className="collection-header"><h4>Forum: { this.subForumName }</h4></li>
-              { list }
-            </ul>
+            <div>
+              <ul className="collection with-header">
+                <li className="collection-header"><h4>Forum: { this.subForumName }</h4></li>
+                { list }
+              </ul>
+              <ThreadCreator url={ url } updateCreated={ this.updateCreated }
+                subForumId={ this.subForumId }  />
+            </div>
           )
 
         case this.COMMENTS:
@@ -189,7 +201,7 @@ class ForumTab extends Component {
                 <li className="collection-header"><h4>Thread: { this.threadName }</h4></li>
                 <li className="collection-item" style={{ padding: '10px 20px' }}>{ list }</li>
                 <li className="collection-item">
-                  <CommentCreator url={ url } getCommentCreated={ this.getCommentCreated }
+                  <CommentCreator url={ url } updateCreated={ this.updateCreated }
                     threadId={ this.threadId }/>
                 </li>
               </ul>
