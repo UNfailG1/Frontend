@@ -9,23 +9,28 @@ import defaultAvatar from '../../assets/user.svg'
 import PGPList from './PGPList'
 import FriendsList from './FriendsList'
 import Loading from '../helpers/Loading'
-import FriendAction from './FriendAction'
+import PlayerAction from './PlayerAction'
 import ErrorManager from '../helpers/ErrorManager'
 
 class PlayerProfile extends Component {
 
   constructor(props) {
     super(props)
-    this.friendStatusLoaded = null
-    this.profileLoaded = null
-    this.friendsLists = null
-    this.currentProfile = null
+    this.pLoaded = false
+    this.rLoaded = false
+    this.relationsLists = null
+    this.curProfile = props.match.params.userId
     this.state = {
       profile: {},
+      locked: null,
       isLoaded: null,
       avatar: null,
       status: null
     }
+  }
+
+  componentWillMount() {
+    this.requests()
   }
 
   componentDidMount() {
@@ -35,7 +40,21 @@ class PlayerProfile extends Component {
 
   componentDidUpdate(){
     this.initTabs()
-    this.updateView()
+
+    const { match: { params: { userId } } } = this.props
+    if(userId !== this.curProfile){
+      this.rLoaded = false
+      this.relationsLists = null
+      this.setState({
+        isLoaded: null,
+        locked: null
+      })
+      this.curProfile = userId
+    }
+
+    if(this.state.isLoaded === null){
+      this.requests()
+    }
   }
 
   initTabs(){
@@ -45,20 +64,40 @@ class PlayerProfile extends Component {
     })
   }
 
-  updateView(){
-    const { match: { params } } = this.props
-    if(this.state.isLoaded === true){
-      if(this.currentProfile !== params.userId){
-        this.setState({ isLoaded: null })
-        this.currentProfile = params.userId
+  requests(){
+    const { match: { params: { userId } } } = this.props
+    const route = `/player_profiles/${userId}`
+    const own = localStorage.getItem('userId') === userId
+    var cl = null
+    GET_AUTH(route).then(
+      res => {
+        this.pLoaded = true
+        this.setState({
+          profile: res.data,
+          isLoaded: (own) ? this.pLoaded : this.pLoaded && this.rLoaded
+        })
       }
+    ).catch(
+      error => {
+        this.setState({
+          isLoaded: false,
+          status: (error.response) ? error.response.status : 0
+        })
+      }
+    )
+    if(own){
+      this.rLoaded = false
+      this.relationsLists = null
     }else{
-      const route = `/player_profiles/${params.userId}`
-      GET_AUTH(route).then(
-        res => {
+
+      GET_AUTH(`/relation_status/${userId}`).then(
+        (res) => {
+          this.rLoaded = true
+          this.relationsLists = res.data
+          cl = this.checkLocks()
           this.setState({
-            profile: res.data,
-            isLoaded: this.updateStatus(true, this.friendStatusLoaded, null)
+            isLoaded: this.pLoaded && this.rLoaded,
+            locked: cl
           })
         }
       ).catch(
@@ -69,53 +108,31 @@ class PlayerProfile extends Component {
           })
         }
       )
-      if(localStorage.getItem('userId') !== params.userId){
-        GET_AUTH(`/friend_status/${params.userId}`).then(
-          res => {
-            this.updateStatus(this.profileLoaded, true, res.data)
-            this.setState({
-              isLoaded: this.profileLoaded && this.friendStatusLoaded
-            })
-          }
-        ).catch(
-          error => {
-            this.setState({
-              isLoaded: false,
-              status: (error.response) ? error.response.status : 0
-            })
-          }
-        )
-      }
     }
   }
 
-  componentWillMount() {
-    this.updateView()
+  get_data = (data) => {
+    this.rLoaded = true
+    this.relationsLists = data
+    const cl = this.checkLocks()
+    this.setState({ locked: cl })
   }
 
-  updateStatus(profileLoaded, friendStatusLoaded, data){
-    const { match: { params } } = this.props
-    if(this.profileLoaded == null){
-      this.profileLoaded = profileLoaded
+  checkLocks(){
+    const { match: { params: { userId } } } = this.props
+    const ownId = localStorage.getItem('userId')
+    if(this.rLoaded){
+      const { current: { c_locks }, player: { p_locks } } = this.relationsLists
+      return p_locks.includes(parseInt(ownId,10)) || c_locks.includes(parseInt(userId,10))
     }
-
-    if (this.friendStatusLoaded == null){
-      this.friendStatusLoaded = friendStatusLoaded
-    }
-
-    if(this.friendsLists == null){
-      this.friendsLists = data
-    }
-    return (localStorage.getItem('userId') !== params.userId) ?
-      this.profileLoaded && this.friendStatusLoaded :
-      this.profileLoaded
+    return false
   }
 
   render() {
-    const { profile, isLoaded } = this.state
-
-    if (isLoaded) {
-      const { match: { params } } = this.props
+    const { profile, isLoaded, locked } = this.state
+    const { match: { params: { userId } } } = this.props
+    const own = userId === localStorage.getItem('userId')
+    if (isLoaded && (this.rLoaded || own)) {
       const {
         email,
         games,
@@ -124,17 +141,25 @@ class PlayerProfile extends Component {
         pp_username,
         player_game_profiles
       } = profile
-      const profileButton = (params.userId === localStorage.getItem('userId')) ?
-        (<div className="center-align" style={{ marginBottom: 8 }}>
+      var profileButton = null
+      if(own){
+        profileButton = (
           <a className="waves-effect waves-light btn primary-color" href="/updateprofile"
-            style={{ width: '100%' }}>
+            style={{ width: '100%', marginBottom: 8 }}>
               Edit profile
           </a>
-        </div>) :
-        (<FriendAction friendId={ params.userId } lists={ this.friendsLists } />)
+        )
+      }else{
+        const { current: { c_friends }, player: { p_friends } } = this.relationsLists
+        profileButton = (
+          <PlayerAction player_id={ userId } return_data={ this.get_data }
+            lists={{ current_friends: c_friends, player_friends: p_friends }} />
+        )
+      }
 
-      return (
-        <div className="container">
+      return (locked && !own) ?
+        (<h4 className="center-align">This content isn't available by locks</h4>) :
+        (<div className="container">
           <div className="row" style={{ marginTop: 32}}>
             <div className="col s12 m3 l3">
               <img src={ (pp_avatar.url) ? BASE_URL + pp_avatar.url : defaultAvatar }
