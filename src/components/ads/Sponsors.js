@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Ads  extends Component {
+class Sponsors  extends Component {
 
   render() {
     return (
@@ -28,4 +28,4 @@ class Ads  extends Component {
   }
 }
 
-export default Ads
+export default Sponsors
