@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // Assets
-import { noImage } from '../../js/assets'
+// import { noImage } from '../../js/assets'
 import { GET_AUTH } from '../../js/requests'
 
 // Components
@@ -65,8 +65,8 @@ class Game extends Component {
     const noPadding = { padding: 0 }, noMargin = { margin: 0 }
 
     if (isLoaded) {
-      const { gam_name, gam_image, screenshots } = game
-      const gam_img = (gam_image) ? gam_image : noImage
+      const { gam_name, screenshots } = game
+      // const gam_img = (gam_image) ? gam_image : noImage
       const screenshot = screenshots[Math.floor(Math.random() * screenshots.length)].scr_url
 
       return (

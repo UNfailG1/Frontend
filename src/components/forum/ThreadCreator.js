@@ -53,7 +53,6 @@ class ThreadCreator extends Component {
   }
 
   render(){
-    const noMargin = { margin: 0 }
     return (
       <div>
         <a className="waves-effect waves-light btn modal-trigger primary-color" href="#modal1">

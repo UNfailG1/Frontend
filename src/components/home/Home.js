@@ -17,12 +17,12 @@ class Home extends Component {
             </p>
           </div>
           <div className="col s12 m6 l6 white l-img valign-wrapper">
-            <img src={test} alt="A image"/>
+            <img src={ test } alt=""/>
           </div>
         </div>
         <div className="row">
           <div className="col s12 m6 l6 l-img valign-wrapper" >
-            <img src={test} alt="A image"/>
+            <img src={ test } alt=""/>
           </div>
           <div className="col s12 m6 l6 l-panel" >
             <h4>Pairing</h4>
@@ -42,12 +42,12 @@ class Home extends Component {
             </p>
           </div>
           <div className="col s12 m6 l6 white l-img valign-wrapper" >
-            <img src={test} alt="A image"/>
+            <img src={ test } alt=""/>
           </div>
         </div>
         <div className="row">
           <div className="col s12 m6 l6 l-img valign-wrapper" >
-            <img src={test} alt="A image"/>
+            <img src={ test } alt=""/>
           </div>
           <div className="col s12 m6 l6 l-panel" >
             <h4>Gather your friends</h4>
@@ -67,7 +67,7 @@ class Home extends Component {
             </p>
           </div>
           <div className="col s12 m6 l6 white l-img valign-wrapper" >
-            <img src={test} alt="A image"/>
+            <img src={ test } alt=""/>
           </div>
         </div>
       </div>

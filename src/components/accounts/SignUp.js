@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Geocode from 'react-geocode'
+// import { Geocode } from 'react-geocode'
 
 // Assests
 import store from '../../js/store'
@@ -25,7 +25,7 @@ class SignUp extends Component{
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.getReverseGeocodingData = this.getReverseGeocodingData.bind(this)
+    // this.getReverseGeocodingData = this.getReverseGeocodingData.bind(this)
   }
 
   initSelect(){
@@ -40,7 +40,7 @@ class SignUp extends Component{
     this.initSelect()
     this.setState({ isLoaded: true })
   }
-  
+
   handleSubmit( event ){
     event.preventDefault()
     this.setState({ logginIn: true })
@@ -52,8 +52,8 @@ class SignUp extends Component{
         "email": document.getElementById("email").value
       }
     }
-    
-    this.locateUser()
+
+    // this.locateUser()
 
     POST('/player_profiles', profile).then(
       (res) => {
@@ -89,40 +89,40 @@ class SignUp extends Component{
     this.setState({ eqPass })
   }
 
-  locateUser(){
-    const $ = window.$
-    const check = $('#Location').prop('checked')
-    
-    if(check === true){
-      this.getLocation()
-    }
-    else{
-      console.log("Permission to locate denied")
-    }
-  }
-  
-  getLocation = () => {
-    const geolocation = navigator.geolocation;
-    
-    geolocation.getCurrentPosition((position) => {
-      this.getReverseGeocodingData(position.coords.latitude, position.coords.longitude)
-    })
-  }
-  
-  getReverseGeocodingData(lat, lng) {
-    
-    Geocode.fromLatLng(lat, lng).then(
-      response => {
-        const address = response.results[8].formatted_address
-        console.log(address)
-        this.setState({country: address})
-      },
-      error => {
-        console.error(error)
-      }
-    )
-  }
-  
+  // locateUser(){
+  //   const $ = window.$
+  //   const check = $('#Location').prop('checked')
+  //
+  //   if(check === true){
+  //     this.getLocation()
+  //   }
+  //   else{
+  //     console.log("Permission to locate denied")
+  //   }
+  // }
+
+  // getLocation = () => {
+  //   const geolocation = navigator.geolocation;
+  //
+  //   geolocation.getCurrentPosition((position) => {
+  //     this.getReverseGeocodingData(position.coords.latitude, position.coords.longitude)
+  //   })
+  // }
+
+  // getReverseGeocodingData(lat, lng) {
+  //
+  //   Geocode.fromLatLng(lat, lng).then(
+  //     response => {
+  //       const address = response.results[8].formatted_address
+  //       console.log(address)
+  //       this.setState({country: address})
+  //     },
+  //     error => {
+  //       console.error(error)
+  //     }
+  //   )
+  // }
+
   render(){
 
     const { eqPass, isLoaded, logginIn } = this.state
