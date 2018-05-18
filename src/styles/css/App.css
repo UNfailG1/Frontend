@@ -67,7 +67,7 @@ footer {
 .form-panel {
   position: absolute;
   margin-top: 0px !important;
-  width: 300px;
+  width: 500px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
