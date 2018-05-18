@@ -10,6 +10,7 @@ import Reports from '../components/reports/Reports'
 import Stats from '../components/statistics/Stats'
 import Dashboard from '../components/Dashboard'
 import Mailbox from '../components/mailbox/Mailbox'
+import Leaderboard from '../components/leaderboard/Leaderboard'
 
 /*
   add redirect option only if you want redirect with 'when' option =
@@ -63,6 +64,9 @@ const ROUTES = [
   { component: Mailbox,
     path: '/mailbox',
     redirect: { when: 'VISITOR', to: '/login' }
+  },
+  { component: Leaderboard,
+    path: '/leaderboard'
   },
   { component: NotFound }
 ]
