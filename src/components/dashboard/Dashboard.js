@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 // Components
-import GameSearch from '../game/GameSearch'
-import ProfileSearch from '../profile/ProfileSearch'
+import GameSearch from './GameSearch'
+import ProfileSearch from './ProfileSearch'
 
 class Dashboard extends Component {
 
