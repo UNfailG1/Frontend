@@ -163,7 +163,7 @@ class PlayerProfile extends Component {
           <div className="row" style={{ marginTop: 32}}>
             <div className="col s12 m3 l3">
               <img src={ (pp_avatar.url) ? BASE_URL + pp_avatar.url : defaultAvatar }
-                alt="Profile img" className="responsive-img circle"/>
+                alt="Profile img" style={{ width: '100%' }}/>
               <p className="truncate" style={{ fontSize: 24, lineHeight: 1 }}>
                 { pp_username }<br />
                 <small className="grey-text trucate">{ email }</small>
