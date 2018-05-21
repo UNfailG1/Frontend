@@ -17,8 +17,8 @@ class AdList extends Component {
     }
   }
 
-  componentWillMount() {
-    // Corresponding request
+  componentDidMount() {
+    // Corresponding request, do it in componentDidMount please
   }
 
   render() {

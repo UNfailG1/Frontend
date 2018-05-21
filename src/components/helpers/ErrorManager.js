@@ -8,10 +8,13 @@ const ErrorManager = ({ status }) => {
   switch(status){
 
     case 0:
-      return (<h1>Disconnected</h1>)
+      return (<h2 className="center-align">No server connection</h2>)
 
     case 404:
       return(<NotFound />)
+
+    case 401:
+      return (<h2 className="center-align">Not logged</h2>)
 
     default:
       return (<h2>New error: { status }</h2>)

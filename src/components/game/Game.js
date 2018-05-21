@@ -23,25 +23,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    const $ = window.$
-    document.title = "SPairing"
-    $(document).ready(function(){
-      $('.parallax').parallax()
-      $('ul.tabs').tabs();
-    })
-  }
-
-  componentDidUpdate() {
-    const $ = window.$
-    $(document).ready(function(){
-      $('.parallax').parallax()
-      $('ul.tabs').tabs();
-    })
-}
-  componentWillMount() {
-
     const { match: { params } } = this.props
-
     GET_AUTH(`/games/${ params.gameId }`).then(
       (res) => {
         this.setState({
@@ -58,7 +40,21 @@ class Game extends Component {
         })
       }
     )
+    const $ = window.$
+    document.title = "SPairing"
+    $(document).ready(function(){
+      $('.parallax').parallax()
+      $('ul.tabs').tabs();
+    })
   }
+
+  componentDidUpdate() {
+    const $ = window.$
+    $(document).ready(function(){
+      $('.parallax').parallax()
+      $('ul.tabs').tabs();
+    })
+}
 
   render() {
     const { game, isLoaded } = this.state

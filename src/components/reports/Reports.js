@@ -19,7 +19,7 @@ class Reports extends Component{
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
     GET('/reports').then(
       (res) => {
         this.setState({

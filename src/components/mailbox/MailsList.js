@@ -22,6 +22,7 @@ class MailsList extends Component {
   componentDidMount(){
     const { section } = this.props
     document.title = 'SPairing - ' + section
+    this.requestMails(this.props.section)
   }
 
   requestMails(section){
@@ -40,10 +41,6 @@ class MailsList extends Component {
         })
       }
     )
-  }
-
-  componentWillMount(){
-    this.requestMails(this.props.section)
   }
 
   render(){

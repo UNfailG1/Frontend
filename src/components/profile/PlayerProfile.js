@@ -29,12 +29,9 @@ class PlayerProfile extends Component {
     }
   }
 
-  componentWillMount() {
-    this.requests()
-  }
-
   componentDidMount() {
     document.title = "SPairing"
+    this.requests()
     this.initTabs()
   }
 

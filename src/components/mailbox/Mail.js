@@ -18,7 +18,8 @@ class Mail extends Component {
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
+    document.title = 'Mailbox'
     GET_AUTH(`/mailboxes/${this.props.id}`).then(
       (res) => {
         console.log(res.data);
@@ -37,10 +38,6 @@ class Mail extends Component {
         })
       }
     )
-  }
-
-  componentDidMount(){
-    document.title = 'SPairing'
   }
 
   render(){

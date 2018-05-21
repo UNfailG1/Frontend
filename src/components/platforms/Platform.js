@@ -19,7 +19,15 @@ class Platform extends Component {
     }
   }
 
-  componentWillMount() {
+  initCollapsible(){
+    const $ = window.$
+    $(document).ready(function() {
+      $('.collapsible').collapsible()
+    })
+  }
+
+  componentDidMount() {
+    document.title = 'Platforms'
     GET_AUTH('/platforms').then(
       (res) => {
         this.setState({
@@ -36,17 +44,6 @@ class Platform extends Component {
         })
       }
     )
-  }
-
-  initCollapsible(){
-    const $ = window.$
-    $(document).ready(function() {
-      $('.collapsible').collapsible()
-    })
-  }
-
-  componentDidMount() {
-    document.title = 'Platforms'
     this.initCollapsible()
   }
 

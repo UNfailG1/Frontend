@@ -24,7 +24,7 @@ class UpdateProfile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentWillMount(){
+  componentDidMount(){
     GET('/locations').then(
       (res) => {
         this.setState({
@@ -42,9 +42,6 @@ class UpdateProfile extends Component {
         })
       }
     )
-  }
-
-  componentDidMount(){
     const $ = window.$
     document.title = 'Settings'
     $(document).ready(function() {

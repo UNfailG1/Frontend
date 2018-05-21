@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 // Assets
+import { GET } from '../../js/requests'
+import { BASE_URL } from '../../js/assets'
 import defaultAvatar from '../../assets/user.svg'
-import { GET, BASE_URL } from '../../js/requests'
-
 
 // Components
 import Loading from '../helpers/Loading'
@@ -22,14 +22,6 @@ class Leaderboard extends Component {
   }
 
   componentDidMount() {
-    const $ = window.$
-    document.title = "SPairing"
-    $(document).ready(function() {
-      $('ul.tabs').tabs()
-    })
-  }
-
-  componentWillMount() {
     const route = `/player_profiles`
     GET(route).then(
       (res) => {
@@ -46,8 +38,13 @@ class Leaderboard extends Component {
         })
       }
     )
+    const $ = window.$
+    document.title = "SPairing"
+    $(document).ready(function() {
+      $('ul.tabs').tabs()
+    })
   }
-  
+
   addData(array, player){
     if(player.pp_avatar.url){
       array.push({user: player.pp_username,
@@ -59,17 +56,17 @@ class Leaderboard extends Component {
                   elo: player.pp_spairing_elo,
                   avatar: defaultAvatar})
     }
-    
+
     return array
   }
-  
+
   getLeaderData(){
     var top3 = []
     var players = []
-    
+
     for(var i = 0; i < 10; i++){
       const player = this.state.players[i]
-      
+
       if(i<=2){
         this.addData(top3, player)
       }
@@ -77,7 +74,7 @@ class Leaderboard extends Component {
         this.addData(players, player)
       }
     }
-    
+
     return [top3, players]
   }
 
@@ -86,10 +83,10 @@ class Leaderboard extends Component {
 
     if (isLoaded) {
       const leaderboard = this.getLeaderData()
-      
+
       var list
       list = leaderboard[1].map((player, i) => (<li key={i}><LeaderboardItem player={ player } index={ i+4 }/></li>))
-      
+
       return (
         <div>
           <div className="row center-align">

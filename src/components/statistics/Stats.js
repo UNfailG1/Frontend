@@ -35,17 +35,13 @@ class Stats extends Component {
     this.getPlayers = this.getPlayers.bind(this)
   }
 
-
-  componentWillMount(){
+  componentDidMount(){
     this.getMCommented()
     this.getMPlayed()
     this.getUserRegister()
     this.getMails()
     this.getGenre()
     this.getPlayers()
-  }
-
-  componentDidMount(){
     const $ = window.$
     document.title = 'Statistics'
     $(document).ready(function() {

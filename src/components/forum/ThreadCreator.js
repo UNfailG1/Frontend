@@ -5,7 +5,7 @@ import { POST_AUTH } from '../../js/requests'
 
 class ThreadCreator extends Component {
 
-  componentWillMount(){
+  componentDidMount(){
     const $ = window.$
     $(document).ready(function(){
       $('.modal').modal()

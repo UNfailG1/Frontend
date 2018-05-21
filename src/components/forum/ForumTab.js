@@ -38,7 +38,7 @@ class ForumTab extends Component {
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.request(this.FORUMS)
   }
 
