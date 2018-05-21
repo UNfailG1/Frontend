@@ -3,22 +3,26 @@ import React from 'react'
 const PlayerGameProfile = ({ game, pgp }) => {
 
   const { gam_name, gam_image } = game
-  const { pgp_nickname, pgp_reputation, pgp_rate } = pgp
-
+  const { pgp_nickname } = pgp
+  const noMargin = { margin: 0 }
   return (
-    <div className="col s12 m9 l9">
-      <div className="card horizontal">
-        <div className="card-image">
-          <img src={ gam_image } alt="Game" style={{ maxHeight: 200, height: 'min-content' }}/>
+    
+    <div className="card-panel" style={{ padding: 8 }}>
+      <div className="row valign-wrapper" style={ noMargin }>
+        <div className="col s4 m2 l2 valign-wrapper">
+          <img src={ gam_image } alt="player_game_profile" className="responsive-img"/>
         </div>
-        <div className="card-stacked">
-          <div className="card-content">
-            <p>
-              <span style={{ fontSize: 22 }}>{ gam_name }</span><br />
-              <b>Nickname: </b>{ pgp_nickname }<br />
-              <b>Reputation: </b>{ pgp_reputation }<br />
-              <b>Rate: </b>{ pgp_rate }
-            </p>
+        <div className="col s8 m10 l10">
+          <div className="row" style={ noMargin }>
+            <div className="col s12 m8 l8 valign-wrapper" style={{ height: 36 }}>
+              <span style={{ fontSize: 18 }} className="truncate">{ pgp_nickname }</span><br />
+              <small className="grey-text">{ gam_name }</small>
+            </div>
+            <div className="col s12 m4 l4">
+              <button className="btn-flat waves-effect waves-light">
+                edit
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -18,7 +18,9 @@ const PGPList = ({ games, pgps }) => {
   }
   return (
     <div className="row">
-      { list }
+      <div className="col s12">
+        { list }
+      </div>
     </div>
   )
 }
