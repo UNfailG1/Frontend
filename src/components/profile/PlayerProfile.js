@@ -144,7 +144,7 @@ class PlayerProfile extends Component {
       var profileButton = null
       if(own){
         profileButton = (
-          <a className="waves-effect waves-light btn primary-color" href="/updateprofile"
+          <a className="waves-effect waves-light btn primary-color" href="/settings"
             style={{ width: '100%', marginBottom: 8 }}>
               Edit profile
           </a>
@@ -163,7 +163,7 @@ class PlayerProfile extends Component {
           <div className="row" style={{ marginTop: 32}}>
             <div className="col s12 m3 l3">
               <img src={ (pp_avatar.url) ? BASE_URL + pp_avatar.url : defaultAvatar }
-                alt="Profile img" className="responsive-img circle"/>
+                alt="Profile img" className="responsive-img"/>
               <p className="truncate" style={{ fontSize: 24, lineHeight: 1 }}>
                 { pp_username }<br />
                 <small className="grey-text trucate">{ email }</small>

@@ -5,7 +5,7 @@ import NotFound from '../components/helpers/NotFound'
 import Game from '../components/game/Game'
 import Platform from '../components/platforms/Platform'
 import PlayerProfile from '../components/profile/PlayerProfile'
-import UpdateProfile from '../components/profile/UpdateProfile'
+import Settings from '../components/profile/Settings'
 import Reports from '../components/reports/Reports'
 import Stats from '../components/statistics/Stats'
 import Dashboard from '../components/Dashboard'
@@ -53,8 +53,8 @@ const ROUTES = [
     path: '/profile/:userId',
     redirect: { when: 'VISITOR', to: '/login' }
   },
-  { component: UpdateProfile,
-    path: '/updateprofile',
+  { component: Settings,
+    path: '/settings',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: Reports,

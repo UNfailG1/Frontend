@@ -47,7 +47,7 @@ class Dashboard extends Component {
         break
     }
     return (
-      <div className="row fill-height" style={ noMargin }>
+      <div className="row" style={ noMargin }>
         <div className="col s12 m3 l2">
           <div className="collection">
             <a href="#!" className="primary-color-text collection-item"

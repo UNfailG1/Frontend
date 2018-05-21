@@ -3,42 +3,36 @@ import React, { Component } from 'react'
 // Assets
 import { BASE_URL } from '../../js/assets'
 import defaultAvatar from '../../assets/user.svg'
-import login_img from '../../assets/login_img.jpg'
-import { GET, GET_AUTH, PATCH, FPATCH } from '../../js/requests'
+import { GET, PATCH, FPATCH } from '../../js/requests'
 
 // Components
 import Loading from '../helpers/Loading'
+import ErrorManager from '../helpers/ErrorManager'
 
 class UpdateProfile extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      username: '',
-      email: '',
-      location_id: '',
-      items: [],
-      loading: true,
-      avatar: null
+      locations: [],
+      avatar: props.avatar,
+      isLoaded: null,
+      status: null
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillMount(){
     GET('/locations').then(
-      (res) => {
+      res => {
         this.setState({
-          loading: false,
-          items: res
+          isLoaded: true,
+          locations: res.data
         })
       }
-    )
-    const route = "/player_profiles/".concat(localStorage.getItem('userId'))
-    GET_AUTH(route).then(
-      (res) => {
-        const url = res.data.pp_avatar.url
+    ).catch(
+      error => {
         this.setState({
-          avatar: (url) ?  BASE_URL + url : url ,
+          isLoaded: false,
+          status: (error.response) ? error.response.status : 0
         })
       }
     )
@@ -46,26 +40,34 @@ class UpdateProfile extends Component {
 
   componentDidMount(){
     const $ = window.$
-    document.title = 'Settings'
+    const Materialize = window.Materialize
     $(document).ready(function() {
+      Materialize.updateTextFields()
       $('select').material_select()
     })
   }
 
   componentDidUpdate(){
-      const $ = window.$
-      $(document).ready(function() {
-        $('select').material_select()
-      })
-   }
+    const $ = window.$
+    const Materialize = window.Materialize
+    $(document).ready(function() {
+      Materialize.updateTextFields()
+      $('select').material_select()
+    })
+  }
 
   handleChange(event){
     const avatar = URL.createObjectURL(event.target.files[0])
     this.setState({ avatar })
   }
 
+  removeAvatar(event){
+    event.preventDefault()
+    this.setState({ avatar: null })
+  }
 
   handleSubmit(event){
+
     event.preventDefault()
     const updateData = {
       "pp_username": document.getElementById("username").value,
@@ -73,18 +75,18 @@ class UpdateProfile extends Component {
       "location_id": document.getElementById("location").value
     }
 
-    const route = "/player_profiles/".concat(localStorage.getItem('userId'))
-    const newAvatar =  document.getElementById("newAvatar").files[0]
-    const data =  new FormData()
+    const newAvatar = document.getElementById("newAvatar").files[0]
+    console.log(newAvatar);
+    const data = new FormData()
     data.append('image', newAvatar)
 
-    PATCH(route, updateData).then(
+    PATCH(`/player_profiles/${localStorage.getItem('userId')}`, updateData).then(
       (res) => {
         console.log(res)
       }
     )
-    const route0 = "/player_profiles_avatar/".concat(localStorage.getItem('userId'))
-    FPATCH(route0, data).then(
+
+    FPATCH(`/player_profiles_avatar/${localStorage.getItem('userId')}`, data).then(
       (res) => {
         console.log(res)
       }
@@ -92,62 +94,85 @@ class UpdateProfile extends Component {
   }
 
   render(){
+    const { username, email, location } = this.props
+    const { isLoaded, avatar, locations } = this.state
 
-    if(this.state.loading === false){
-      const {items, avatar} = this.state
-      var avatarImg = ( avatar ) ?
-          <img className="circle responsive-img" alt="" src={ avatar } height="160" width="160"/> :
-          <img className="circle responsive-img" alt="" src={ defaultAvatar } height="160" width="160"/>
-      var list = items.data.map(
+    if(isLoaded){
+      const avatarImg = ( avatar ) ?
+        (<div className="col s12 m9 l9 center-align">
+          <img className="responsive-img" alt="" src={ BASE_URL + avatar }
+          height="160" width="160"/><br />
+          <button className="btn-flat waves-effect waves-light primary-color"
+            onClick={ (e) => this.removeAvatar(e) }>
+            remove
+          </button>
+        </div>) :
+        (<div className="col s12 m9 l9 center-align">
+          <img className="responsive-img" alt="" src={ defaultAvatar }
+          height="160" width="160"/>
+        </div>)
+
+      const list = locations.map(
         item => (
           <option value={ item.id } key={ item.id } className="primary-color-text">
             { item.loc_name }
           </option>
         )
+
       )
+      const adjMargin = {
+        marginLeft: 0,
+        marginRight: 0
+      }
       return (
-        <figure className="back_image">
-          <img src={ login_img } alt="login_image"/>
-          <figcaption>
-            <div className="center-align form-panel">
-              <div className="card-panel white">
-                <form onSubmit={ (e) => this.handleSubmit(e)}>
-                  <h5>Update your Profile</h5>
-                  { avatarImg }
-                  <div className="file-field input-field">
-                    <div className="btn primary-color">
-                      <span>File</span>
-                      <input id="newAvatar" type="file" onChange={(e) => this.handleChange(e)}/>
-                    </div>
-                    <div className="file-path-wrapper">
-                      <input className="file-path validate" type="text"/>
-                    </div>
-                  </div>
-                  <div className="input-field">
-                    <label htmlFor="username">Username</label>
-                    <input id="username" type="text"/>
-                  </div>
-                  <div className="input-field">
-                    <label htmlFor="email">Email</label>
-                    <input id="email" type="email"/>
-                  </div>
-                  <div className="input-field">
-                    <select id="location">
-                      <option value="" disabled>Choose your location</option>
-                      {list}
-                    </select>
-                    <label htmlFor="location">Location</label>
-                  </div>
-                  <button className="waves-effect waves-light btn primary-color">Update profile</button>
-                </form>
+        <form onSubmit={ (e) => this.handleSubmit(e) }>
+          <div className="row" style={ adjMargin }>
+            <h6><b>Username</b></h6>
+            <div className="input-field col s12 m9 l9">
+              <input id="username" type="text" defaultValue={ username }/>
+            </div>
+          </div>
+          <div className="row" style={ adjMargin }>
+            <h6><b>Email</b></h6>
+            <div className="input-field col s12 m9 l9">
+              <input id="email" type="email" defaultValue={ email }/>
+            </div>
+          </div>
+          <div className="row" style={ adjMargin }>
+            <h6><b>Profile Picture</b></h6><br />
+            { avatarImg }
+            <div className="file-field input-field col s12 m9 l9">
+              <div className="btn secondary-color-dark">
+                <span>load image</span>
+                <input id="newAvatar" type="file" onChange={ (e) => this.handleChange(e) }/>
+              </div>
+              <div className="file-path-wrapper">
+                <input className="file-path validate" type="text"/>
               </div>
             </div>
-          </figcaption>
-        </figure>
+          </div>
+          <div className="row" style={ adjMargin }>
+            <h6><b>Location</b></h6>
+            <div className="input-field col s12 m9 l9">
+              <select id="location" defaultValue={ (location) ? location.id : 0 }>
+                <option value="0" disabled>Choose your location</option>)
+                { list }
+              </select>
+            </div>
+          </div>
+          <div className="row" style={ adjMargin }>
+            <div className="input-field col s12 m9 l9 center-align">
+              <button type="submit" className="btn waves-effect waves-light secondary-color">
+                Update Profile
+              </button>
+            </div>
+          </div>
+        </form>
       )
-    }
-    else{
-      return(<Loading />)
+    }else if(isLoaded === null){
+      return (<Loading />)
+    }else{
+      return (<ErrorManager status={ this.state.status } />)
     }
   }
 }
