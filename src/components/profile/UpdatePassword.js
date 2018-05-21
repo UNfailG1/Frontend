@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 
-// Assets
-
-
 class UpdatePassword extends Component {
   constructor(props) {
     super(props)

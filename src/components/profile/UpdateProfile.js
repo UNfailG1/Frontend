@@ -20,7 +20,7 @@ class UpdateProfile extends Component {
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
     GET('/locations').then(
       res => {
         this.setState({
@@ -36,9 +36,6 @@ class UpdateProfile extends Component {
         })
       }
     )
-  }
-
-  componentDidMount(){
     const $ = window.$
     const Materialize = window.Materialize
     $(document).ready(function() {

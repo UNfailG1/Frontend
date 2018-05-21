@@ -8,7 +8,7 @@ import Loading from '../helpers/Loading'
 import UpdateProfile from './UpdateProfile'
 import UpdatePassword from './UpdatePassword'
 import ErrorManager from '../helpers/ErrorManager'
-import LockedProfilesList from './LockedProfilesList'
+import BlockedProfilesList from './BlockedProfilesList'
 
 class Settings extends Component {
 
@@ -16,7 +16,7 @@ class Settings extends Component {
     super(props)
     this.PROFILE = 0
     this.PASSWORD = 1
-    this.LOCKED = 2
+    this.BLOCKED = 2
     this.state = {
       view: this.PROFILE,
       profile: {},
@@ -24,8 +24,7 @@ class Settings extends Component {
       status: null
     }
   }
-
-  componentWillMount(){
+  componentDidMount(){
     GET_AUTH(`/player_profiles/${localStorage.getItem('userId')}`).then(
       res => {
         this.setState({
@@ -66,8 +65,8 @@ class Settings extends Component {
           content = (<UpdatePassword />)
           break
 
-        case this.LOCKED:
-          content = (<LockedProfilesList locked={ profile.locked_players } />)
+        case this.BLOCKED:
+          content = (<BlockedProfilesList blocked={ profile.blocked_players } />)
           break
 
         default:
@@ -85,7 +84,7 @@ class Settings extends Component {
                 <a href="#!" className="primary-color-text collection-item"
                   onClick={ (e) => this.handleClick(e, this.PASSWORD) }>Password</a>
                 <a href="#!" className="primary-color-text collection-item"
-                  onClick={ (e) => this.handleClick(e, this.LOCKED) }>Locked Players</a>
+                  onClick={ (e) => this.handleClick(e, this.BLOCKED) }>Blocked Players</a>
               </div>
             </div>
             <div className="col s12 m9 l9">
