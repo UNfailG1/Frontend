@@ -6,6 +6,7 @@ import { GET_AUTH } from '../../js/requests'
 
 // Components
 import Loading from '../helpers/Loading'
+import PlayerGameProfile from './PlayerGameProfile'
 import ForumTab from '../forum/ForumTab'
 import ErrorManager from '../helpers/ErrorManager'
 import GameDescription from './GameDescription'
@@ -80,13 +81,13 @@ class Game extends Component {
             </div>
           </div>
           <div className="section" style={ noPadding }>
-
             <div className="row" style={ noMargin }>
               <div className="col s12" style={ noPadding }>
                 <ul className="tabs">
-                  <li className="tab col s4"><a className="primary-color-dark" href="#about">About</a></li>
-                  <li className="tab col s4"><a className="primary-color-dark" href="#forum">Forum</a></li>
-                  <li className="tab col s4"><a className="primary-color-dark" href="#statistics">Statistics</a></li>
+                  <li className="tab col s3"><a className="primary-color-dark" href="#about">About</a></li>
+                  <li className="tab col s3"><a className="primary-color-dark" href="#forum">Forum</a></li>
+                  <li className="tab col s3"><a className="primary-color-dark" href="#gameProfile">Game Profile</a></li>
+                  <li className="tab col s3"><a className="primary-color-dark" href="#statistics">Statistics</a></li>
                 </ul>
               </div>
               <div className="container">
@@ -96,6 +97,9 @@ class Game extends Component {
                 </div>
                 <div id="forum" className="col s12">
                   <ForumTab gameId={ game.id } />
+                </div>
+                <div id="gameProfile" className="col s12">
+                  <PlayerGameProfile gameId={ game.id } />
                 </div>
                 <div id="statistics" className="col s12">
                   Statistics

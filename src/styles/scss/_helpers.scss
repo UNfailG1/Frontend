@@ -91,10 +91,14 @@ ul.autocomplete-content {
   display: flex;
   height: 375px !important;
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
-  h2 {
+  h2, #pgp-button {
     align-self: flex-end;
     margin: 25px auto;
   }
+}
+
+.parallax img{
+  z-index: 20;
 }
 
 .brand-logo img {
