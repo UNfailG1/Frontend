@@ -68,9 +68,9 @@ class Game extends Component {
       const { gam_name, screenshots } = game
       // const gam_img = (gam_image) ? gam_image : noImage
       const screenshot = screenshots[Math.floor(Math.random() * screenshots.length)].scr_url
-
+      const fixHeight = { height: 'auto', minHeihgt: 'calc(100% - 110px)' }
       return (
-        <div>
+        <main style={ fixHeight }>
           <div className="parallax-container">
             <h2 className="white-text container">
               { game.gam_name }
@@ -103,7 +103,7 @@ class Game extends Component {
               </div>
             </div>
           </div>
-        </div>
+        </main>
       )
     } else if(isLoaded == null) {
       return (<Loading />)

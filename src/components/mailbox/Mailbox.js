@@ -54,23 +54,26 @@ class Mailbox extends Component {
         break
     }
     const content = aux
+    const fixHeight = { height: 'auto', minHeihgt: 'calc(100% - 110px)' }
     return (
-      <div className="row" style={{margin: 0, 'height': '-webkit-fill-available'}}>
-        <div className="col s12 m3 l2 center-align">
-          <br />
-          <button className="waves-light btn primary-color"
-            onClick={ () => this.handleClick(this.COMPOSE) }>Compose</button>
-          <div className="collection">
-            <a href="#!" className="primary-color-text collection-item"
-              onClick={ () => this.handleClick(this.INBOX) }>Inbox</a>
-            <a href="#!" className="primary-color-text collection-item"
-              onClick={ () => this.handleClick(this.SENT) }>Sent</a>
+      <main style={ fixHeight }>
+        <div className="row" style={{ margin: 0 }}>
+          <div className="col s12 m3 l2 center-align">
+            <br />
+            <button className="waves-light btn primary-color"
+              onClick={ () => this.handleClick(this.COMPOSE) }>Compose</button>
+            <div className="collection">
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ () => this.handleClick(this.INBOX) }>Inbox</a>
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ () => this.handleClick(this.SENT) }>Sent</a>
+            </div>
+          </div>
+          <div className="col s12 m9 l10">
+            { content }
           </div>
         </div>
-        <div className="col s12 m9 l10">
-          { content }
-        </div>
-      </div>
+      </main>
     )
   }
 }

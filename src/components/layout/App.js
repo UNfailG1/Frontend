@@ -13,9 +13,7 @@ class App extends Component {
         <header>
           <Header/>
         </header>
-        <main>
-          { children }
-        </main>
+        { children }
         <footer className="page-footer primary-color" style={{ padding: 0 }}>
           <Footer/>
         </footer>

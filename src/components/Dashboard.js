@@ -47,21 +47,23 @@ class Dashboard extends Component {
         break
     }
     return (
-      <div className="row" style={ noMargin }>
-        <div className="col s12 m3 l2">
-          <div className="collection">
-            <a href="#!" className="primary-color-text collection-item"
-              onClick={ (e) => this.handleClick(e, this.HOME) }>Home</a>
-            <a href="#!" className="primary-color-text collection-item"
-              onClick={ (e) => this.handleClick(e, this.PAIRING) }>Pairing</a>
-            <a href="#!" className="primary-color-text collection-item"
-              onClick={ (e) => this.handleClick(e, this.GAMES) }>Game</a>
+      <main style={{ height: 'auto' }}>
+        <div className="row" style={ noMargin }>
+          <div className="col s12 m3 l2">
+            <div className="collection">
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.HOME) }>Home</a>
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.PAIRING) }>Pairing</a>
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.GAMES) }>Game</a>
+            </div>
+          </div>
+          <div className="col s12 m9 l10">
+            { content }
           </div>
         </div>
-        <div className="col s12 m9 l10">
-          { content }
-        </div>
-      </div>
+      </main>
     )
   }
 }

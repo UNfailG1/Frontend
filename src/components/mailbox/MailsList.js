@@ -53,7 +53,7 @@ class MailsList extends Component {
     if(isLoaded){
 
       if(items.length === 0){
-        return (<h4 className="center-align">There aren't mails on { section }</h4>)
+        return (<h4 className="center-align">You don't have mails on { section }</h4>)
       }
 
       if(section === 'Sent'){
@@ -86,7 +86,8 @@ class MailsList extends Component {
       )
 
     }else if(isLoaded == null){
-      return (<Loading />)
+      const $ = window.$
+      return (<Loading h={$(document).height() - 110}/>)
     }else{
       return (<ErrorManager status={ this.state.status } />)
     }

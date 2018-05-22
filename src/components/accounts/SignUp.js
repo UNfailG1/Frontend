@@ -128,7 +128,7 @@ class SignUp extends Component{
     const { eqPass, isLoaded, logginIn } = this.state
 
     if(logginIn){
-      return (<Loading />)
+      return (<main style={{ height: 'calc(100% - 110px)'}}><Loading /></main>)
     }
 
     var equalPass = null
@@ -141,9 +141,9 @@ class SignUp extends Component{
         </div>
       )
     }
-
-    if(isLoaded){
-      return (
+    const fixHeight = { height: 'calc(100% - 110px)', minHeight: '560px' }
+    return (
+      <main style={ fixHeight }>
         <figure className="back_image">
           <img src={ register_img } alt="una imagen mas"/>
           <figcaption>
@@ -173,7 +173,7 @@ class SignUp extends Component{
                   <input id="cpass" type="password" onChange={ this.handleChange }
                   pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" required/>
                 </div>
-                <div>
+                {/* <div>
                   <p>
                     In order to improve our pairing recommendations and suggest players near you,
                     we need your permission to obtain your location.
@@ -184,7 +184,7 @@ class SignUp extends Component{
                     <label htmlFor="Location">Share Location?</label>
                   </p>
                   <p/>
-                </div>
+                </div> */}
                 { equalPass }
                 <button className="btn waves-effect waves-light primary-color"
                 type="submit">Sign Up</button>
@@ -192,12 +192,9 @@ class SignUp extends Component{
              </div>
           </figcaption>
         </figure>
-      )
-    }else if(isLoaded == null){
-      return (<Loading />)
-    }else{
-      return (<ErrorManager status={this.state.status} />)
-    }
+      </main>
+    )
+
   }
 }
 

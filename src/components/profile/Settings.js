@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 
-// Assets
-import { GET_AUTH } from '../../js/requests'
-
 // Components
-import Loading from '../helpers/Loading'
 import UpdateProfile from './UpdateProfile'
 import UpdatePassword from './UpdatePassword'
-import ErrorManager from '../helpers/ErrorManager'
 import BlockedProfilesList from './BlockedProfilesList'
 
 class Settings extends Component {
@@ -19,27 +14,7 @@ class Settings extends Component {
     this.BLOCKED = 2
     this.state = {
       view: this.PROFILE,
-      profile: {},
-      isLoaded: null,
-      status: null
     }
-  }
-  componentDidMount(){
-    GET_AUTH(`/player_profiles/${localStorage.getItem('userId')}`).then(
-      res => {
-        this.setState({
-          profile: res.data,
-          isLoaded: true
-        })
-      }
-    ).catch(
-      error => {
-        this.setState({
-          isLoaded: false,
-          status: (error.response) ? error.response.status : 0
-        })
-      }
-    )
   }
 
   handleClick(event, view){
@@ -49,32 +24,33 @@ class Settings extends Component {
 
   render(){
 
-    const { view, profile, isLoaded } = this.state
+    const { view, isLoaded } = this.state
+    const { profile } = this.props
 
-    if(isLoaded){
-      var content = null
-      switch(view){
+    var content = null
+    switch(view){
 
-        case this.PROFILE:
-          content = (<UpdateProfile username={ profile.pp_username }
-            avatar={ profile.pp_avatar.url } location={ profile.location }
-            email={ profile.email }/>)
-          break
+      case this.PROFILE:
+        content = (<UpdateProfile username={ profile.pp_username }
+          avatar={ profile.pp_avatar.url } location={ profile.location }
+          email={ profile.email }/>)
+        break
 
-        case this.PASSWORD:
-          content = (<UpdatePassword />)
-          break
+      case this.PASSWORD:
+        content = (<UpdatePassword />)
+        break
 
-        case this.BLOCKED:
-          content = (<BlockedProfilesList blocked={ profile.blocked_players } />)
-          break
+      case this.BLOCKED:
+        content = (<BlockedProfilesList blocked={ profile.blocked_players } />)
+        break
 
-        default:
-          content = (<div>Error</div>)
-          break
-      }
-
-      return (
+      default:
+        content = (<div>Error</div>)
+        break
+    }
+    const fixHeight = { height: 'auto', minHeihgt: 'calc(100% - 110px)' }
+    return (
+      <main style={ fixHeight }>
         <div className="container">
           <div className="row" style={{ marginTop: 32 }}>
             <div className="col s12 m3 l3">
@@ -92,12 +68,8 @@ class Settings extends Component {
             </div>
           </div>
         </div>
-      )
-    }else if(isLoaded == null){
-      return <Loading />
-    }else{
-      return (<ErrorManager status={ this.state.status } />)
-    }
+      </main>
+    )
   }
 }
 
