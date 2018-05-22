@@ -153,7 +153,7 @@ class PlayerProfile extends Component {
             lists={{ current_friends: c_friends, player_friends: p_friends }} />
         )
       }
-
+      console.log(profile);
       return (locked && !own) ?
         (<h4 className="center-align">This content isn't available by locks</h4>) :
         (<div className="container">

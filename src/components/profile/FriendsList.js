@@ -15,7 +15,9 @@ const FriendsList = ({ friends }) => {
 
   return (
     <div className="row">
-      { list }
+      <div className="col s12">
+        { list }
+      </div>
     </div>
   )
 }
