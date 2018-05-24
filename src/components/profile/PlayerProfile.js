@@ -73,10 +73,10 @@ class PlayerProfile extends Component {
               <li className="tab"><a className="primary-color-text" href="#friends">Friends</a></li>
             </ul>
             <div id="pgp">
-              <PGPList games={ games } pgps={ player_game_profiles }/>
+              <PGPList games={ games } pgps={ player_game_profiles } own={ own }/>
             </div>
             <div id="friends">
-              <FriendsList friends={ friends } />
+              <FriendsList friends={ friends } own={ own }/>
             </div>
           </div>
         </div>

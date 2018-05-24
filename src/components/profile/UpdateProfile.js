@@ -8,7 +8,8 @@ import { GET, PATCH, FPATCH } from '../../js/requests'
 class UpdateProfile extends Component {
   constructor(props) {
     super(props)
-    this.location = null
+    this.location = 0
+    this.avatar_removed = null
     this.state = {
       avatar: props.avatar,
     }
@@ -19,7 +20,6 @@ class UpdateProfile extends Component {
     const Materialize = window.Materialize
     $(document).ready(function() {
       Materialize.updateTextFields()
-      $('select').material_select()
     })
   }
 
@@ -52,8 +52,9 @@ class UpdateProfile extends Component {
 
   updateLocations(data){
     const $ = window.$
-    var aux = {}, with_ids = {}, location = this.location
-    if(data){
+    var aux = {}, with_ids = {}, locationId = {}
+    
+    if(data.length > 0){
       data.forEach(
         (location) => {
           aux[location.loc_name] = null
@@ -61,30 +62,33 @@ class UpdateProfile extends Component {
         }
       )
     }
+    
     $('input.autocomplete').autocomplete({
       data: aux,
       limit: 5,
-      onAutocomplete: (val) =>{
-        location = this.with_ids[val]
+      onAutocomplete: function(val){
+        locationId['location_id'] = with_ids[val]
       },
       minLength: 1
     })
-    this.location = location
+    console.log(locationId)
+    this.location = locationId
   }
 
   removeAvatar(event){
     event.preventDefault()
+    this.avatar_removed = true
     this.setState({ avatar: null })
   }
 
   handleSubmit(event){
-
     event.preventDefault()
     const updateData = {
       "pp_username": document.getElementById("username").value,
       "email": document.getElementById("email").value,
-      "location_id": document.getElementById("location").value
+      "location_id": (this.location.location_id) ? this.location.location_id : 0
     }
+    console.log(updateData)
 
     const newAvatar = document.getElementById("newAvatar").files[0]
     console.log(newAvatar);

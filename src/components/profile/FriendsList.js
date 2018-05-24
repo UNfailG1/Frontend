@@ -3,14 +3,14 @@ import React from 'react'
 // Components
 import Friend from './Friend'
 
-const FriendsList = ({ friends }) => {
+const FriendsList = ({ friends, own }) => {
 
   if(friends.length === 0){
-    return (<h4 className="center-align">There aren't friends to show</h4>)
+    return (<h4 className="center-align">You don't have friends to show</h4>)
   }
 
   const list = friends.map(
-    friend => <Friend key={ friend.id } friend={ friend } />
+    friend => <Friend key={ friend.id } friend={ friend } own={ own }/>
   )
 
   return (

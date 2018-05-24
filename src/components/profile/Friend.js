@@ -4,9 +4,16 @@ import React from 'react'
 import { BASE_URL } from '../../js/assets'
 import defaultAvatar from '../../assets/user.svg'
 
-const Friend = ({ friend }) => {
+const Friend = ({ friend, own }) => {
   const { pp_username, email, pp_avatar } = friend
   const noMargin = { margin: 0 }
+  const button = (own) ? (
+    <div className="col s12 m3 l3">
+      <button className="btn-flat waves-effect waves-light">
+        remove
+      </button>
+    </div>
+  ) : null
   return (
     <div className="card-panel" style={{ padding: 8 }}>
       <div className="row valign-wrapper" style={ noMargin }>
@@ -21,11 +28,7 @@ const Friend = ({ friend }) => {
                 <span style={{ fontSize: 18 }}>{ pp_username }</span><br />
                 <span className="trucante grey-text">{ email }</span><br />
             </div>
-            <div className="col s12 m3 l3">
-              <button className="btn-flat waves-effect waves-light">
-                remove
-              </button>
-            </div>
+            { button }
           </div>
         </div>
       </div>

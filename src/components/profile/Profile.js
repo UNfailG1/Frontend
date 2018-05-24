@@ -31,7 +31,6 @@ class Profile extends Component {
 
   componentDidMount(){
     this.requests()
-    console.log("Requests Done for profile");
   }
 
   checkLocks(){
@@ -107,7 +106,6 @@ class Profile extends Component {
 
   render(){
     const { isLoaded, profile} = this.state
-    console.log(this.props.match)
     if(isLoaded){
       const fixHeight = { height: 'auto', minHeihgt: 'calc(100% - 110px)' }
       const { match: { params: { param } } } = this.props

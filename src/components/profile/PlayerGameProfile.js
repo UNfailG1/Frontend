@@ -1,10 +1,17 @@
 import React from 'react'
 
-const PlayerGameProfile = ({ game, pgp }) => {
+const PlayerGameProfile = ({ game, pgp, own }) => {
 
   const { gam_name, gam_image } = game
   const { pgp_nickname, pgp_reputation } = pgp
   const noMargin = { margin: 0 }
+  const button = (own) ? (
+    <div className="col s12 m3 l3">
+      <button className="btn-flat waves-effect waves-light">
+        edit
+      </button>
+    </div>
+  ) : null
   return (
     <div className="card-panel" style={{ padding: 8 }}>
       <div className="row valign-wrapper" style={ noMargin }>
@@ -20,11 +27,7 @@ const PlayerGameProfile = ({ game, pgp }) => {
                 <span className="grey-text">{ gam_name }</span><br />
                 <span className="grey-text">{ pgp_reputation }</span>
             </div>
-            <div className="col s12 m3 l3">
-              <button className="btn-flat waves-effect waves-light">
-                edit
-              </button>
-            </div>
+            { button }
           </div>
         </div>
       </div>
