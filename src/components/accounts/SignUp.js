@@ -9,7 +9,6 @@ import register_img from '../../assets/register_img.jpg'
 
 // Components
 import Loading from '../helpers/Loading'
-import ErrorManager from '../helpers/ErrorManager'
 
 class SignUp extends Component{
 
@@ -17,11 +16,9 @@ class SignUp extends Component{
     super(props)
     this.state = {
       eqPass: null,
-      items: [],
-      isLoaded: null,
       status: null,
       logginIn: false,
-      country: null
+      // country: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -125,7 +122,7 @@ class SignUp extends Component{
 
   render(){
 
-    const { eqPass, isLoaded, logginIn } = this.state
+    const { eqPass, logginIn } = this.state
 
     if(logginIn){
       return (<main style={{ height: 'calc(100% - 110px)'}}><Loading /></main>)

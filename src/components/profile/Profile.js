@@ -4,20 +4,24 @@ import React, { Component } from 'react'
 import { GET_AUTH } from '../../js/requests'
 
 // Components
+import Settings from './Settings'
 import Loading from '../helpers/Loading'
+import PlayerProfile from './PlayerProfile'
 import ErrorManager from '../helpers/ErrorManager'
 
 class Profile extends Component {
+  
   constructor(props) {
+    super(props)
     this.PROFILE = 0
     this.SETTINGS = 1
     this.pLoaded = false
     this.rLoaded = false
     this.relationsLists = null
+    this.locked = false
     this.curProfile = props.match.params.userId
     this.state = {
       view: this.PROFILE,
-      lock: 
       profile: {},
       isLoaded: null,
       status: null
@@ -25,25 +29,14 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-
-    const { match: { params: { userId } } } = this.props
-    if(userId !== this.curProfile){
-      this.rLoaded = false
-      this.relationsLists = null
-      this.setState({
-        isLoaded: null,
-        locked: null
-      })
-      this.curProfile = userId
-    }
-
-    if(this.state.isLoaded === null){
-      this.requests()
-    }
+    const { match: { params: { param } } } = this.props
+    this.setState({ view: (param === 'settings') ? this.SETTINGS : this.PROFILE })
+    this.requests()
   }
 
   checkLocks(){
-    const { match: { params: { userId } } } = this.props
+    const { match: { params: { param } } } = this.props
+    const userId = (param === 'settings') ? null : param
     const ownId = localStorage.getItem('userId')
     if(this.rLoaded){
       const { current: { c_locks }, player: { p_locks } } = this.relationsLists
@@ -53,11 +46,12 @@ class Profile extends Component {
   }
 
   requests(){
-    const own = localStorage.getItem('userId') === userId
-    const { match: { params: { userId } } } = this.props
-    var cl = null
+    const { match: { params: { param } } } = this.props
+    const settings = param === 'settings'
+    const userId = (settings) ? localStorage.getItem('userId') : param
+    const own = settings || localStorage.getItem('userId') === param
 
-    GET_AUTH(`/player_profiles/${localStorage.getItem('userId')}`).then(
+    GET_AUTH(`/player_profiles/${userId}`).then(
       res => {
         this.pLoaded = true
         this.setState({
@@ -83,10 +77,9 @@ class Profile extends Component {
         (res) => {
           this.rLoaded = true
           this.relationsLists = res.data
-          cl = this.checkLocks()
+          this.locked = this.checkLocks()
           this.setState({
-            isLoaded: this.pLoaded && this.rLoaded,
-            locked: cl
+            isLoaded: this.pLoaded && this.rLoaded
           })
         }
       ).catch(
@@ -100,31 +93,39 @@ class Profile extends Component {
     }
   }
 
-  handleClick = (event) => {
-    event.preventDefault()
+  changeView = () => {
     this.setState({ view: this.SETTINGS })
+  }
+  
+  get_data = (data) => {
+    this.rLoaded = true
+    this.relationsLists = data
+    const cl = this.checkLocks()
+    this.setState({ locked: cl })
   }
 
   render(){
-    const { isLoaded, view, profile } = this.state
+    const { isLoaded, profile} = this.state
+    console.log(this.props.match)
     if(isLoaded){
       const fixHeight = { height: 'auto', minHeihgt: 'calc(100% - 110px)' }
-      switch (view) {
-        case this.PROFILE:
-          const { match: { params: { userId } } } = this.props
-          const own = userId === localStorage.getItem('userId')
-          return (
-            <PlayerProfile profile={ profile } own={ own }
-            relationsLists={ this.relationsLists }/>
-          )
-
-        case this.SETTINGS:
-          return (<Settings profile={ profile } />)
-
-        default:
-          return (<div>Error</div>)
-
+      const { match: { params: { param } } } = this.props
+      const own = (param === 'settings') ? false : localStorage.getItem('userId') === param
+      var content = null
+      if(this.props.match.params.param === 'settings') {
+        content = (<Settings profile={ profile } />)
+      } else {
+        content = (<PlayerProfile profile={ profile } own={ own }
+          relationsLists={ this.relationsLists } get_data={ this.get_data }
+          changeView={ this.changeView }/>) 
       }
+      
+      return (
+        <main style={ fixHeight }>
+          { content }
+        </main>
+      )
+      
     }else if(isLoaded == null){
       return (
         <main style={{ height: 'calc(100% - 110px)' }}>
@@ -139,5 +140,6 @@ class Profile extends Component {
       )
     }
   }
-
 }
+
+export default Profile

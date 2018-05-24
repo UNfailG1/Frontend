@@ -24,7 +24,7 @@ class Settings extends Component {
 
   render(){
 
-    const { view, isLoaded } = this.state
+    const { view } = this.state
     const { profile } = this.props
 
     var content = null

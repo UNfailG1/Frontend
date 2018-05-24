@@ -4,8 +4,7 @@ import Home from '../components/home/Home'
 import NotFound from '../components/helpers/NotFound'
 import Game from '../components/game/Game'
 import Platform from '../components/platforms/Platform'
-import PlayerProfile from '../components/profile/PlayerProfile'
-import Settings from '../components/profile/Settings'
+import Profile from '../components/profile/Profile'
 import Reports from '../components/reports/Reports'
 import Stats from '../components/statistics/Stats'
 import Dashboard from '../components/Dashboard'
@@ -49,12 +48,8 @@ const ROUTES = [
     path: '/platforms',
     redirect: { when: 'VISITOR', to: '/login' }
   },
-  { component: PlayerProfile,
-    path: '/profile/:userId',
-    redirect: { when: 'VISITOR', to: '/login' }
-  },
-  { component: Settings,
-    path: '/settings',
+  { component: Profile,
+    path: '/profile/:param',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: Reports,
