@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 // Components
-import GameSearch from './game/GameSearch'
+import Pairing from './Pairing'
+import GameSearch from './GameSearch'
 
 class Dashboard extends Component {
 
@@ -35,7 +36,7 @@ class Dashboard extends Component {
         break
 
       case this.PAIRING:
-        content = (<div>Pairing</div>)
+        content = (<Pairing />)
         break
 
       case this.GAMES:
