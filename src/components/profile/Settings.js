@@ -48,27 +48,24 @@ class Settings extends Component {
         content = (<div>Error</div>)
         break
     }
-    const fixHeight = { height: 'auto', minHeihgt: 'calc(100% - 110px)' }
     return (
-      <main style={ fixHeight }>
-        <div className="container">
-          <div className="row" style={{ marginTop: 32 }}>
-            <div className="col s12 m3 l3">
-              <div className="collection">
-                <a href="#!" className="primary-color-text collection-item"
-                  onClick={ (e) => this.handleClick(e, this.PROFILE) }>Profile</a>
-                <a href="#!" className="primary-color-text collection-item"
-                  onClick={ (e) => this.handleClick(e, this.PASSWORD) }>Password</a>
-                <a href="#!" className="primary-color-text collection-item"
-                  onClick={ (e) => this.handleClick(e, this.BLOCKED) }>Blocked Players</a>
-              </div>
-            </div>
-            <div className="col s12 m9 l9">
-              { content }
+      <div className="container">
+        <div className="row" style={{ marginTop: 32 }}>
+          <div className="col s12 m3 l3">
+            <div className="collection">
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.PROFILE) }>Profile</a>
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.PASSWORD) }>Password</a>
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.BLOCKED) }>Blocked Players</a>
             </div>
           </div>
+          <div className="col s12 m9 l9">
+            { content }
+          </div>
         </div>
-      </main>
+      </div>
     )
   }
 }

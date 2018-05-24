@@ -6,6 +6,7 @@ import defaultAvatar from '../../assets/user.svg'
 
 // Components
 import PGPList from './PGPList'
+import { Link } from 'react-router-dom'
 import FriendsList from './FriendsList'
 import PlayerAction from './PlayerAction'
 
@@ -28,7 +29,7 @@ class PlayerProfile extends Component {
   }
 
   render() {
-    const { profile, own, relationsLists, locked, get_data, changeView } = this.props
+    const { profile, own, relationsLists, locked, get_data } = this.props
     const {
       email,
       games,
@@ -40,11 +41,10 @@ class PlayerProfile extends Component {
     var profileButton = null
     if(own){
       profileButton = (
-        <button className="waves-effect waves-light btn primary-color"
-          style={{ width: '100%', marginBottom: 8 }}
-          onClick={ () => changeView() }>
+        <Link to= "/profile/settings" className="waves-effect waves-light btn primary-color"
+          style={{ width: '100%', marginBottom: 8 }} >
             Edit profile
-        </button>
+        </Link>
       )
     }else{
       const { current: { c_friends }, player: { p_friends } } = relationsLists

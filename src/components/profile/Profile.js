@@ -10,18 +10,19 @@ import PlayerProfile from './PlayerProfile'
 import ErrorManager from '../helpers/ErrorManager'
 
 class Profile extends Component {
-  
+
   constructor(props) {
     super(props)
+    const { match: { params: { param } } } = props
     this.PROFILE = 0
     this.SETTINGS = 1
     this.pLoaded = false
     this.rLoaded = false
     this.relationsLists = null
     this.locked = false
-    this.curProfile = props.match.params.userId
+    this.curProfile = param
     this.state = {
-      view: this.PROFILE,
+      view: (param === 'settings') ? this.SETTINGS : this.PROFILE,
       profile: {},
       isLoaded: null,
       status: null
@@ -29,9 +30,8 @@ class Profile extends Component {
   }
 
   componentDidMount(){
-    const { match: { params: { param } } } = this.props
-    this.setState({ view: (param === 'settings') ? this.SETTINGS : this.PROFILE })
     this.requests()
+    console.log("Requests Done for profile");
   }
 
   checkLocks(){
@@ -93,10 +93,11 @@ class Profile extends Component {
     }
   }
 
-  changeView = () => {
+  changeView = (event) => {
+    event.preventDefault()
     this.setState({ view: this.SETTINGS })
   }
-  
+
   get_data = (data) => {
     this.rLoaded = true
     this.relationsLists = data
@@ -116,16 +117,15 @@ class Profile extends Component {
         content = (<Settings profile={ profile } />)
       } else {
         content = (<PlayerProfile profile={ profile } own={ own }
-          relationsLists={ this.relationsLists } get_data={ this.get_data }
-          changeView={ this.changeView }/>) 
+          relationsLists={ this.relationsLists } get_data={ this.get_data } />)
       }
-      
+
       return (
         <main style={ fixHeight }>
           { content }
         </main>
       )
-      
+
     }else if(isLoaded == null){
       return (
         <main style={{ height: 'calc(100% - 110px)' }}>

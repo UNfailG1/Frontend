@@ -5,37 +5,16 @@ import { BASE_URL } from '../../js/assets'
 import defaultAvatar from '../../assets/user.svg'
 import { GET, PATCH, FPATCH } from '../../js/requests'
 
-// Components
-import Loading from '../helpers/Loading'
-import ErrorManager from '../helpers/ErrorManager'
-
 class UpdateProfile extends Component {
   constructor(props) {
     super(props)
+    this.location = null
     this.state = {
-      locations: [],
       avatar: props.avatar,
-      isLoaded: null,
-      status: null
     }
   }
 
   componentDidMount(){
-    GET('/locations').then(
-      res => {
-        this.setState({
-          isLoaded: true,
-          locations: res.data
-        })
-      }
-    ).catch(
-      error => {
-        this.setState({
-          isLoaded: false,
-          status: (error.response) ? error.response.status : 0
-        })
-      }
-    )
     const $ = window.$
     const Materialize = window.Materialize
     $(document).ready(function() {
@@ -49,13 +28,48 @@ class UpdateProfile extends Component {
     const Materialize = window.Materialize
     $(document).ready(function() {
       Materialize.updateTextFields()
-      $('select').material_select()
     })
   }
 
   handleChange(event){
     const avatar = URL.createObjectURL(event.target.files[0])
     this.setState({ avatar })
+  }
+
+  handleSearch(event){
+    event.preventDefault()
+    const loc_name = event.target.value
+    GET(`/locations?loc_name=${loc_name}`).then(
+      res => {
+        this.updateLocations(res.data)
+      }
+    ).catch(
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  updateLocations(data){
+    const $ = window.$
+    var aux = {}, with_ids = {}, location = this.location
+    if(data){
+      data.forEach(
+        (location) => {
+          aux[location.loc_name] = null
+          with_ids[location.loc_name] = location.id
+        }
+      )
+    }
+    $('input.autocomplete').autocomplete({
+      data: aux,
+      limit: 5,
+      onAutocomplete: (val) =>{
+        location = this.with_ids[val]
+      },
+      minLength: 1
+    })
+    this.location = location
   }
 
   removeAvatar(event){
@@ -92,85 +106,69 @@ class UpdateProfile extends Component {
 
   render(){
     const { username, email, location } = this.props
-    const { isLoaded, avatar, locations } = this.state
+    const { avatar } = this.state
+    const avatarImg = ( avatar ) ?
+      (<div className="col s12 m9 l9 center-align">
+        <img className="responsive-img" alt="" src={ BASE_URL + avatar }
+        height="160" width="160"/><br />
+        <button className="btn-flat waves-effect waves-light primary-color"
+          onClick={ (e) => this.removeAvatar(e) }>
+          remove
+        </button>
+      </div>) :
+      (<div className="col s12 m9 l9 center-align">
+        <img className="responsive-img" alt="" src={ defaultAvatar }
+        height="160" width="160"/>
+      </div>)
 
-    if(isLoaded){
-      const avatarImg = ( avatar ) ?
-        (<div className="col s12 m9 l9 center-align">
-          <img className="responsive-img" alt="" src={ BASE_URL + avatar }
-          height="160" width="160"/><br />
-          <button className="btn-flat waves-effect waves-light primary-color"
-            onClick={ (e) => this.removeAvatar(e) }>
-            remove
-          </button>
-        </div>) :
-        (<div className="col s12 m9 l9 center-align">
-          <img className="responsive-img" alt="" src={ defaultAvatar }
-          height="160" width="160"/>
-        </div>)
-
-      const list = locations.map(
-        item => (
-          <option value={ item.id } key={ item.id } className="primary-color-text">
-            { item.loc_name }
-          </option>
-        )
-
-      )
-      const adjMargin = {
-        marginLeft: 0,
-        marginRight: 0
-      }
-      return (
-        <form onSubmit={ (e) => this.handleSubmit(e) }>
-          <div className="row" style={ adjMargin }>
-            <h6><b>Username</b></h6>
-            <div className="input-field col s12 m9 l9">
-              <input id="username" type="text" defaultValue={ username }/>
-            </div>
-          </div>
-          <div className="row" style={ adjMargin }>
-            <h6><b>Email</b></h6>
-            <div className="input-field col s12 m9 l9">
-              <input id="email" type="email" defaultValue={ email }/>
-            </div>
-          </div>
-          <div className="row" style={ adjMargin }>
-            <h6><b>Profile Picture</b></h6><br />
-            { avatarImg }
-            <div className="file-field input-field col s12 m9 l9">
-              <div className="btn secondary-color-dark">
-                <span>load image</span>
-                <input id="newAvatar" type="file" onChange={ (e) => this.handleChange(e) }/>
-              </div>
-              <div className="file-path-wrapper">
-                <input className="file-path validate" type="text"/>
-              </div>
-            </div>
-          </div>
-          <div className="row" style={ adjMargin }>
-            <h6><b>Location</b></h6>
-            <div className="input-field col s12 m9 l9">
-              <select id="location" defaultValue={ (location) ? location.id : 0 }>
-                <option value="0" disabled>Choose your location</option>)
-                { list }
-              </select>
-            </div>
-          </div>
-          <div className="row" style={ adjMargin }>
-            <div className="input-field col s12 m9 l9 center-align">
-              <button type="submit" className="btn waves-effect waves-light secondary-color">
-                Update Profile
-              </button>
-            </div>
-          </div>
-        </form>
-      )
-    }else if(isLoaded === null){
-      return (<Loading />)
-    }else{
-      return (<ErrorManager status={ this.state.status } />)
+    const adjMargin = {
+      marginLeft: 0,
+      marginRight: 0
     }
+    return (
+      <form onSubmit={ (e) => this.handleSubmit(e) }>
+        <div className="row" style={ adjMargin }>
+          <h6><b>Username</b></h6>
+          <div className="input-field col s12 m9 l9">
+            <input id="username" type="text" defaultValue={ username }/>
+          </div>
+        </div>
+        <div className="row" style={ adjMargin }>
+          <h6><b>Email</b></h6>
+          <div className="input-field col s12 m9 l9">
+            <input id="email" type="email" defaultValue={ email }/>
+          </div>
+        </div>
+        <div className="row" style={ adjMargin }>
+          <h6><b>Profile Picture</b></h6><br />
+          { avatarImg }
+          <div className="file-field input-field col s12 m9 l9">
+            <div className="btn secondary-color-dark">
+              <span>load image</span>
+              <input id="newAvatar" type="file" onChange={ (e) => this.handleChange(e) }/>
+            </div>
+            <div className="file-path-wrapper">
+              <input className="file-path validate" type="text"/>
+            </div>
+          </div>
+        </div>
+        <div className="row" style={ adjMargin }>
+          <h6><b>Location</b></h6>
+          <div className="input-field col s12 m9 l9">
+            <input type="text" id="autocomplete-input" className="autocomplete"
+              onChange={ (e) => this.handleSearch(e) }
+              defaultValue={ (location) ? location.loc_name : null }/>
+          </div>
+        </div>
+        <div className="row" style={ adjMargin }>
+          <div className="input-field col s12 m9 l9 center-align">
+            <button type="submit" className="btn waves-effect waves-light secondary-color">
+              Update Profile
+            </button>
+          </div>
+        </div>
+      </form>
+    )
   }
 }
 
