@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 // Assets
-import { GET_AUTH, POST_AUTH, DEL_AUTH } from '../../js/requests'
+import { POST_AUTH, DEL_AUTH } from '../../js/requests'
 // Components
 
 class PlayerGameProfile extends Component{
@@ -10,33 +10,11 @@ class PlayerGameProfile extends Component{
     this.CREATE = 0
     this.SHOW_EDIT = 1
     this.state = {
-      view: this.CREATE,
+      view: (this.props.pgp)? this.SHOW_EDIT : this.CREATE,
       disabled: true,
       create: false,
-      pgp: null
+      pgp: this.props.pgp
     }
-  }
-
-  componentDidMount(){
-    const { gameId } = this.props
-    const url = `/player_game_profile?player_profile_id=${localStorage.getItem('userId')}&game_id=${gameId}`
-
-    GET_AUTH(url).then(
-      (res) => {
-        console.log(res.data)
-        this.setState({
-          view: this.SHOW_EDIT,
-          pgp: res.data
-        })
-      }
-    ).catch(
-      (error) => {
-        console.log(error)
-        this.setState({
-          view: this.CREATE
-        })
-      }
-    )
   }
 
   createPgp(event){

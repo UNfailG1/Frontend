@@ -18,6 +18,7 @@ class Game extends Component {
     super(props)
     this.state = {
       game: {},
+      pgp: null,
       isLoaded: null,
       status: null
     }
@@ -38,17 +39,37 @@ class Game extends Component {
       $('.parallax').parallax()
       $('ul.tabs').tabs();
     })
-}
+  }
+
+  getPgp(game){
+    const url = `/player_games?pid=${localStorage.getItem('userId')}&gid=${game.id}`
+    GET_AUTH(url).then(
+      (res) => {
+        this.setState({
+          game: game,
+          isLoaded: true,
+          pgp: res.data
+        })
+      }
+    ).catch(
+      (error) => {
+        console.log(error)
+        this.setState({
+          game: game,
+          isLoaded: true,
+          pgp: null
+        })
+      }
+    )
+  }
+
   componentWillMount() {
 
     const { match: { params } } = this.props
 
     GET_AUTH(`/games/${ params.gameId }`).then(
       (res) => {
-        this.setState({
-          game: res.data,
-          isLoaded: true
-        })
+        this.getPgp(res.data)
       }
     ).catch(
       (error) => {
@@ -62,12 +83,10 @@ class Game extends Component {
   }
 
   render() {
-    const { game, isLoaded } = this.state
+    const { game, isLoaded, pgp } = this.state
     const noPadding = { padding: 0 }, noMargin = { margin: 0 }
-
     if (isLoaded) {
       const { gam_name, screenshots } = game
-      // const gam_img = (gam_image) ? gam_image : noImage
       const screenshot = screenshots[Math.floor(Math.random() * screenshots.length)].scr_url
 
       return (
@@ -92,14 +111,14 @@ class Game extends Component {
               </div>
               <div className="container">
                 <div id="about" className="col s12">
-                  <GameDescription game={ game } />
+                  <GameDescription game={ game } pgp={ pgp }/>
                   <GameGallery screenshots={ screenshots } />
                 </div>
                 <div id="forum" className="col s12">
                   <ForumTab gameId={ game.id } />
                 </div>
                 <div id="gameProfile" className="col s12">
-                  <PlayerGameProfile gameId={ game.id } />
+                  <PlayerGameProfile gameId={ game.id } pgp={ pgp }/>
                 </div>
                 <div id="statistics" className="col s12">
                   Statistics
