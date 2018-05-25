@@ -80,8 +80,9 @@ class SignIn extends Component {
       'marginBottom': 16,
       'marginTop': 0
     }
+    const fixHeight = { height: 'calc(100% - 110px)', minHeight: '560px' }
     if(logginIn){
-      return (<Loading />)
+      return (<main style={{ height: 'calc(100% - 110px)'}}><Loading /></main>)
     }
     var errorMessage = null
     if(error){
@@ -94,47 +95,49 @@ class SignIn extends Component {
         )
     }
     return (
-      <figure className="back_image">
-        <img src={ login_img } alt="The Pulpit Rock"/>
-        <figcaption>
-          <div className="center-align form-panel">
-            <div className="card-panel white">
-              <form onSubmit={ (e) => this.handleSubmit(e) }>
-                <h5>Sign in to Spairing</h5>
-                <div className="input-field">
-                  <label htmlFor="email">Email</label>
-                  <input type="email" id="email"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                  title="Must contain the symbol '@' followed of a domain"/>
-                </div>
-                <div className="input-field">
-                  <label htmlFor="password">Password</label>
-                  <input type="password" id="password"
-                    pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
-                    title="Must contain at least one number, one letter and at
-                    least 8 or more characters"/>
-                </div>
-                { errorMessage }
-                <button className="waves-effect waves-light btn primary-color" style={{"marginBottom": "20px"}}>Sign In</button>
-                <GoogleLogin
-                    clientId="544479097367-vsgksn1j0h4p6kv9glqhq6h6pffbs5l4.apps.googleusercontent.com"
-                    buttonText="Sign in with Google"
-                    onSuccess={ this.responseGoogle }
-                />
-                <h6><br/>
-                  <a href="/resetpassword">Forgot your password?</a>
-                </h6>
-              </form>
+      <main style={ fixHeight }>
+        <figure className="back_image">
+          <img src={ login_img } alt="The Pulpit Rock"/>
+          <figcaption>
+            <div className="center-align form-panel">
+              <div className="card-panel white">
+                <form onSubmit={ (e) => this.handleSubmit(e) }>
+                  <h5>Sign in to Spairing</h5>
+                  <div className="input-field">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    title="Must contain the symbol '@' followed of a domain"/>
+                  </div>
+                  <div className="input-field">
+                    <label htmlFor="password">Password</label>
+                    <input type="password" id="password"
+                      pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
+                      title="Must contain at least one number, one letter and at
+                      least 8 or more characters"/>
+                  </div>
+                  { errorMessage }
+                  <button className="waves-effect waves-light btn primary-color" style={{"marginBottom": "20px"}}>Sign In</button>
+                  <GoogleLogin
+                      clientId="544479097367-vsgksn1j0h4p6kv9glqhq6h6pffbs5l4.apps.googleusercontent.com"
+                      buttonText="Sign in with Google"
+                      onSuccess={ this.responseGoogle }
+                  />
+                  <h6><br/>
+                    <a href="/resetpassword">Forgot your password?</a>
+                  </h6>
+                </form>
+              </div>
+              <div className="card-panel blue lighten-5">
+                <span>Are you new on Spairing?
+                  <br/>
+                  <a href="/register">Create an account</a>
+                </span>
+              </div>
             </div>
-            <div className="card-panel blue lighten-5">
-              <span>Are you new on Spairing?
-                <br/>
-                <a href="/register">Create an account</a>
-              </span>
-            </div>
-          </div>
-        </figcaption>
-      </figure>
+          </figcaption>
+        </figure>
+      </main>
     )
   }
 }

@@ -66,7 +66,7 @@ footer {
 
 .form-panel {
   position: absolute;
-  margin-top: 0px !important;
+  margin: 0px !important;
   width: 300px;
   top: 50%;
   left: 50%;
@@ -188,8 +188,7 @@ ul.autocomplete-content {
 
 .loading-space {
   position: relative;
-  width: 100%;
-  height: 100%; }
+  width: 100%; }
 
 .center-loading {
   position: absolute;

@@ -4,8 +4,9 @@ import React from 'react'
 import test from '../../assets/user.svg'
 
 const Home = (props) => {
+
   return (
-    <div>
+    <main style={{ height: 'auto' }}>
       <div className="row">
         <div className="col s12 m6 l6 white l-panel flow-text">
           <h3>Smart Pairing</h3>
@@ -68,7 +69,7 @@ const Home = (props) => {
           <img src={ test } alt=""/>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 

@@ -3,85 +3,105 @@ import React, { Component } from 'react'
 // Assets
 import { BASE_URL } from '../../js/assets'
 import defaultAvatar from '../../assets/user.svg'
-import login_img from '../../assets/login_img.jpg'
-import { GET, GET_AUTH, PATCH, FPATCH } from '../../js/requests'
-
-// Components
-import Loading from '../helpers/Loading'
+import { GET, PATCH, FPATCH } from '../../js/requests'
 
 class UpdateProfile extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props)
+    this.location = 0
+    this.avatar_removed = null
     this.state = {
-      username: '',
-      email: '',
-      location_id: '',
-      items: [],
-      loading: true,
-      avatar: null
+      avatar: props.avatar,
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount(){
-    GET('/locations').then(
-      (res) => {
-        this.setState({
-          loading: false,
-          items: res
-        })
-      }
-    )
-    const route = "/player_profiles/".concat(localStorage.getItem('userId'))
-    GET_AUTH(route).then(
-      (res) => {
-        const url = res.data.pp_avatar.url
-        this.setState({
-          avatar: (url) ?  BASE_URL + url : url ,
-        })
-      }
-    )
     const $ = window.$
-    document.title = 'Settings'
+    const Materialize = window.Materialize
     $(document).ready(function() {
-      $('select').material_select()
+      Materialize.updateTextFields()
     })
   }
 
   componentDidUpdate(){
-      const $ = window.$
-      $(document).ready(function() {
-        $('select').material_select()
-      })
-   }
+    const $ = window.$
+    const Materialize = window.Materialize
+    $(document).ready(function() {
+      Materialize.updateTextFields()
+    })
+  }
 
   handleChange(event){
     const avatar = URL.createObjectURL(event.target.files[0])
     this.setState({ avatar })
   }
 
+  handleSearch(event){
+    event.preventDefault()
+    const loc_name = event.target.value
+    GET(`/locations?loc_name=${loc_name}`).then(
+      res => {
+        this.updateLocations(res.data)
+      }
+    ).catch(
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  updateLocations(data){
+    const $ = window.$
+    var aux = {}, with_ids = {}, locationId = {}
+
+    if(data.length > 0){
+      data.forEach(
+        (location) => {
+          aux[location.loc_name] = null
+          with_ids[location.loc_name] = location.id
+        }
+      )
+    }
+
+    $('input.autocomplete').autocomplete({
+      data: aux,
+      limit: 5,
+      onAutocomplete: function(val){
+        locationId['location_id'] = with_ids[val]
+      },
+      minLength: 1
+    })
+    console.log(locationId)
+    this.location = locationId
+  }
+
+  removeAvatar(event){
+    event.preventDefault()
+    this.avatar_removed = true
+    this.setState({ avatar: null })
+  }
 
   handleSubmit(event){
     event.preventDefault()
     const updateData = {
       "pp_username": document.getElementById("username").value,
       "email": document.getElementById("email").value,
-      "location_id": document.getElementById("location").value
+      "location_id": (this.location.location_id) ? this.location.location_id : 0
     }
+    console.log(updateData)
 
-    const route = "/player_profiles/".concat(localStorage.getItem('userId'))
-    const newAvatar =  document.getElementById("newAvatar").files[0]
-    const data =  new FormData()
+    const newAvatar = document.getElementById("newAvatar").files[0]
+    console.log(newAvatar);
+    const data = new FormData()
     data.append('image', newAvatar)
 
-    PATCH(route, updateData).then(
+    PATCH(`/player_profiles/${localStorage.getItem('userId')}`, updateData).then(
       (res) => {
         console.log(res)
       }
     )
-    const route0 = "/player_profiles_avatar/".concat(localStorage.getItem('userId'))
-    FPATCH(route0, data).then(
+
+    FPATCH(`/player_profiles_avatar/${localStorage.getItem('userId')}`, data).then(
       (res) => {
         console.log(res)
       }
@@ -89,63 +109,70 @@ class UpdateProfile extends Component {
   }
 
   render(){
+    const { username, email, location } = this.props
+    const { avatar } = this.state
+    const avatarImg = ( avatar ) ?
+      (<div className="col s12 m9 l9 center-align">
+        <img className="responsive-img" alt="" src={ BASE_URL + avatar }
+        height="160" width="160"/><br />
+        <button className="btn-flat waves-effect waves-light primary-color"
+          onClick={ (e) => this.removeAvatar(e) }>
+          remove
+        </button>
+      </div>) :
+      (<div className="col s12 m9 l9 center-align">
+        <img className="responsive-img" alt="" src={ defaultAvatar }
+        height="160" width="160"/>
+      </div>)
 
-    if(this.state.loading === false){
-      const {items, avatar} = this.state
-      var avatarImg = ( avatar ) ?
-          <img className="circle responsive-img" alt="" src={ avatar } height="160" width="160"/> :
-          <img className="circle responsive-img" alt="" src={ defaultAvatar } height="160" width="160"/>
-      var list = items.data.map(
-        item => (
-          <option value={ item.id } key={ item.id } className="primary-color-text">
-            { item.loc_name }
-          </option>
-        )
-      )
-      return (
-        <figure className="back_image">
-          <img src={ login_img } alt="login_image"/>
-          <figcaption>
-            <div className="center-align form-panel">
-              <div className="card-panel white">
-                <form onSubmit={ (e) => this.handleSubmit(e)}>
-                  <h5>Update your Profile</h5>
-                  { avatarImg }
-                  <div className="file-field input-field">
-                    <div className="btn primary-color">
-                      <span>File</span>
-                      <input id="newAvatar" type="file" onChange={(e) => this.handleChange(e)}/>
-                    </div>
-                    <div className="file-path-wrapper">
-                      <input className="file-path validate" type="text"/>
-                    </div>
-                  </div>
-                  <div className="input-field">
-                    <label htmlFor="username">Username</label>
-                    <input id="username" type="text"/>
-                  </div>
-                  <div className="input-field">
-                    <label htmlFor="email">Email</label>
-                    <input id="email" type="email"/>
-                  </div>
-                  <div className="input-field">
-                    <select id="location">
-                      <option value="" disabled>Choose your location</option>
-                      {list}
-                    </select>
-                    <label htmlFor="location">Location</label>
-                  </div>
-                  <button className="waves-effect waves-light btn primary-color">Update profile</button>
-                </form>
-              </div>
+    const adjMargin = {
+      marginLeft: 0,
+      marginRight: 0
+    }
+    return (
+      <form onSubmit={ (e) => this.handleSubmit(e) }>
+        <div className="row" style={ adjMargin }>
+          <h6><b>Username</b></h6>
+          <div className="input-field col s12 m9 l9">
+            <input id="username" type="text" defaultValue={ username }/>
+          </div>
+        </div>
+        <div className="row" style={ adjMargin }>
+          <h6><b>Email</b></h6>
+          <div className="input-field col s12 m9 l9">
+            <input id="email" type="email" defaultValue={ email }/>
+          </div>
+        </div>
+        <div className="row" style={ adjMargin }>
+          <h6><b>Profile Picture</b></h6><br />
+          { avatarImg }
+          <div className="file-field input-field col s12 m9 l9">
+            <div className="btn secondary-color-dark">
+              <span>load image</span>
+              <input id="newAvatar" type="file" onChange={ (e) => this.handleChange(e) }/>
             </div>
-          </figcaption>
-        </figure>
-      )
-    }
-    else{
-      return(<Loading />)
-    }
+            <div className="file-path-wrapper">
+              <input className="file-path validate" type="text"/>
+            </div>
+          </div>
+        </div>
+        <div className="row" style={ adjMargin }>
+          <h6><b>Location</b></h6>
+          <div className="input-field col s12 m9 l9">
+            <input type="text" id="autocomplete-input" className="autocomplete"
+              onChange={ (e) => this.handleSearch(e) }
+              defaultValue={ (location) ? location.loc_name : null }/>
+          </div>
+        </div>
+        <div className="row" style={ adjMargin }>
+          <div className="input-field col s12 m9 l9 center-align">
+            <button type="submit" className="btn waves-effect waves-light secondary-color">
+              Update Profile
+            </button>
+          </div>
+        </div>
+      </form>
+    )
   }
 }
 

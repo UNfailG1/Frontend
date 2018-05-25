@@ -1,8 +1,9 @@
 import React from 'react'
 
 const Loading = (props) => {
+  const fixHeight = { height: (props.h) ? props.h : '100%' }
   return (
-    <div className="loading-space">
+    <div className="loading-space" style={ fixHeight }>
       <div className="center-loading">
         <div className="preloader-wrapper big active">
           <div className="spinner-layer spinner-blue-only">

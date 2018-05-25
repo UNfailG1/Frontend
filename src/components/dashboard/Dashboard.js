@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 // Components
-import GameSearch from './game/GameSearch'
+import Pairing from './Pairing'
+import GameSearch from './GameSearch'
 
 class Dashboard extends Component {
 
@@ -35,7 +36,7 @@ class Dashboard extends Component {
         break
 
       case this.PAIRING:
-        content = (<div>Pairing</div>)
+        content = (<Pairing />)
         break
 
       case this.GAMES:
@@ -47,21 +48,23 @@ class Dashboard extends Component {
         break
     }
     return (
-      <div className="row fill-height" style={ noMargin }>
-        <div className="col s12 m3 l2">
-          <div className="collection">
-            <a href="#!" className="primary-color-text collection-item"
-              onClick={ (e) => this.handleClick(e, this.HOME) }>Home</a>
-            <a href="#!" className="primary-color-text collection-item"
-              onClick={ (e) => this.handleClick(e, this.PAIRING) }>Pairing</a>
-            <a href="#!" className="primary-color-text collection-item"
-              onClick={ (e) => this.handleClick(e, this.GAMES) }>Game</a>
+      <main style={{ height: 'auto' }}>
+        <div className="row" style={ noMargin }>
+          <div className="col s12 m3 l2">
+            <div className="collection">
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.HOME) }>Home</a>
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.PAIRING) }>Pairing</a>
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.GAMES) }>Game</a>
+            </div>
+          </div>
+          <div className="col s12 m9 l10">
+            { content }
           </div>
         </div>
-        <div className="col s12 m9 l10">
-          { content }
-        </div>
-      </div>
+      </main>
     )
   }
 }

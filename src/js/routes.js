@@ -4,11 +4,10 @@ import Home from '../components/home/Home'
 import NotFound from '../components/helpers/NotFound'
 import Game from '../components/game/Game'
 import Platform from '../components/platforms/Platform'
-import PlayerProfile from '../components/profile/PlayerProfile'
-import UpdateProfile from '../components/profile/UpdateProfile'
+import Profile from '../components/profile/Profile'
 import Reports from '../components/reports/Reports'
 import Stats from '../components/statistics/Stats'
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/dashboard/Dashboard'
 import Mailbox from '../components/mailbox/Mailbox'
 import Leaderboard from '../components/leaderboard/Leaderboard'
 import AdList from '../components/ads/AdList'
@@ -49,12 +48,8 @@ const ROUTES = [
     path: '/platforms',
     redirect: { when: 'VISITOR', to: '/login' }
   },
-  { component: PlayerProfile,
-    path: '/profile/:userId',
-    redirect: { when: 'VISITOR', to: '/login' }
-  },
-  { component: UpdateProfile,
-    path: '/updateprofile',
+  { component: Profile,
+    path: '/profile/:param',
     redirect: { when: 'VISITOR', to: '/login' }
   },
   { component: Reports,
