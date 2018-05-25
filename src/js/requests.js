@@ -71,4 +71,17 @@ const FPATCH = (url, data) => {
   })
 }
 
-export { POST, GET, POST_AUTH, GET_AUTH, PATCH, FPATCH, BASE_URL }
+const DEL_AUTH = (url, params = {}) => {
+  return axios({
+    url,
+    method: 'delete',
+    baseURL: BASE_URL,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('spToken')}`
+    },
+    params
+  })
+}
+
+export { POST, GET, POST_AUTH, GET_AUTH, PATCH, FPATCH, DEL_AUTH, BASE_URL }

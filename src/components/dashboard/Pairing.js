@@ -5,9 +5,9 @@ class Pairing extends Component {
     super(props)
     this.game = null
   }
-  
+
   render(){
-    return(<h1>Soy el pa9irign component</h1>)
+    return(<h1>Soy el pairign component</h1>)
   }
 }
 

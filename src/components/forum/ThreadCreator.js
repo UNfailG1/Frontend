@@ -41,7 +41,6 @@ class ThreadCreator extends Component {
 
     POST_AUTH(url, { thread_forum }).then(
       (res) => {
-        console.log(res.data.id);
         this.props.updateCreated(res.data)
         this.commentRequest(url, res.data.id)
       }

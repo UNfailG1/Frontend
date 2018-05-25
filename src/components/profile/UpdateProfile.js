@@ -71,7 +71,6 @@ class UpdateProfile extends Component {
       },
       minLength: 1
     })
-    console.log(locationId)
     this.location = locationId
   }
 

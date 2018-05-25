@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 // Components
 import Pairing from './Pairing'
 import GameSearch from './GameSearch'
+import ProfileSearch from './ProfileSearch'
 
 class Dashboard extends Component {
 
@@ -11,6 +12,7 @@ class Dashboard extends Component {
     this.HOME = 0
     this.PAIRING = 1
     this.GAMES = 2
+    this.PROFILES = 3
     this.state = {
       view: this.HOME
     }
@@ -43,6 +45,10 @@ class Dashboard extends Component {
         content = (<GameSearch />)
         break
 
+      case this.PROFILES:
+        content = (<ProfileSearch />)
+        break
+
       default:
         content = (<div>Un error</div>)
         break
@@ -58,6 +64,8 @@ class Dashboard extends Component {
                 onClick={ (e) => this.handleClick(e, this.PAIRING) }>Pairing</a>
               <a href="#!" className="primary-color-text collection-item"
                 onClick={ (e) => this.handleClick(e, this.GAMES) }>Game</a>
+              <a href="#!" className="primary-color-text collection-item"
+                onClick={ (e) => this.handleClick(e, this.PROFILES) }>Players</a>
             </div>
           </div>
           <div className="col s12 m9 l10">

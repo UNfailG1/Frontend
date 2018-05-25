@@ -84,5 +84,4 @@ class PlayerProfile extends Component {
     )
   }
 }
-
 export default PlayerProfile
