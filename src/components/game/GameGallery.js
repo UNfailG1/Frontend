@@ -16,7 +16,6 @@ const GameGallery = ({ screenshots }) => {
     )
   )
 
-
   return(
     <div className="carousel carousel-slider" style={{ marginBottom: 16 }}>
       { images }

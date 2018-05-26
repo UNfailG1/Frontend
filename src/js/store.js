@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 
 const initialState = {
-  session: !!localStorage.getItem('spToken')
+  session: false
 }
 
 const reducer = (state, action) => {
@@ -10,7 +10,7 @@ const reducer = (state, action) => {
     case 'LOG_IN':
       return {
         ...state,
-        session: !!localStorage.getItem('spToken')
+        session: true
       }
 
     case 'LOG_OUT':

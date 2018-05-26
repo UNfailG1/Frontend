@@ -64,7 +64,7 @@ class PlayerGameProfile extends Component{
     event.preventDefault()
 
     const { gameId } = this.props
-    const url = `/player_profiles/${localStorage.getItem('userId')}/player_game_profiles`
+    const url = `/player_profiles/${sessionStorage.getItem('userId')}/player_game_profiles`
 
     const player_game_profile = {
       pgp_nickname: document.getElementById('nickname').value,
@@ -101,18 +101,18 @@ class PlayerGameProfile extends Component{
                 <input id="nickname" type="text" />
                 <label htmlFor="nickname">Nickname</label>
               </div>
-              <a className="waves-effect waves-light btn primary-color" onClick={ (e) => this.handleSubmit(e) }>
+              <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.handleSubmit(e) }>
                 Create
-              </a>
+              </button>
             </div>
           )
         }else{
           return (
             <div className="row">
               <h3>You dont have a game profile</h3>
-              <a className="waves-effect waves-light btn primary-color" onClick={ (e) => this.createPgp(e) }>
+              <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.createPgp(e) }>
                 Create
-              </a>
+              </button>
             </div>
           )
         }
@@ -120,15 +120,15 @@ class PlayerGameProfile extends Component{
 
         if(disabled){
           button = (
-            <a className="waves-effect waves-light btn primary-color" onClick={ (e) => this.editPgp(e) }>
+            <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.editPgp(e) }>
               Edit
-            </a>
+            </button>
           )
         }else{
           button = (
-            <a className="waves-effect waves-light btn primary-color" onClick={ (e) => this.savePgp(e) }>
+            <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.savePgp(e) }>
               Save
-            </a>
+            </button>
           )
         }
 
@@ -140,9 +140,9 @@ class PlayerGameProfile extends Component{
               <label htmlFor="nickname">Nickname</label>
             </div>
             { button }
-            <a className="waves-effect waves-light btn primary-color" onClick={ (e) => this.deletePgp(e) }>
+            <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.deletePgp(e) }>
               Delete
-            </a>
+            </button>
           </div>
         )
       default:

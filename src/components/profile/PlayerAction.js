@@ -7,7 +7,7 @@ class PlayerAction extends Component {
 
   constructor(props){
     super(props)
-    this.senderId = localStorage.getItem('userId')
+    this.senderId = sessionStorage.getItem('userId')
     this.currentFriends = props.lists.current_friends
     this.playerFriends = props.lists.player_friends
     this.areFriends = 0

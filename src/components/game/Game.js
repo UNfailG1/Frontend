@@ -32,7 +32,7 @@ class Game extends Component {
   }
 
   getPgp(game){
-    const url = `/player_games?pid=${localStorage.getItem('userId')}&gid=${game.id}`
+    const url = `/player_games?pid=${sessionStorage.getItem('userId')}&gid=${game.id}`
     GET_AUTH(url).then(
       (res) => {
         this.setState({

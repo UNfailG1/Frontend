@@ -3,6 +3,9 @@ import React from 'react'
 // Assets
 import { noImage } from '../../js/assets'
 
+// Components
+import { Link } from 'react-router-dom'
+
 const GameItem = ({ game }) => {
 
   const gam_img = (game.gam_image) ? game.gam_image : noImage
@@ -19,7 +22,7 @@ const GameItem = ({ game }) => {
               <i className="material-icons right">close</i>
               { game.gam_name }
             </span><br />
-            <a href={ `/game/${game.id}` }>See more...</a>
+            <Link to={ `/game/${game.id}` }>See more...</Link>
           </div>
       </div>
     </div>

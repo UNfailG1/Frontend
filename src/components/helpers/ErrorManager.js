@@ -16,6 +16,9 @@ const ErrorManager = ({ status }) => {
     case 401:
       return (<h2 className="center-align">Not logged</h2>)
 
+    case 500:
+      return (<h2 className="center-align">Server Error</h2>)
+
     default:
       return (<h2>New error: { status }</h2>)
   }

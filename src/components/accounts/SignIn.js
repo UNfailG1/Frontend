@@ -39,13 +39,13 @@ class SignIn extends Component {
     }
 
     POST('/player_profile_token', credentials).then(
-      (res) => {
+      res => {
           localStorage.setItem('spToken', res.data.jwt)
-          localStorage.setItem('userId', res.data.user_id)
+          sessionStorage.setItem('userId', res.data.user_id)
           store.dispatch(login())
       }
     ).catch(
-      (error) => {
+      error => {
         this.setState({
           error: true,
           logginIn: false
@@ -59,13 +59,13 @@ class SignIn extends Component {
     const data = {id_token: response.Zi.id_token }
 
     POST('/google_authentication', data).then(
-      (res) => {
+      res => {
           localStorage.setItem('spToken', res.data.jwt)
           localStorage.setItem('userId', res.data.user_id)
           store.dispatch(login())
       }
     ).catch(
-      (error) => {
+      error => {
         this.setState({
           error: true,
           logginIn: false

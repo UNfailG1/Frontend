@@ -49,7 +49,8 @@ class Reports extends Component{
             (report) => {
               reports[index].push(
                 <li key={ report.id }>
-                  <a href={ BASE_URL + '/' + report.link } target="_blank" >
+                  <a href={ BASE_URL + '/' + report.link } target="_blank"
+                    rel="noopener noreferrer">
                     { report.filename }
                   </a>
                 </li>

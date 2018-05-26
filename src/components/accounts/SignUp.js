@@ -53,7 +53,7 @@ class SignUp extends Component{
     // this.locateUser()
 
     POST('/player_profiles', profile).then(
-      (res) => {
+      res => {
         const crendentials = {
           auth: {
             email: profile.player_profile.email,
@@ -61,19 +61,19 @@ class SignUp extends Component{
           }
         }
         POST('/player_profile_token', crendentials).then(
-          (res) => {
+          res => {
             localStorage.setItem('spToken', res.data.jwt)
-            localStorage.setItem('userId', res.data.user_id)
+            sessionStorage.setItem('userId', res.data.user_id)
             store.dispatch(login())
           }
         ).catch(
-          (error) => {
+          error => {
             this.setState({ logginIn: false})
           }
         )
       }
     ).catch(
-      (error) => {
+      error => {
         this.setState({ logginIn: false})
       }
     )

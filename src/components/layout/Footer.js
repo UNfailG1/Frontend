@@ -7,9 +7,8 @@ class Footer extends Component {
       <div className="footer-copyright">
         <div className="container">
           2018 Copyright - SPairing
-          <a className="white-text right" href="https://github.com/UNfailG1">Github</a>
-          <a className="white-text right" href="https://spairing.herokuapp.com">Heroku-Front</a>
-          <a className="white-text right" href="https://spairing-api.herokuapp.com">Heroku-Back</a>
+          <a className="white-text right" target="_blank" rel="noopener noreferrer"
+            href="https://github.com/UNfailG1">Github</a>
         </div>
       </div>
     )

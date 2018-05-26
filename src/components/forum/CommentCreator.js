@@ -10,7 +10,7 @@ class CommentCreator extends Component {
     const comment = {
       com_comment: document.getElementById('comment').value,
       thread_forum_id: threadId,
-      player_profile_id: localStorage.getItem('userId')
+      player_profile_id: sessionStorage.getItem('userId')
     }
     POST_AUTH(url, { comment }).then(
       (res) => {

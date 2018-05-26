@@ -94,13 +94,13 @@ class UpdateProfile extends Component {
     const data = new FormData()
     data.append('image', newAvatar)
 
-    PATCH(`/player_profiles/${localStorage.getItem('userId')}`, updateData).then(
+    PATCH(`/player_profiles/${sessionStorage.getItem('userId')}`, updateData).then(
       (res) => {
         console.log(res)
       }
     )
 
-    FPATCH(`/player_profiles_avatar/${localStorage.getItem('userId')}`, data).then(
+    FPATCH(`/player_profiles_avatar/${sessionStorage.getItem('userId')}`, data).then(
       (res) => {
         console.log(res)
       }

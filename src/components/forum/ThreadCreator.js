@@ -16,7 +16,7 @@ class ThreadCreator extends Component {
     const comment = {
       com_comment: document.getElementById('body').value,
       thread_forum_id: threadId,
-      player_profile_id: localStorage.getItem('userId')
+      player_profile_id: sessionStorage.getItem('userId')
     }
     POST_AUTH(url + `/${threadId}/comments`, { comment }).then(
       (res) => {
