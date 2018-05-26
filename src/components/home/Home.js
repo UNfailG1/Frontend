@@ -2,6 +2,13 @@ import React from 'react'
 
 // Assets
 import test from '../../assets/user.svg'
+import collabimg from '../../assets/collaboration.jpg'
+import angryimg from '../../assets/angry2.jpg'
+import platimg from '../../assets/plataforms.jpeg'
+import forumimg from '../../assets/forums.jpg'
+import lolimg from '../../assets/lol.jpeg'
+import fortimg from '../../assets/fortnite.jpeg'
+import mineimg from '../../assets/minecraft.jpg'
 
 const Home = (props) => {
 
@@ -16,12 +23,12 @@ const Home = (props) => {
           </p>
         </div>
         <div className="col s12 m6 l6 white l-img valign-wrapper">
-          <img src={ test } alt=""/>
+          <img src={ collabimg } alt=""/>
         </div>
       </div>
       <div className="row">
         <div className="col s12 m6 l6 l-img valign-wrapper" >
-          <img src={ test } alt=""/>
+          <img src={ angryimg } alt="" style={{'padding-left':150}}/>
         </div>
         <div className="col s12 m6 l6 l-panel" >
           <h4>Pairing</h4>
@@ -41,12 +48,14 @@ const Home = (props) => {
           </p>
         </div>
         <div className="col s12 m6 l6 white l-img valign-wrapper" >
-          <img src={ test } alt=""/>
+          <img src={ lolimg } alt="" style={{'padding-left':60}}/>
+          <img src={ fortimg } alt=""style={{'padding-left':10}}/>
+          <img src={ mineimg } alt=""style={{'padding-left':10}}/>
         </div>
       </div>
       <div className="row">
         <div className="col s12 m6 l6 l-img valign-wrapper" >
-          <img src={ test } alt=""/>
+          <img src={ platimg } alt="" style={{'padding-left':40}}/>
         </div>
         <div className="col s12 m6 l6 l-panel" >
           <h4>Gather your friends</h4>
@@ -66,7 +75,7 @@ const Home = (props) => {
           </p>
         </div>
         <div className="col s12 m6 l6 white l-img valign-wrapper" >
-          <img src={ test } alt=""/>
+          <img src={ forumimg } alt=""/>
         </div>
       </div>
     </main>
