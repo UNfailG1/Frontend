@@ -17,7 +17,7 @@ class GameDescription extends Component {
 
   handleChange(rate){
     const player_game_profile = { pgp_rate: rate*20 }
-
+    console.log(player_game_profile);
     PATCH(`/player_game_profiles/${this.pgp.id}`, { player_game_profile }).then(
       (res) => {
         this.pgp = res.data

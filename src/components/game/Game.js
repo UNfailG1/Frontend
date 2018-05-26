@@ -8,6 +8,7 @@ import GameGallery from './GameGallery'
 import Loading from '../helpers/Loading'
 import ForumTab from '../forum/ForumTab'
 import GameDescription from './GameDescription'
+import Leaderboard from './Leaderboard'
 import ErrorManager from '../helpers/ErrorManager'
 import PlayerGameProfile from './PlayerGameProfile'
 
@@ -116,7 +117,7 @@ class Game extends Component {
                   <PlayerGameProfile gameId={ game.id } pgp={ pgp }/>
                 </div>
                 <div id="statistics" className="col s12">
-                  Statistics
+                  <Leaderboard game={ game }/>
                 </div>
               </div>
             </div>
