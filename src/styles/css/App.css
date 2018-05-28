@@ -154,6 +154,9 @@ ul.autocomplete-content {
   padding-bottom: 2px;
   padding-left: 2px; }
 
+.sponsorList {
+  background: lightgrey; }
+
 .input-field label {
   color: #263238 !important; }
 

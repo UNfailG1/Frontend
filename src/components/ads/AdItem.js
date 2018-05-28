@@ -1,5 +1,4 @@
 import React from 'react'
-import defaultAvatar from '../../assets/user.svg'
 
 const AdItem = ({ item, sponsor_id }) => {
   
