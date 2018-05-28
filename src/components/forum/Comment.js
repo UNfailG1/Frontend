@@ -17,7 +17,7 @@ const Comment = ({ item }) => {
           <div className="row" style={ noMargin }>
             <div className="col s12 m3 l3 center-align">
               <h5 className="truncate">{ pp_username }</h5>
-              <img src={ avatar } alt="" className="circle" />
+              <img src={ avatar } alt="" className="responsive-img" />
             </div>
             <div className="col s12 m9 l9">
               <div className="section">
