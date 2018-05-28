@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Geocode from 'react-geocode'
 
 // Assets
 import { BASE_URL } from '../../js/assets'
@@ -12,7 +13,10 @@ class UpdateProfile extends Component {
     this.avatar_removed = null
     this.state = {
       avatar: props.avatar,
+      location: 0
     }
+    
+    this.getReverseGeocodingData = this.getReverseGeocodingData.bind(this)
   }
 
   componentDidMount(){
@@ -41,6 +45,7 @@ class UpdateProfile extends Component {
     const loc_name = event.target.value
     GET(`/locations?loc_name=${loc_name}`).then(
       res => {
+        console.log(res)
         this.updateLocations(res.data)
       }
     ).catch(
@@ -82,6 +87,9 @@ class UpdateProfile extends Component {
 
   handleSubmit(event){
     event.preventDefault()
+    
+    this.locateUser()
+    
     const updateData = {
       "pp_username": document.getElementById("username").value,
       "email": document.getElementById("email").value,
@@ -105,6 +113,37 @@ class UpdateProfile extends Component {
         console.log(res)
       }
     )
+  }
+  
+  locateUser(){
+   const $ = window.$
+   const check = $('#Location').prop('checked')
+     if(check === true){
+     this.getLocation()
+   }
+   else{
+     console.log("Permission to locate denied")
+   }
+  }
+
+  getLocation = () => {
+   const geolocation = navigator.geolocation;
+     geolocation.getCurrentPosition((position) => {
+     this.getReverseGeocodingData(position.coords.latitude, position.coords.longitude)
+   })
+  }
+
+  getReverseGeocodingData(lat, lng) {
+     Geocode.fromLatLng(lat, lng).then(
+     response => {
+       const address = response.results[0].address_components[3].long_name
+       this.location = {loc_name: address}
+       console.log("Location: " + this.location.loc_name)
+     },
+     error => {
+       console.error(error)
+     }
+   )
   }
 
   render(){
@@ -162,6 +201,17 @@ class UpdateProfile extends Component {
               onChange={ (e) => this.handleSearch(e) }
               defaultValue={ (location) ? location.loc_name : null }/>
           </div>
+        </div>
+        <div>
+          <p>
+            If your city doesn't appears included in our list, consider allowing us to obtain your position
+            in order to obtain precise results and simplify your location update.
+          </p>
+          <p>
+            <input type="checkbox" id="Location" />
+            <label htmlFor="Location">Share Location?</label>
+          </p>
+          <p/>
         </div>
         <div className="row" style={ adjMargin }>
           <div className="input-field col s12 m9 l9 center-align">

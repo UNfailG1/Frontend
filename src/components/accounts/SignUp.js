@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import { Geocode } from 'react-geocode'
 
 // Assests
 import store from '../../js/store'
@@ -50,8 +49,6 @@ class SignUp extends Component{
       }
     }
 
-    // this.locateUser()
-
     POST('/player_profiles', profile).then(
       res => {
         const crendentials = {
@@ -85,40 +82,6 @@ class SignUp extends Component{
     var eqPass = cpass === password
     this.setState({ eqPass })
   }
-
-  // locateUser(){
-  //   const $ = window.$
-  //   const check = $('#Location').prop('checked')
-  //
-  //   if(check === true){
-  //     this.getLocation()
-  //   }
-  //   else{
-  //     console.log("Permission to locate denied")
-  //   }
-  // }
-
-  // getLocation = () => {
-  //   const geolocation = navigator.geolocation;
-  //
-  //   geolocation.getCurrentPosition((position) => {
-  //     this.getReverseGeocodingData(position.coords.latitude, position.coords.longitude)
-  //   })
-  // }
-
-  // getReverseGeocodingData(lat, lng) {
-  //
-  //   Geocode.fromLatLng(lat, lng).then(
-  //     response => {
-  //       const address = response.results[8].formatted_address
-  //       console.log(address)
-  //       this.setState({country: address})
-  //     },
-  //     error => {
-  //       console.error(error)
-  //     }
-  //   )
-  // }
 
   render(){
 
@@ -170,18 +133,6 @@ class SignUp extends Component{
                   <input id="cpass" type="password" onChange={ this.handleChange }
                   pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" required/>
                 </div>
-                {/* <div>
-                  <p>
-                    In order to improve our pairing recommendations and suggest players near you,
-                    we need your permission to obtain your location.
-                    Please check the checkbox bellow if you agree to share your location with us.
-                  </p>
-                  <p>
-                    <input type="checkbox" id="Location" />
-                    <label htmlFor="Location">Share Location?</label>
-                  </p>
-                  <p/>
-                </div> */}
                 { equalPass }
                 <button className="btn waves-effect waves-light primary-color"
                 type="submit">Sign Up</button>
