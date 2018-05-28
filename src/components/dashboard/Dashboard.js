@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 // Components
+import Home from './Home'
 import Pairing from './Pairing'
 import GameSearch from './GameSearch'
 import ProfileSearch from './ProfileSearch'
@@ -34,7 +35,7 @@ class Dashboard extends Component {
     const noMargin = { margin: 0 }
     switch(view){
       case this.HOME:
-        content = (<div>Home</div>)
+        content = (<Home />)
         break
 
       case this.PAIRING:
