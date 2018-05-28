@@ -15,7 +15,8 @@ class ProfileSearch extends Component{
     this.state = {
       items: [],
       isLoaded: true,
-      status: null
+      status: null,
+      timeout: null
     }
     this.profiles = {}
   }
@@ -26,22 +27,25 @@ class ProfileSearch extends Component{
       items: []
     })
     const username = event.target.value
-    GET_AUTH(`/usernames_like?username=${ username }&page=1`).then(
-      (res) => {
-        this.setState({
-          isLoaded: true,
-          items: res.data
-        })
-      }
-    ).catch(
-      (error) => {
-        console.log(error)
-        this.setState({
-          isLoaded: false,
-          status: (error.response) ? error.response.status : 0
-        })
-      }
-    )
+    clearTimeout(this.state.timeout);
+    this.state.timeout = setTimeout(function () {
+      GET_AUTH(`/usernames_like?username=${ username }&page=1`).then(
+        (res) => {
+          this.setState({
+            isLoaded: true,
+            items: res.data
+          })
+        }
+      ).catch(
+        (error) => {
+          console.log(error)
+          this.setState({
+            isLoaded: false,
+            status: (error.response) ? error.response.status : 0
+          })
+        }
+      )
+    }.bind(this), 1000);
   }
 
   render(){

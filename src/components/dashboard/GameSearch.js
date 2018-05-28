@@ -15,7 +15,8 @@ class GameSearch extends Component{
     this.state = {
       items: [],
       isLoaded: true,
-      status: null
+      status: null,
+      timeout: null
     }
     this.games = {}
   }
@@ -26,22 +27,25 @@ class GameSearch extends Component{
       items: []
     })
     const gam_name = event.target.value
-    GET_AUTH(`/games_like?gam_name=${ gam_name }&page=1`).then(
-      (res) => {
-        this.setState({
-          isLoaded: true,
-          items: res.data
-        })
-      }
-    ).catch(
-      (error) => {
-        console.log(error)
-        this.setState({
-          isLoaded: false,
-          status: (error.response) ? error.response.status : 0
-        })
-      }
-    )
+    clearTimeout(this.state.timeout);
+    this.state.timeout = setTimeout(function () {
+      GET_AUTH(`/games_like?gam_name=${ gam_name }&page=1`).then(
+        (res) => {
+          this.setState({
+            isLoaded: true,
+            items: res.data
+          })
+        }
+      ).catch(
+        (error) => {
+          console.log(error)
+          this.setState({
+            isLoaded: false,
+            status: (error.response) ? error.response.status : 0
+          })
+        }
+      )
+    }.bind(this), 1000);
   }
 
   render(){
