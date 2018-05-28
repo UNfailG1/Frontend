@@ -5,6 +5,7 @@ import Home from './Home'
 import Pairing from './Pairing'
 import GameSearch from './GameSearch'
 import ProfileSearch from './ProfileSearch'
+import AdList from '../ads/AdList'
 
 class Dashboard extends Component {
 
@@ -68,6 +69,10 @@ class Dashboard extends Component {
               <a href="#!" className="primary-color-text collection-item"
                 onClick={ (e) => this.handleClick(e, this.PROFILES) }>Players</a>
             </div>
+            <div className="center-align">
+              <h5>Sponsored Content</h5>
+            </div>
+            <AdList/>
           </div>
           <div className="col s12 m9 l10">
             { content }

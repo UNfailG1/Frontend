@@ -2,6 +2,7 @@ import React from 'react'
 
 // Assets
 import test from '../../assets/user.svg'
+import Sponsors from '../ads/Sponsors'
 
 const Home = (props) => {
 
@@ -69,6 +70,7 @@ const Home = (props) => {
           <img src={ test } alt=""/>
         </div>
       </div>
+      <Sponsors/>
     </main>
   )
 }
