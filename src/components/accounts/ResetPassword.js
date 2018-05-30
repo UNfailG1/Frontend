@@ -31,7 +31,7 @@ class ResetPassword extends Component {
                   <label htmlFor="email">Email</label>
                   <input id="email" type="email" pattern="(([a-zA-Z]+)([\w\.\-]*)\@([\w\.\-]*)\.([\w\.\-]*))" required/>
                 </div>
-                <button className="waves-effect waves-light btn primary-color">Recover password</button>
+                <button className="waves-effect waves-orange btn primary-color">Recover password</button>
               </form>
             </div>
           </div>

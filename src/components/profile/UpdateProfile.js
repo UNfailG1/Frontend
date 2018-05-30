@@ -12,10 +12,10 @@ class UpdateProfile extends Component {
     this.location = 0
     this.avatar_removed = null
     this.state = {
-      avatar: props.avatar,
+      avatar: props.avatarL,
       location: 0
     }
-    
+
     this.getReverseGeocodingData = this.getReverseGeocodingData.bind(this)
   }
 
@@ -87,9 +87,9 @@ class UpdateProfile extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    
+
     this.locateUser()
-    
+
     const updateData = {
       "pp_username": document.getElementById("username").value,
       "email": document.getElementById("email").value,
@@ -114,7 +114,7 @@ class UpdateProfile extends Component {
       }
     )
   }
-  
+
   locateUser(){
    const $ = window.$
    const check = $('#Location').prop('checked')
@@ -147,13 +147,13 @@ class UpdateProfile extends Component {
   }
 
   render(){
-    const { username, email, location } = this.props
+    const { username, email, location, avatarL } = this.props
     const { avatar } = this.state
     const avatarImg = ( avatar ) ?
       (<div className="col s12 m9 l9 center-align">
-        <img className="responsive-img" alt="" src={ BASE_URL + avatar }
+        <img className="responsive-img" alt="" src={ (avatarL) ? BASE_URL + avatar : avatar }
         height="160" width="160"/><br />
-        <button className="btn-flat waves-effect waves-light primary-color"
+        <button className="btn-flat waves-effect waves-orange primary-color"
           onClick={ (e) => this.removeAvatar(e) }>
           remove
         </button>
@@ -215,7 +215,7 @@ class UpdateProfile extends Component {
         </div>
         <div className="row" style={ adjMargin }>
           <div className="input-field col s12 m9 l9 center-align">
-            <button type="submit" className="btn waves-effect waves-light secondary-color">
+            <button type="submit" className="btn waves-effect waves-orange secondary-color">
               Update Profile
             </button>
           </div>

@@ -41,7 +41,7 @@ class PlayerProfile extends Component {
     var profileButton = null
     if(own){
       profileButton = (
-        <Link to= "/profile/settings" className="waves-effect waves-light btn primary-color"
+        <Link to= "/profile/settings" className="waves-effect waves-orange btn primary-color"
           style={{ width: '100%', marginBottom: 8 }} >
             Edit profile
         </Link>
@@ -65,12 +65,12 @@ class PlayerProfile extends Component {
               <small className="grey-text trucate">{ email }</small>
             </p>
             { profileButton }
-            <div style={{ height: 200 }} className="teal">Espacio para mapa</div>
+            {/* <div style={{ height: 200 }} className="teal">Espacio para mapa</div> */}
           </div>
           <div className="col s12 m9 l9">
             <ul className="tabs" style={{ margin: 0 }}>
-              <li className="tab"><a className="primary-color-text" href="#pgp">Games</a></li>
-              <li className="tab"><a className="primary-color-text" href="#friends">Friends</a></li>
+              <li className="tab"><a className="primary-color" href="#pgp">Games</a></li>
+              <li className="tab"><a className="primary-color" href="#friends">Friends</a></li>
             </ul>
             <div id="pgp">
               <PGPList games={ games } pgps={ player_game_profiles } own={ own }/>

@@ -52,7 +52,7 @@ class UpdatePassword extends Component {
         <div className="row" style={ adjMargin }>
           { equalPass }
           <div className="input-field col s12 m9 l9 center-align">
-            <button type="submit" className="btn waves-effect waves-light secondary-color">
+            <button type="submit" className="btn waves-effect waves-orange secondary-color">
               Update Password
             </button>
           </div>

@@ -17,11 +17,9 @@ class SignUp extends Component{
       eqPass: null,
       status: null,
       logginIn: false,
-      // country: null
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    // this.getReverseGeocodingData = this.getReverseGeocodingData.bind(this)
   }
 
   initSelect(){
@@ -111,30 +109,30 @@ class SignUp extends Component{
               <h5>Create your personal account.</h5>
               <form onSubmit={ this.handleSubmit }>
                 <div className="input-field">
-                  <label htmlFor="username">Username</label>
                   <input id="username" type="text" pattern="([a-zA-Z]+)([\w\.\-]*)"
                     title="Must begin with a letter" required/>
+                  <label htmlFor="username">Username</label>
                 </div>
                 <div className="input-field">
-                  <label htmlFor="email">email</label>
                   <input id="email" type="email"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                     title="Must contain the symbol '@' followed of a domain" required/>
+                  <label htmlFor="email">email</label>
                 </div>
                 <div className="input-field">
-                  <label  htmlFor="password">Password</label>
                   <input id="password" type="password"
                     pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
                     title="Must contain at least one number, one letter and at least
                     8 or more characters"/>
+                  <label  htmlFor="password">Password</label>
                 </div>
                 <div className="input-field">
-                  <label htmlFor="cpass">Confirm Password</label>
                   <input id="cpass" type="password" onChange={ this.handleChange }
-                  pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" required/>
+                    pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}" required/>
+                  <label htmlFor="cpass">Confirm Password</label>
                 </div>
                 { equalPass }
-                <button className="btn waves-effect waves-light primary-color"
+                <button className="btn waves-effect waves-orange primary-color"
                 type="submit">Sign Up</button>
               </form>
              </div>

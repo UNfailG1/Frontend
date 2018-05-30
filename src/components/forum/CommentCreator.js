@@ -31,7 +31,7 @@ class CommentCreator extends Component {
           <input id="comment" type="text" placeholder="Write a comment"/>
         </div>
         <div className="input-field col s2">
-          <button className="btn waves-effect-light primary-color">comment</button>
+          <button className="btn waves-effect waves-orange primary-color">comment</button>
         </div>
       </form>
     )

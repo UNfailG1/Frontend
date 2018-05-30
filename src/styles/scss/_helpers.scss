@@ -4,6 +4,30 @@ html, body, div#root {
   // background-color: $background-color;
 }
 
+.no-hover{
+  color: black !important;
+  &:hover{
+    color: $secondary-color !important;
+  }
+}
+
+.breadcrumb {
+  color: black !important;
+  &::before{
+    color: $primary-color-dark !important;
+    vertical-align: middle !important;
+  }
+}
+
+.collection a:not(.no-hover),
+.side-nav a:not(.no-hover),
+#nav-mobile a:not(.no-hover){
+  color: black !important;
+  &:hover {
+    @extend .secondary-color-light;
+  }
+}
+
 div#root > div{
   width: 100%;
   height: 100%;
@@ -15,11 +39,14 @@ header {
 
 main {
   min-height: calc(100% - 110px);
-  height: calc(auto);
 }
 
 footer {
   width: 100%;
+  @extend .primary-color-dark;
+  * {
+    color: black !important;
+  }
 }
 
 .form-panel{
@@ -67,6 +94,13 @@ footer {
 
 .max-height{
   height: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+  &:hover {
+    background-color: $secondary-color-light !important;
+  }
 }
 
 .recharts-wrapper{
@@ -142,6 +176,6 @@ ul.autocomplete-content {
   padding-left: 2px;
 }
 
-.sponsorList{
-  background: lightgrey;
-}
+// .sponsorList{
+//   background: lightgrey;
+// }

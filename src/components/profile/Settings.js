@@ -32,7 +32,7 @@ class Settings extends Component {
 
       case this.PROFILE:
         content = (<UpdateProfile username={ profile.pp_username }
-          avatar={ profile.pp_avatar.url } location={ profile.location }
+          avatarL={ profile.pp_avatar.url } location={ profile.location }
           email={ profile.email }/>)
         break
 

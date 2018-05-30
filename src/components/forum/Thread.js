@@ -11,7 +11,9 @@ const Thread = ({ item, onClick }) => {
     <div className="row valign-wrapper" style={ noMargin }>
       <div className="col s7">
         <p>
-          <b><a href="#!" onClick={ () => onClick() }>{ thr_name }</a></b>
+          <b><a href="#!" className="no-hover" onClick={ () => onClick() }>
+            { thr_name }
+          </a></b>
         </p>
       </div>
       <div className="col s2 center-align">

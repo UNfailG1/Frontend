@@ -40,6 +40,9 @@ class App extends Component {
         }
       )
     } else {
+      if (!!sessionStorage.getItem('userId')){
+        sessionStorage.removeItem('userId')
+      }
       this.setState({ isLoaded: true })
     }
   }

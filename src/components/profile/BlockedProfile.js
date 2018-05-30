@@ -20,7 +20,7 @@ const LockedProfile = ({ profile, unblock }) => {
               <span style={{ fontSize: 18 }} className="truncate">{ pp_username }</span>
             </div>
             <div className="col s12 m4 l4">
-              <button className="btn-flat waves-effect waves-light"
+              <button className="btn-flat waves-effect waves-orange"
                 onClick={ (e) => unblock(e, id) }>
                   unblock
               </button>

@@ -98,9 +98,10 @@ class Pairing extends Component {
         pgp => (
           <a key={ pgp.id } className="carousel-item" href="#!"
               onClick={ (e) => this.handleClick(e, pgp.game.id)}>
-            <div className="card-panel" style={{ padding: 0, width: 200, height: 300 }}>
-              <img src={ pgp.game.gam_image } alt={ pgp.game.gam_name }
-                className="responsive-img"/>
+            <div className="card hoverable">
+              <div className="card-image">
+                <img src={ pgp.game.gam_image } style={{ height: 350 }} alt={ pgp.game.gam_name }/>
+              </div>
             </div>
           </a>
         )
@@ -116,7 +117,7 @@ class Pairing extends Component {
             <input type="checkbox" id="location" defaultChecked={ this.location }/>
             <label htmlFor="location">By location</label>
           </p>
-          <button className="center-align btn waves-effect waves-light primary-color"
+          <button className="center-align btn waves-effect waves-orange primary-color"
             style={{ marginTop: 16 }}>
             Pairing
           </button>

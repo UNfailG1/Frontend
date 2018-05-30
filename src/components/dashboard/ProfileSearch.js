@@ -28,24 +28,26 @@ class ProfileSearch extends Component{
     })
     const username = event.target.value
     clearTimeout(this.state.timeout);
-    this.state.timeout = setTimeout(function () {
-      GET_AUTH(`/usernames_like?username=${ username }&page=1`).then(
-        (res) => {
-          this.setState({
-            isLoaded: true,
-            items: res.data
-          })
-        }
-      ).catch(
-        (error) => {
-          console.log(error)
-          this.setState({
-            isLoaded: false,
-            status: (error.response) ? error.response.status : 0
-          })
-        }
-      )
-    }.bind(this), 1000);
+    this.setState({
+      timeout: setTimeout(function () {
+        GET_AUTH(`/usernames_like?username=${ username }&page=1`).then(
+          (res) => {
+            this.setState({
+              isLoaded: true,
+              items: res.data
+            })
+          }
+        ).catch(
+          (error) => {
+            console.log(error)
+            this.setState({
+              isLoaded: false,
+              status: (error.response) ? error.response.status : 0
+            })
+          }
+        )
+      }.bind(this), 1000)
+    })
   }
 
   render(){
@@ -73,10 +75,11 @@ class ProfileSearch extends Component{
         </div>
       )
     }else if(isLoaded == null){
+      const $ = window.$
       return(
         <div>
           { form }
-          <Loading />
+          <Loading h={ $(window).height()/2 } />
         </div>
       )
     }else{

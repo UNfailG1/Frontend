@@ -25,6 +25,10 @@ class Game extends Component {
   }
 
   componentDidUpdate() {
+    this.initComp()
+  }
+
+  initComp(){
     const $ = window.$
     $(document).ready(function(){
       $('.parallax').parallax()
@@ -54,10 +58,15 @@ class Game extends Component {
     )
   }
 
-  componentDidMount() {
+  createPgp = (pgp) => {
+    this.setState({ pgp })
+  }
 
-    const { match: { params } } = this.props
-    GET_AUTH(`/games/${ params.gameId }`).then(
+  componentDidMount() {
+    const { match: { params: { gameId } } } = this.props
+    document.title = "SPairing"
+    this.initComp()
+    GET_AUTH(`/games/${ gameId }`).then(
       (res) => {
         this.getPgp(res.data)
       }
@@ -70,21 +79,15 @@ class Game extends Component {
         })
       }
     )
-    const $ = window.$
-    document.title = "SPairing"
-    $(document).ready(function(){
-      $('.parallax').parallax()
-      $('ul.tabs').tabs();
-    })
   }
 
   render() {
     const { game, isLoaded, pgp } = this.state
     const noPadding = { padding: 0 }, noMargin = { margin: 0 }
+    const fixHeight = { height: 'auto', minHeihgt: 'calc(100% - 110px)' }
     if (isLoaded) {
       const { gam_name, screenshots } = game
       const screenshot = screenshots[Math.floor(Math.random() * screenshots.length)].scr_url
-      const fixHeight = { height: 'auto', minHeihgt: 'calc(100% - 110px)' }
       return (
         <main style={ fixHeight }>
           <div className="parallax-container">
@@ -114,7 +117,7 @@ class Game extends Component {
                   <ForumTab gameId={ game.id } />
                 </div>
                 <div id="gameProfile" className="col s12">
-                  <PlayerGameProfile gameId={ game.id } pgp={ pgp }/>
+                  <PlayerGameProfile gameId={ game.id } pgp={ pgp } create={ this.createPgp }/>
                 </div>
                 <div id="statistics" className="col s12">
                   <Leaderboard game={ game }/>
@@ -125,9 +128,17 @@ class Game extends Component {
         </main>
       )
     } else if(isLoaded == null) {
-      return (<Loading />)
+      return (
+        <main style={{ height: 'calc(100% - 110px)' }}>
+          <Loading />
+        </main>
+      )
     } else {
-      return (<ErrorManager status={ this.state.status } />)
+      return (
+        <main style={{ height: 'calc(100% - 110px)' }}>
+          <ErrorManager status={ this.state.status } />
+        </main>
+      )
     }
   }
 }

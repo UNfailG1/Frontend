@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 
 // Assets
+import { BASE_URL } from '../../js/assets'
 import { GET_AUTH } from '../../js/requests'
 import defaultAvatar from '../../assets/user.svg'
+
+// Components
+import { Link } from 'react-router-dom'
 
 class Leaderboard extends Component {
 
@@ -39,11 +43,16 @@ class Leaderboard extends Component {
       (player) => (
           <li key={ player.id } className="collection-item avatar valign-wrapper">
             <div className="col s3">
-              <img src={ (player.player_profile.pp_avatar.url) ? player.player_profile.pp_avatar.url : defaultAvatar }
-                alt={ player.player_profile.pp_username } className="responsive-img" />
+              <Link to={`/profile/${player.player_profile.id}`} className="no-hover">
+                <img src={ (player.player_profile.pp_avatar.url) ?
+                  BASE_URL + player.player_profile.pp_avatar.url : defaultAvatar }
+                  alt={ player.player_profile.pp_username } className="responsive-img" />
+              </Link>
             </div>
             <div className="col s6">
-              <span className="title">{ player.pgp_nickname }</span>
+              <Link to={`/profile/${player.player_profile.id}`} className="no-hover">
+                <span className="title">{ player.pgp_nickname }</span>
+              </Link>
             </div>
             <div className="col s3">
               <span className="title">{ player.pgp_reputation }</span>

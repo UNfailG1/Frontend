@@ -61,7 +61,7 @@ class Mailbox extends Component {
         <div className="row" style={{ margin: 0 }}>
           <div className="col s12 m3 l2 center-align">
             <br />
-            <button className="waves-light btn primary-color"
+            <button className="waves-orange btn primary-color"
               onClick={ () => this.handleClick(this.COMPOSE) }>Compose</button>
             <div className="collection">
               <a href="#!" className="primary-color-text collection-item"

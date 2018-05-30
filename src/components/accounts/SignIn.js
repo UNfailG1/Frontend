@@ -104,20 +104,20 @@ class SignIn extends Component {
                 <form onSubmit={ (e) => this.handleSubmit(e) }>
                   <h5>Sign in to Spairing</h5>
                   <div className="input-field">
-                    <label htmlFor="email">Email</label>
                     <input type="email" id="email"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-                    title="Must contain the symbol '@' followed of a domain"/>
+                      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                      title="Must contain the symbol '@' followed of a domain"/>
+                    <label htmlFor="email">Email</label>
                   </div>
                   <div className="input-field">
-                    <label htmlFor="password">Password</label>
                     <input type="password" id="password"
                       pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,}"
                       title="Must contain at least one number, one letter and at
                       least 8 or more characters"/>
+                    <label htmlFor="password">Password</label>
                   </div>
                   { errorMessage }
-                  <button className="waves-effect waves-light btn primary-color" style={{"marginBottom": "20px"}}>Sign In</button>
+                  <button className="waves-effect waves-orange btn primary-color" style={{"marginBottom": "20px"}}>Sign In</button>
                   <GoogleLogin
                       clientId="544479097367-vsgksn1j0h4p6kv9glqhq6h6pffbs5l4.apps.googleusercontent.com"
                       buttonText="Sign in with Google"

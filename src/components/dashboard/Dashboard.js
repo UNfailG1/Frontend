@@ -3,35 +3,28 @@ import React, { Component } from 'react'
 // Components
 import Home from './Home'
 import Pairing from './Pairing'
-import GameSearch from './GameSearch'
-import ProfileSearch from './ProfileSearch'
 import AdList from '../ads/AdList'
+import GameSearch from './GameSearch'
+import { Link } from 'react-router-dom'
+import ProfileSearch from './ProfileSearch'
+import ErrorManager from '../helpers/ErrorManager'
 
 class Dashboard extends Component {
 
   constructor(props){
     super(props)
-    this.HOME = 0
-    this.PAIRING = 1
-    this.GAMES = 2
-    this.PROFILES = 3
-    this.state = {
-      view: this.HOME
-    }
-
+    this.HOME = 'news'
+    this.PAIRING = 'pairing'
+    this.GAMES = 'game_search'
+    this.PROFILES = 'player_search'
   }
 
   componentDidMount(){
     document.title = 'SPairing'
   }
 
-  handleClick(event, i){
-    event.preventDefault()
-    this.setState({ view: i })
-  }
-
   render(){
-    const { view } = this.state
+    const { match: { params: { view }} } = this.props
     var content = null
     const noMargin = { margin: 0 }
     switch(view){
@@ -52,7 +45,7 @@ class Dashboard extends Component {
         break
 
       default:
-        content = (<div>Un error</div>)
+        content = (<ErrorManager status={ 404 } />)
         break
     }
     return (
@@ -60,14 +53,18 @@ class Dashboard extends Component {
         <div className="row" style={ noMargin }>
           <div className="col s12 m3 l2">
             <div className="collection">
-              <a href="#!" className="primary-color-text collection-item"
-                onClick={ (e) => this.handleClick(e, this.HOME) }>Home</a>
-              <a href="#!" className="primary-color-text collection-item"
-                onClick={ (e) => this.handleClick(e, this.PAIRING) }>Pairing</a>
-              <a href="#!" className="primary-color-text collection-item"
-                onClick={ (e) => this.handleClick(e, this.GAMES) }>Game</a>
-              <a href="#!" className="primary-color-text collection-item"
-                onClick={ (e) => this.handleClick(e, this.PROFILES) }>Players</a>
+              <Link to="/dashboard/news" className="collection-item">
+                Home
+              </Link>
+              <Link to="/dashboard/pairing" className="collection-item">
+                Pairing
+              </Link>
+              <Link to="/dashboard/game_search" className="collection-item">
+                Game
+              </Link>
+              <Link to="/dashboard/player_search" className="collection-item">
+                Players
+              </Link>
             </div>
             <div className="center-align">
               <h5>Sponsored Content</h5>

@@ -100,7 +100,7 @@ class MailCompose extends Component {
             <textarea id="body" className="materialize-textarea" placeholder="Compose email"/>
           </div>
           <div className="input-field col s12 left-align">
-            <button id="submitCompose" className="waves-effect-light btn secondary-color">Send</button>
+            <button id="submitCompose" className="waves-effect waves-orange btn secondary-color">Send</button>
           </div>
         </div>
       </form>

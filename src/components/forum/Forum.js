@@ -10,12 +10,14 @@ const Forum = ({ item, onClick }) => {
     <div className="row" style={ noMargin }>
       <div className="col s12 m7 l7">
         <p>
-          <b><a href="#!" onClick={ () => onClick() }>{ sf_name }</a></b><br/>
+          <b><a href="#!" className="no-hover" onClick={ () => onClick() }>
+            { sf_name }
+          </a></b><br/>
           { sf_description }
         </p>
       </div>
       <div className="col s12 m2 l2 center-align">
-        <p>Hay daticos</p>
+        {/* <p>Hay daticos</p> */}
       </div>
       <div className="col s12 m3 l3 center-align">
         <p>{ dateTime(created_at) }</p>

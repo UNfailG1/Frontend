@@ -25,20 +25,20 @@ import AdList from '../components/ads/AdList'
 
 const ROUTES = [
   { component: Dashboard,
-    path: '/dashboard',
+    path: '/dashboard/:view',
     redirect: { when: 'VISITOR', to: '/' }
   },
   { component: Home,
     path: '/',
-    redirect: { when: 'LOGED_IN', to: '/dashboard' }
+    redirect: { when: 'LOGED_IN', to: '/dashboard/news' }
   },
   { component: SignIn,
     path: '/login',
-    redirect: { when: 'LOGED_IN', to: '/dashboard' }
+    redirect: { when: 'LOGED_IN', to: '/dashboard/news' }
   },
   { component: SignUp,
     path: '/register',
-    redirect: { when: 'LOGED_IN', to: '/dashboard' }
+    redirect: { when: 'LOGED_IN', to: '/dashboard/news' }
   },
   { component: Game,
     path: '/game/:gameId',

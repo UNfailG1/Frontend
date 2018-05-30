@@ -54,10 +54,9 @@ class ThreadCreator extends Component {
   render(){
     return (
       <div>
-        <a className="waves-effect waves-light btn modal-trigger primary-color" href="#modal1">
+        <a className="waves-effect waves-orange btn modal-trigger primary-color" href="#modal1">
           Create a Thread
         </a>
-
         <div id="modal1" className="modal">
           <div className="modal-content">
             <h4>Create a Thread</h4>
@@ -72,11 +71,11 @@ class ThreadCreator extends Component {
             </div>
           </div>
           <div className="modal-footer">
-            <a href="#!" className="modal-action modal-close waves-effect waves-light
+            <a className="modal-action modal-close waves-effect waves-orange
                btn-flat" onClick={ (e) => this.handleSubmit(e) }>
               POST
             </a>
-            <a href="#!" className="modal-action modal-close waves-effect waves-light
+            <a className="modal-action modal-close waves-effect waves-orange
                btn-flat">
               CANCEL
             </a>

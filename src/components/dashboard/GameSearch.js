@@ -28,24 +28,26 @@ class GameSearch extends Component{
     })
     const gam_name = event.target.value
     clearTimeout(this.state.timeout);
-    this.state.timeout = setTimeout(function () {
-      GET_AUTH(`/games_like?gam_name=${ gam_name }&page=1`).then(
-        (res) => {
-          this.setState({
-            isLoaded: true,
-            items: res.data
-          })
-        }
-      ).catch(
-        (error) => {
-          console.log(error)
-          this.setState({
-            isLoaded: false,
-            status: (error.response) ? error.response.status : 0
-          })
-        }
-      )
-    }.bind(this), 1000);
+    this.setState({
+      timeout: setTimeout(function () {
+        GET_AUTH(`/games_like?gam_name=${ gam_name }&page=1`).then(
+          (res) => {
+            this.setState({
+              isLoaded: true,
+              items: res.data
+            })
+          }
+        ).catch(
+          (error) => {
+            console.log(error)
+            this.setState({
+              isLoaded: false,
+              status: (error.response) ? error.response.status : 0
+            })
+          }
+        )
+      }.bind(this), 1000)
+    })
   }
 
   render(){
@@ -73,10 +75,11 @@ class GameSearch extends Component{
         </div>
       )
     }else if(isLoaded == null){
+      const $ = window.$
       return(
         <div>
           { form }
-          <Loading />
+          <Loading h={ $(window).height()/2 }/>
         </div>
       )
     }else{

@@ -91,7 +91,7 @@ class PlayerAction extends Component {
     const { friendStatus } = this.state
     const buttonStyle = { width: '100%', marginBottom: 8 }
     const lockButton = (
-      <button className="btn waves-effect waves-light primary-color"
+      <button className="btn waves-effect waves-orange primary-color"
         style={ buttonStyle }
         onClick={ (e) => this.blockPlayer(e) } >
         Block Player
@@ -102,7 +102,7 @@ class PlayerAction extends Component {
       case this.areFriends:
         return (
           <div>
-            <button className="waves-effect waves-light btn primary-color-light"
+            <button className="waves-effect waves-orange btn primary-color-light"
               onClick={ (e) => this.removeFriend(e) } style={ buttonStyle }>
               Remove Friend
             </button>
@@ -113,7 +113,7 @@ class PlayerAction extends Component {
       case this.requestSent:
         return (
           <div>
-            <button className="waves-effect waves-light btn primary-color-light"
+            <button className="waves-effect waves-orange btn primary-color-light"
               onClick={ (e) => this.removeFriend(e) } style={ buttonStyle }>
               Cancel request
             </button>
@@ -124,7 +124,7 @@ class PlayerAction extends Component {
       case this.notFriends:
         return (
           <div>
-            <button className="waves-effect waves-light btn secondary-color"
+            <button className="waves-effect waves-orange btn secondary-color"
               onClick={ (e) => this.addFriend(e) } style={ buttonStyle } >
               Add Friend
             </button>
@@ -135,12 +135,12 @@ class PlayerAction extends Component {
       case this.requestReceived:
         return (
           <div>
-            <button className="waves-effect waves-light btn secondary-color"
+            <button className="waves-effect waves-orange btn secondary-color"
               style={ buttonStyle }
               onClick={ (e) => this.addFriend(e) } >
               Accept request
             </button>
-            <button className="waves-effect waves-light btn secondary-color"
+            <button className="waves-effect waves-orange btn secondary-color"
               style={ buttonStyle }
               onClick={ (e) => this.removeFriend(e) } >
               Decline request

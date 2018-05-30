@@ -9,7 +9,7 @@ const Friend = ({ friend, own }) => {
   const noMargin = { margin: 0 }
   const button = (own) ? (
     <div className="col s12 m3 l3">
-      <button className="btn-flat waves-effect waves-light">
+      <button className="btn-flat waves-effect waves-orange">
         remove
       </button>
     </div>

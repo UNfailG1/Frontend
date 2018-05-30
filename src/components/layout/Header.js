@@ -56,22 +56,22 @@ class Header extends Component {
       return (
         <nav>
           <div className="nav-wrapper primary-color">
-            <Link to="/dashboard" className="brand-logo" style={ adjPadding }>
+            <Link to="/dashboard/news" className="brand-logo" style={ adjPadding }>
               <img src={ logo } alt="SPairing Logo"
                 className="hide-on-small-only resposive-img center-align"/>
               SPairing
             </Link>
             <a href="#!" data-activates="mobile-demo" className="button-collapse">
-              <i className="material-icons">menu</i>
+              <i className="material-icons black-text">menu</i>
             </a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li><Link to="/dashboard">Dashboard</Link></li>
+              <li><Link to="/dashboard/news">Dashboard</Link></li>
               <li><Link to={ "/profile/" +  sessionStorage.getItem('userId') }>Profile</Link></li>
               <li><Link to="/mailbox">Mail</Link></li>
               <li><Link to="/" onClick={ (e) => this.log_out(e) }>Log out</Link></li>
             </ul>
             <ul className="side-nav" id="mobile-demo">
-              <li><Link to="/dashboard">Dashboard</Link></li>
+              <li><Link to="/dashboard/news">Dashboard</Link></li>
               <li><Link to={ "/profile/" +  sessionStorage.getItem('userId') }>Profile</Link></li>
               <li><Link to="/mailbox">Mail</Link></li>
               <li><Link to="/" onClick={ (e) => this.log_out(e) }>Log out</Link></li>
@@ -89,7 +89,7 @@ class Header extends Component {
               SPairing
             </Link>
             <a href="#!" data-activates="mobile-demo" className="button-collapse">
-              <i className="material-icons">menu</i>
+              <i className="material-icons black-text">menu</i>
             </a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><Link to="/login">Sign In</Link></li>

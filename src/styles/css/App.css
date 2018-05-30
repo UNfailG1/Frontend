@@ -1,48 +1,69 @@
+.brand-logo, nav ul a {
+  color: black !important; }
+
 .primary-color {
-  background-color: #263238 !important;
-  color: white !important; }
+  background-color: #f5f5f5 !important;
+  color: black !important; }
 
 .primary-color-light {
-  background-color: #4f5b62 !important;
-  color: white !important; }
+  background-color: #ffffff !important;
+  color: black !important; }
 
-.primary-color-dark {
-  background-color: #000a12 !important;
-  color: white !important; }
+.primary-color-dark, footer {
+  background-color: #c2c2c2 !important;
+  color: black !important; }
 
 .primary-color-text {
-  color: #263238 !important; }
+  color: #f5f5f5 !important; }
 
 .primary-color-light-text {
-  color: #4f5b62 !important; }
+  color: #ffffff !important; }
 
 .primary-color-dark-text {
-  color: #000a12 !important; }
+  color: #c2c2c2 !important; }
 
 .secondary-color, .chip.selected {
-  background-color: #0277bd !important;
-  color: white !important; }
+  background-color: #ff7c0a !important;
+  color: black !important; }
 
-.secondary-color-light {
-  background-color: #58a5f0 !important;
+.secondary-color-light, .collection a:not(.no-hover):hover,
+.side-nav a:not(.no-hover):hover,
+#nav-mobile a:not(.no-hover):hover {
+  background-color: #ffad46 !important;
   color: black !important; }
 
 .secondary-color-dark {
-  background-color: #004c8c !important;
+  background-color: #c54d00 !important;
   color: white; }
 
 .secondary-color-text {
-  color: #0277bd !important; }
+  color: #ff7c0a !important; }
 
 .secondary-color-light-text {
-  color: #58a5f0 !important; }
+  color: #ffad46 !important; }
 
 .secondary-color-dark-text {
-  color: #004c8c !important; }
+  color: #c54d00 !important; }
 
 html, body, div#root {
   height: 100%;
   width: 100%; }
+
+.no-hover {
+  color: black !important; }
+  .no-hover:hover {
+    color: #ff7c0a !important; }
+
+.breadcrumb {
+  color: black !important; }
+  .breadcrumb::before {
+    color: #c2c2c2 !important;
+    vertical-align: middle !important; }
+
+.collection a:not(.no-hover),
+.side-nav a:not(.no-hover),
+#nav-mobile a:not(.no-hover) {
+  color: black !important; }
 
 div#root > div {
   width: 100%;
@@ -52,11 +73,12 @@ header {
   width: 100%; }
 
 main {
-  min-height: calc(100% - 110px);
-  height: calc(auto); }
+  min-height: calc(100% - 110px); }
 
 footer {
   width: 100%; }
+  footer * {
+    color: black !important; }
 
 .form-panel {
   position: absolute;
@@ -72,7 +94,7 @@ footer {
 
 .tabs .indicator {
   height: 3px !important;
-  background-color: #58a5f0 !important; }
+  background-color: #ffad46 !important; }
 
 .no-padding {
   padding: 0px !important; }
@@ -93,6 +115,11 @@ footer {
 
 .max-height {
   height: 100%; }
+
+.clickable {
+  cursor: pointer; }
+  .clickable:hover {
+    background-color: #ffad46 !important; }
 
 .recharts-wrapper {
   margin: 0 auto !important; }
@@ -154,40 +181,40 @@ ul.autocomplete-content {
   padding-bottom: 2px;
   padding-left: 2px; }
 
-.sponsorList {
-  background: lightgrey; }
-
 .input-field label {
-  color: #263238 !important; }
+  color: black !important; }
 
 .input-field input:focus + label {
-  color: #263238 !important; }
+  color: #ff7c0a !important; }
 
 .input-field input:focus {
-  border-bottom: 1px solid #263238 !important;
-  box-shadow: 0 1px 0 0 #263238 !important; }
+  border-bottom: 1px solid #ff7c0a !important;
+  box-shadow: 0 1px 0 0 #ff7c0a !important; }
 
 .input-field .prefix.active {
-  color: #263238 !important; }
+  color: #ff7c0a !important; }
 
 .input-field textarea:focus {
-  border-bottom: 1px solid #263238 !important;
-  box-shadow: 0 1px 0 0 #263238 !important; }
+  border-bottom: 1px solid #ff7c0a !important;
+  box-shadow: 0 1px 0 0 #ff7c0a !important; }
 
 .chips.chips-autocomplete {
   margin-bottom: 0; }
   .chips.chips-autocomplete.focus {
-    border-bottom-color: #263238 !important;
-    box-shadow: 0 1px 0 0 #263238 !important; }
+    border-bottom-color: #ff7c0a !important;
+    box-shadow: 0 1px 0 0 #ff7c0a !important; }
+
+.chip.selected {
+  color: white !important; }
 
 .dropdown-content li > span {
-  color: #263238 !important; }
+  color: #c2c2c2 !important; }
 
 .select-dropdown {
   height: 290px; }
 
 .spinner-blue, .spinner-blue-only {
-  border-color: #0277bd !important; }
+  border-color: #ff7c0a !important; }
 
 .loading-space {
   position: relative;

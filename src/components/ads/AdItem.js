@@ -1,25 +1,25 @@
 import React from 'react'
 
 const AdItem = ({ item, sponsor_id }) => {
-  
+
   function importAll(r) {
-    let images = {};
-    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-    return images;
+    let images = {}
+    r.keys().forEach( item => { images[item.replace('./', '')] = r(item) })
+    return images
   }
-  
-  const images = importAll(require.context('../../assets/default_sponsors', false, /\.(png|jpe?g|svg)$/));
+
+  const images = importAll(require.context('../../assets/default_sponsors', false, /\.(png|jpe?g|svg)$/))
   const defaultImg = String(sponsor_id).concat('.png')
-  
+
   var image = null
   if(item.ad_image.url === null){
-    image = images[defaultImg] 
+    image = images[defaultImg]
   }else{
     image = item.ad_image.url
   }
-  
+
   console.log(images[defaultImg])
-  
+
   return (
     <div>
         <div className="card horizontal">

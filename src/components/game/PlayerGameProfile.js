@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 // Assets
 import { POST_AUTH, DEL_AUTH } from '../../js/requests'
-// Components
 
 class PlayerGameProfile extends Component{
   constructor(props){
@@ -15,6 +14,22 @@ class PlayerGameProfile extends Component{
       create: false,
       pgp: this.props.pgp
     }
+  }
+
+  componentDidMount(){
+    this.initInputs()
+  }
+
+  componentDidUpdate(){
+    this.initInputs()
+  }
+
+  initInputs(){
+    const $ = window.$
+    const Materialize = window.Materialize
+    $(document).ready(function() {
+      Materialize.updateTextFields()
+    })
   }
 
   createPgp(event){
@@ -75,6 +90,7 @@ class PlayerGameProfile extends Component{
     POST_AUTH(url, { player_game_profile }).then(
       (res) => {
         console.log(res.data);
+        this.props.create(res.data)
         this.setState({
           view: this.SHOW_EDIT,
           pgp: res.data
@@ -101,7 +117,7 @@ class PlayerGameProfile extends Component{
                 <input id="nickname" type="text" />
                 <label htmlFor="nickname">Nickname</label>
               </div>
-              <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.handleSubmit(e) }>
+              <button className="waves-effect waves-orange btn primary-color" onClick={ (e) => this.handleSubmit(e) }>
                 Create
               </button>
             </div>
@@ -110,7 +126,7 @@ class PlayerGameProfile extends Component{
           return (
             <div className="row">
               <h3>You dont have a game profile</h3>
-              <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.createPgp(e) }>
+              <button className="waves-effect waves-orange btn primary-color" onClick={ (e) => this.createPgp(e) }>
                 Create
               </button>
             </div>
@@ -120,13 +136,13 @@ class PlayerGameProfile extends Component{
 
         if(disabled){
           button = (
-            <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.editPgp(e) }>
+            <button className="waves-effect waves-orange btn primary-color" onClick={ (e) => this.editPgp(e) }>
               Edit
             </button>
           )
         }else{
           button = (
-            <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.savePgp(e) }>
+            <button className="waves-effect waves-orange btn primary-color" onClick={ (e) => this.savePgp(e) }>
               Save
             </button>
           )
@@ -140,7 +156,7 @@ class PlayerGameProfile extends Component{
               <label htmlFor="nickname">Nickname</label>
             </div>
             { button }
-            <button className="waves-effect waves-light btn primary-color" onClick={ (e) => this.deletePgp(e) }>
+            <button className="waves-effect waves-orange btn primary-color" onClick={ (e) => this.deletePgp(e) }>
               Delete
             </button>
           </div>

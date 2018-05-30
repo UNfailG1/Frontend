@@ -123,7 +123,6 @@ class Home extends Component {
           </div>
         )
       }
-
       return (
         <div>
           <div className="row">
@@ -137,10 +136,9 @@ class Home extends Component {
           </div>
         </div>
       )
-
-
     } else if (isLoaded == null) {
-      return (<Loading />)
+      const $ = window.$
+      return (<Loading h={ $(window).height()/2 }/>)
     } else {
       return (<ErrorManager status={ this.state.status } />)
     }

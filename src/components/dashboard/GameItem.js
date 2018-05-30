@@ -7,24 +7,19 @@ import { noImage } from '../../js/assets'
 import { Link } from 'react-router-dom'
 
 const GameItem = ({ game }) => {
-
-  const gam_img = (game.gam_image) ? game.gam_image : noImage
+  const { id, gam_name, gam_image } = game
+  const gam_img = (gam_image) ? gam_image : noImage
 
   return (
-    <div className="col s12 m4 l4">
-      <div className="card sticky-action">
+    <div className="col s12 m4 l3">
+      <Link to={`/game/${id}`} className="no-hover">
+        <div className="card hoverable" style={{ maxWidth: 250 }}>
           <div className="card-image">
-            <img className="activator" src={ gam_img } style={{ 'height': '250px' }} alt={ game.gam_name }/>
-            <span className="truncate activator card-title">{ game.gam_name }</span>
+            <img src={ gam_img } style={{ height: 350 }} alt={ gam_name }/>
+            <span className="truncate activator card-title">{ gam_name }</span>
           </div>
-          <div className="card-reveal">
-            <span className="card-title grey-text text-darken-4">
-              <i className="material-icons right">close</i>
-              { game.gam_name }
-            </span><br />
-            <Link to={ `/game/${game.id}` }>See more...</Link>
-          </div>
-      </div>
+        </div>
+      </Link>
     </div>
   )
 }
